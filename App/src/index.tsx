@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import allReducer from './reducers';
+import rootReducer from './reducers';
 import thunk from 'redux-thunk';
 
 declare global {
@@ -15,9 +15,7 @@ declare global {
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(allReducer, composeEnhancers(applyMiddleware(thunk)));
-
-createStore(allReducer, composeEnhancers());
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
 	<React.StrictMode>
