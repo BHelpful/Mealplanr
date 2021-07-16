@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 import thunk from 'redux-thunk';
 
+// defining the type for REDUX_DEVTOOLS_EXTENSION
 declare global {
 	interface Window {
 		__REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
@@ -15,10 +16,15 @@ declare global {
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+// create store
+const store = createStore(
+	rootReducer,
+	composeEnhancers(applyMiddleware(thunk))
+);
 
 ReactDOM.render(
 	<React.StrictMode>
+		{/* Uses provider to procide access to the store from any component App and within App */}
 		<Provider store={store}>
 			<App />
 		</Provider>
