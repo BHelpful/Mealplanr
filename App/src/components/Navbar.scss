@@ -1,0 +1,194 @@
+:root {
+  --joyfull: #7488ED;
+  --accent: #8E9CE4;
+  --bright: #FFFFFF;
+  --dark: #000000;
+
+  --br: 15px;
+  --shadow: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+
+  
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+#navbar {
+
+  font-family: Montserrat;
+  font-size: 21px;
+  color: var(--bright);
+
+  width: 80px;
+  height: 100vh;
+  transition: .5s width;
+
+  border-color: inherit;
+  border-radius: 0 var(--br) var(--br) 0;
+  filter: var(--shadow);
+
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  background-color: var(--joyfull);
+
+  .top {
+
+    height: 80px;
+
+    display: grid;
+    align-items: center;
+    grid-template-columns: minmax(0px, 65px) minmax(0px, 350px) 45px;
+
+    margin: 0 16px;
+
+    .logo.icon {
+
+      width: auto;
+      height: 65px;
+
+    }
+
+    p {
+
+      font-weight: 700;
+
+      overflow: hidden;
+      text-overflow: clip;
+      white-space: nowrap;
+
+      margin: 0;
+      padding-left: 14px;
+
+    }
+
+    .burger.icon {
+
+      text-align: center;
+
+    }
+
+  }
+
+  .items {
+
+    .bar {
+
+      margin: 16px 10px;
+  
+      width: auto;
+      height: 60px;
+  
+      display: grid;
+      align-items: center;
+      grid-gap: 30px;
+      grid-template-columns: 45px auto;
+
+      border-color: inherit;
+      border-radius: var(--br);
+      transition: 1s background-color, .25s filter, 1s color;
+      background-color: var(--joyfull);
+      
+      &.selected {
+
+        background-color: var(--accent);
+
+      }
+
+      p {
+
+        margin: 0;
+        padding-left: 10px;
+        
+        align-self: center;
+
+        width: 100%;
+
+        overflow: hidden;
+        text-overflow: clip;
+        white-space: nowrap;
+        
+      }
+
+      &:hover {
+
+        background-color: var(--bright);
+        filter: var(--shadow);
+        color: var(--dark);
+
+      }
+
+    }
+
+  }
+
+  .bottom {
+
+    padding: 0 16px;
+    border-color: inherit;
+    border-radius: 0 0 var(--br) 0;
+
+    width: auto;
+    height: 95px;
+
+    display: grid;
+    align-items: center;
+    grid-gap: 0;
+    grid-template-columns: minmax(0px, 65px) minmax(0px, 350px) 45px;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    
+    background-color: var(--accent);
+
+    .profile.image {
+
+      display: block;
+
+      width: auto;
+
+      height: 65px;
+
+    }
+
+    .icon.logout {
+
+      display: block;
+
+      width: auto;
+
+      height: 45px;
+
+    }
+
+    p {
+
+      margin: 0;
+      
+      align-self: center;
+
+      font-weight: 700;
+
+      overflow: hidden;
+      text-overflow: clip;
+      white-space: nowrap;
+
+    }
+
+  }
+
+  &.wide {
+    
+    width: 350px;
+
+    .bottom {
+
+      grid-gap: 15px;
+
+    }
+
+  }
+
+}
