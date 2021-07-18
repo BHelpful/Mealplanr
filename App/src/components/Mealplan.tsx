@@ -100,6 +100,7 @@ export default function Mealplan() {
             <Plan recepie={data.recepieId} time={data.time}/>
           </div>
         )))}
+        <div className="scrollFiller"></div>
       </div>
 
     </Container>

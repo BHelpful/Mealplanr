@@ -43,10 +43,10 @@
     grid-column: span 2;
 
     display: grid;
-    grid-template-columns: repeat(7, 150px);
+    grid-template-columns: repeat(7, 150px) 20px;
     grid-gap: 20px;
 
-    padding: 20px;
+    padding: 20px 40px;
     
     overflow-x: scroll;
   
