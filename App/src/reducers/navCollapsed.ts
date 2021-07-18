@@ -1,29 +1,22 @@
 // Function definitions - Defining what parameters and the object structure
-export const logIn = () => {
+export const setNavCollapsed = (collapsed: boolean = true) => {
 	return {
-		type: 'LOGIN',
-	};
-};
-export const logOut = () => {
-	return {
-		type: 'LOGOUT',
+		type: 'TOGGLE',
+    payload: collapsed,
 	};
 };
 
 // Defining the type of the action in order for the reducer to know the content of the action
-type ActionType = ReturnType<typeof logIn | typeof logOut>;
+type ActionType = ReturnType<typeof setNavCollapsed>
 
 // Defining the reducer, which contains the functionality for each of the functions defined above
 // using action.type to identify the function.
-const loggedInReducer = (state = false, action: ActionType) => {
+const navCollapsedReduser = (state: boolean = false, action: ActionType) => {
 	switch (action.type) {
-		case 'LOGIN':
-			return true;
-		case 'LOGOUT':
-			return false;
-		default:
-			return false;
+		case 'TOGGLE':
+			return !state;
+		default: return state;
 	}
 };
 
-export default loggedInReducer;
+export default navCollapsedReduser;

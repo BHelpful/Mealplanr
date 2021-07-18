@@ -1,0 +1,17 @@
+.container {
+
+  margin: 80px;
+  padding: 20px;
+
+  max-width: 1300px;
+  height: max-content;
+
+  display: block;
+
+  background-color: var(--bright);
+
+  border-color: inherit;
+  border-radius: var(--br);
+  filter: var(--shadow);
+
+}

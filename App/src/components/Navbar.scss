@@ -1,24 +1,10 @@
-:root {
-  --joyfull: #7488ED;
-  --accent: #8E9CE4;
-  --bright: #FFFFFF;
-  --dark: #000000;
-
-  --br: 15px;
-  --shadow: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
-
-  
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
 #navbar {
 
   font-family: Montserrat;
-  font-size: 21px;
+  font-size: var(--font);
   color: var(--bright);
 
-  width: 80px;
+  width: var(--nav-min);
   height: 100vh;
   transition: .5s width;
 
@@ -27,11 +13,24 @@
   filter: var(--shadow);
 
   display: block;
-  position: fixed;
   left: 0;
   top: 0;
 
   background-color: var(--joyfull);
+
+  & p {
+
+    margin: 0;
+    
+    align-self: center;
+
+    font-weight: 400;
+
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+
+  }
 
   .top {
 
@@ -54,11 +53,6 @@
 
       font-weight: 700;
 
-      overflow: hidden;
-      text-overflow: clip;
-      white-space: nowrap;
-
-      margin: 0;
       padding-left: 14px;
 
     }
@@ -98,16 +92,12 @@
 
       p {
 
-        margin: 0;
         padding-left: 10px;
-        
-        align-self: center;
 
         width: 100%;
 
-        overflow: hidden;
-        text-overflow: clip;
-        white-space: nowrap;
+        opacity: 0;
+        transition: 1s opacity;
         
       }
 
@@ -153,7 +143,7 @@
 
     }
 
-    .icon.logout {
+    .logout.icon {
 
       display: block;
 
@@ -165,15 +155,29 @@
 
     p {
 
-      margin: 0;
-      
-      align-self: center;
+      padding: 0 14px;
 
       font-weight: 700;
 
-      overflow: hidden;
-      text-overflow: clip;
-      white-space: nowrap;
+    }
+
+    &.loggedout {
+
+      grid-template-columns: minmax(0, min-content) 45px;
+      width: calc(100% - 32px);
+      margin: 0;
+      
+      align-items: center;
+      justify-content: center;
+      
+      .login.icon {
+
+        width: auto;
+        height: 45px;
+
+        background-color: var(--white);
+
+      }
 
     }
 
@@ -181,11 +185,11 @@
 
   &.wide {
     
-    width: 350px;
+    width: var(--nav-max);
 
-    .bottom {
+    .bar p {
 
-      grid-gap: 15px;
+      opacity: 1;
 
     }
 

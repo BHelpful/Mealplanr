@@ -1,10 +1,15 @@
 import React from "react";
-import { logOut } from "../reducers/isLoggedIn";
+import { logIn, logOut } from "../reducers/isLoggedIn";
+import { setNavIndex } from '../reducers/navIndex';
+import { setNavCollapsed } from '../reducers/navCollapsed';
+
 import "./Navbar.scss"
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../reducers";
 //import { user } from "path/to/user";    // TODO: Create and import user object 
 const user = {
   firstname: "Lars",
-  lastname: "larsen",
+  lastname: "Larsen",
   image: "path/to/image.jpg"
 }
 
@@ -31,48 +36,40 @@ const navbarlist = [
   }
 ]
 
-export default function Navbar({
-  menuCurrent,
-  menuOpen,
-  setMenuCurrent,
-  setMenuOpen,
-} : {
-  menuCurrent: number,
-  menuOpen: boolean,
-  setMenuCurrent: React.Dispatch<React.SetStateAction<number>>,
-  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+export default function Navbar() {
 
-  const toggleNav = (old: boolean) => {
-    console.log(!old);
-    setMenuOpen(!old);
-  };
-
-  const clickBar = (index: number, url: string) => {
-    console.log(index, url);
-    setMenuCurrent(index);
-  };
+  const navIndex = useSelector((state: RootState) => state.navgationIndex);
+  const navCollapsed = useSelector((state: RootState) => state.navgationCollapsed);
+  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
+  const dispatch = useDispatch();
 
   return (
-    <div id="navbar" className={menuOpen?'wide':'thin'}>
+    <div id="navbar" className={navCollapsed?'thin':'wide'}>
       <div className="top">
         <div className="logo icon"></div>
         <p>MealPlanr</p>
-        <div className="burger icon" onClick={() => toggleNav((menuOpen))}>x</div>
+        <div className="burger icon" onClick={() => dispatch(setNavCollapsed((navCollapsed===true?false:true)))}>x</div>
       </div>
       <div className="items">
         {navbarlist.map(((data: any, index: number) => (
-          <div className={"bar" + (menuCurrent===index?" selected":"")} onClick={() => clickBar((index), (data.url))} >
+          <div key={index.toString()} className={"bar" + (navIndex===index?" selected":"")} onClick={() => dispatch(setNavIndex((index)))} >
             <div className={"icon " + index}></div>
             <p>{data.title}</p>
           </div>
         )))}
       </div>
-      <div className="bottom">
-        <div className="profile image" data-img={user.image}></div>
-        <p>{user.firstname} {user.lastname}</p>
-        <div className="logout icon" onClick={() => logOut()}></div>
-      </div>
+        {isLoggedIn ? (
+          <div className="bottom loggedin">
+            <div className="profile image" data-img={user.image}></div>
+            <p>{user.firstname} {user.lastname}</p>
+            <div className="logout icon" onClick={() => logOut()}></div>
+          </div>
+        ) : (
+          <div className="bottom loggedout">
+            <p>Log in / Sign up</p>
+            <div className="login icon" onClick={() => logIn()}></div>
+          </div>
+        )}    
     </div>
   )
 };
