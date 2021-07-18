@@ -1,0 +1,186 @@
+#mealplan {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 60px auto;
+  
+  h1 {
+
+    margin: 0;
+    align-self: center;
+    
+  }
+  
+  .button {
+    
+    margin-left: auto;
+    margin-right: 20px;
+    
+    align-self: center;
+
+    background-color: var(--accent);
+    color: var(--bright);
+    padding: 5px;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+
+    filter: var(--shadow);
+
+    transition: .5s filter, .1s margin;
+
+    &:hover {
+
+      filter: none;
+      margin-top: 5px;
+
+    }
+
+  }
+
+  .plans {
+    
+    grid-column: span 2;
+
+    display: grid;
+    grid-template-columns: repeat(7, 150px);
+    grid-gap: 20px;
+
+    padding: 20px;
+    
+    overflow-x: scroll;
+  
+    height: 390px;
+
+    .recepie {
+
+      border-color: inherit;
+      border-radius: var(--br);
+      filter: var(--shadow);
+      color: var(--bright);
+      
+      
+      &.tall {
+        
+        height: 350px;
+        width: 130px;
+        
+        justify-self: center;
+        align-self: center;
+
+        background-image: url(boubbles.jpg);
+        background-position: center;
+        background-size: 500%;
+
+        &.empty {
+
+          display: inline-grid;
+          text-align: center;
+
+          transition: .3s box-shadow, .3s padding;
+
+          h3 {
+            
+            margin: 0;
+
+            font-size: 16px;
+            font-weight: 400;
+
+            align-self: end;
+
+            transition: .3s font-size;
+            
+          }
+          
+          p {
+            
+            margin: -10px;
+
+            font-size: 60px;
+            font-weight: 700;
+            
+          }
+
+          &:hover {
+
+            box-shadow: inset 1000px 1000px 4px rgba(0, 0, 0, 0.25);
+            padding: 10px;
+
+            h3 {
+
+              font-size: 18px;
+              
+            }
+
+          }
+
+        }
+
+        &:not(.empty) {
+
+          background-image: none;
+
+          display: grid;
+          grid-template-rows: min-content min-content auto 40px;
+
+          .image {
+
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/1;
+
+          }
+
+          h3 {
+
+            margin: 5px;
+
+            font-size: 16px;
+
+          }
+
+          p {
+
+            margin: 5px;
+            margin-top: 0;
+
+            font-size: 14px;
+
+            overflow-y: scroll;
+
+            scrollbar-width: none;
+
+          }
+
+          .time {
+
+            background-color: var(--bright);
+            color: var(--gray);
+
+            height: 20px;
+            width: auto;
+            border-radius: var(--br);
+
+            text-align: center;
+
+            font-weight: 700;
+            padding: 10px;
+
+          }
+
+        }
+
+        &.meat {
+
+          background-color: var(--meat);
+
+        }
+
+      }
+      
+
+    }
+
+  }
+
+}
