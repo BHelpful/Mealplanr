@@ -6,6 +6,7 @@ import Container from './components/Container';
 
 import { RootState } from './reducers';
 import Mealplan from './components/Mealplan';
+import BrowseRecepies from './components/Recepies';
 
 function App() {
 
@@ -46,10 +47,7 @@ function App() {
 					0:
 						<Mealplan />,
 					1:
-						<Container>
-							<h1>Browse recepies</h1>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente modi possimus nobis nisi nulla voluptates numquam ea provident aliquid, enim natus iusto ipsam illum ipsum temporibus fuga, quidem, error ipsa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente modi possimus nobis nisi nulla voluptates numquam ea provident aliquid, enim natus iusto ipsam illum ipsum temporibus fuga, quidem, error ipsa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente modi possimus nobis nisi nulla voluptates numquam ea provident aliquid, enim natus iusto ipsam illum ipsum temporibus fuga, quidem, error ipsa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente modi possimus nobis nisi nulla voluptates numquam ea provident aliquid, enim natus iusto ipsam illum ipsum temporibus fuga, quidem, error ipsa.</p>
-						</Container>,
+						<BrowseRecepies />,
 					2:
 						<Container>
 							<h1>Create a collection</h1>

@@ -14,7 +14,11 @@
   left: 0;
   top: 0;
 
+  position: sticky;
+
   background-color: var(--joyfull);
+
+  align-self: baseline;
 
   & p {
 

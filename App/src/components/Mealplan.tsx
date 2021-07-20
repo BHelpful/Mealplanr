@@ -1,5 +1,6 @@
 import Container from "./Container"
 import "./Mealplan.scss"
+import SelectionArea, { Tag, TagSearch, WeekdaysButtons, WeekdaysDropdown } from "./SelectionArea";
 
 const mealplan = [
 
@@ -94,6 +95,27 @@ export default function Mealplan() {
 
       <h1>My meal plan</h1>
       <div className="button">Create Plan</div>
+      <SelectionArea columns={2}>
+        <WeekdaysButtons decription={"Select which days to plan meals for"} offset={2} namelength={2} uppercase={true} />
+        <WeekdaysDropdown decription={"What meals do you want for each day"} offset={2} namelength={3} uppercase={false} />
+        <div></div>
+        <TagSearch decription={"What foods do you have at home already"}>
+          <Tag type="salad" name="Gouda"/>
+          <Tag type="meat" name="Chicken"/>
+          <Tag type="dessert" name="Cocca"/>
+          <Tag type="vegan" name="Carrots"/>
+          <Tag type="exotic" name="Saffron "/>
+          <Tag type="fish" name="Salmon"/>
+        </TagSearch>
+        <TagSearch decription={"What stores do you prefer?"}>
+          <Tag type="none" name="Rema1000"/>
+          <Tag type="none" name="Føtex"/>
+        </TagSearch>
+        <TagSearch decription={"What categories do you wish to have recipes from?"}>
+          <Tag type="none" name="Spice"/>
+          <Tag type="none" name="Asian"/>
+        </TagSearch>
+      </SelectionArea>
       <div className="plans">
         {mealplan.map(((data: any, index: number) => (
           <div key={index.toString()} className={"tall recepie "+(data.recepieId!==-1?data.type:"empty")} onClick={() => console.log("Clicked recepie in mealplan")}>

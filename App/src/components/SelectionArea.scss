@@ -1,0 +1,224 @@
+.selectionarea {
+
+  grid-column: span 2;
+  background-color: var(--light);
+  border-radius: var(--br);
+  filter: var(--shadow);
+  padding: 20px;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(3, min-content);
+  
+  &[data-columns='1'] { grid-template-columns: repeat(1, auto); }
+  &[data-columns='2'] { grid-template-columns: repeat(2, auto); }
+  &[data-columns='3'] { grid-template-columns: repeat(3, auto); }
+
+  font-size: 14px;
+
+  .search.tags {
+
+    margin-left: 20px;
+    width: min-content;
+
+    .bar {
+
+      width: 300px;
+      height: 50px;
+      display: block;
+      background-color: var(--faded);
+      border-radius: var(--br);
+
+
+    }
+
+    .list {
+
+      display: flex;
+      flex-wrap: wrap;
+
+      .tag {
+
+        display: flex;
+        flex-flow: column;
+        
+        width: min-content;
+        height: 1em;
+        padding: 5px;
+        margin: 5px;
+        border-radius: var(--br);
+        line-height: 0;
+        text-align: center;
+        justify-content: center;
+        color: var(--gray);
+
+        background-color: var(--bgcolor);
+
+        &.meat {
+          
+          background-color: var(--meat);
+          
+        }
+        
+        &.dessert {
+          
+          background-color: var(--dessert);
+          
+        }
+        
+        &.salad {
+          
+          background-color: var(--salad);
+          
+        }
+        
+        &.vegan {
+          
+          background-color: var(--vegan);
+          
+        }
+        
+        &.fish {
+          
+          background-color: var(--fish);
+          
+        }
+        
+        &.exotic {
+          
+          background-color: var(--exotic);
+          
+        }
+        
+      }
+
+    }
+
+  }
+
+  .weekdays.selection {
+
+    margin-right: 20px;
+    margin-bottom: 40px;
+
+    width: auto;
+
+    p {
+    
+      margin-bottom: 0;
+      
+    }
+
+    .week {
+
+
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      
+      align-items: center;
+      justify-items: center;
+
+      .day {
+
+        &.unavailable {
+
+          border: 1px solid var(--faded);
+          color: var(--faded);
+          background-color: transparent;
+
+        }
+
+        &.available {
+
+          border: 2px solid var(--joyfull);
+          color: var(--joyfull);
+          background-color: transparent;
+
+        }
+
+        &.selected {
+
+          background-color: var(--joyfull);
+          color: var(--bright);
+
+        }
+
+      }
+
+      &:not(.dropdowns) {
+
+        margin-top: 20px;
+
+        .day {
+
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          
+          text-align: center;
+
+          font-size: 16px;
+
+          line-height: 3.1em;
+
+        }
+
+      }
+
+      &.dropdowns {
+
+        .day {
+          
+          text-align: center;
+          color: var(--joyfull);
+
+          &.unavailable {
+
+            color: var(--faded);
+            border: 0;
+
+          }
+        
+          .dropdownbox {
+
+            border-radius: var(--br);
+            border: 0;
+            background-color: var(--joyfull);
+            color: var(--bright);
+            text-align: center;
+            width: 65px;
+            height: 30px;
+            padding-left: calc(50% - .5em);
+            letter-spacing: 20px;
+
+            &:disabled {
+
+              color: var(--faded);
+              background-color: var(--faded);
+
+            }
+
+            &:hover {
+
+              background-color: var(--bright);
+              color: var(--gray);
+
+            }
+
+            option {
+
+              width: 75px;
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
