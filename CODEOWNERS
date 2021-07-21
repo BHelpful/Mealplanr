@@ -1,7 +1,7 @@
 # Global codeowners
 * @Andreasgdp @Toeffe3
 
-# Owns scss files if it is the only thing changed
+# Owns scss files
 *.scss @BHelpful/Front-end-design
 
 # Owns all in the app folder
