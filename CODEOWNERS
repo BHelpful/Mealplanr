@@ -5,7 +5,7 @@
 *.scss @BHelpful/Front-end-design
 
 # Owns all in the app folder
-app/* @BHelpful/React.js
+app/* @BHelpful/Reactjs
 
 # Owns the cypress folder (this overrules the rule before as it comes later)
 app/cypress/* @BHelpful/Cypress
