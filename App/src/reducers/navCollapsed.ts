@@ -2,12 +2,12 @@
 export const setNavCollapsed = (collapsed: boolean = true) => {
 	return {
 		type: 'TOGGLE',
-    payload: collapsed,
+		payload: collapsed,
 	};
 };
 
 // Defining the type of the action in order for the reducer to know the content of the action
-type ActionType = ReturnType<typeof setNavCollapsed>
+type ActionType = ReturnType<typeof setNavCollapsed>;
 
 // Defining the reducer, which contains the functionality for each of the functions defined above
 // using action.type to identify the function.
@@ -15,7 +15,8 @@ const navCollapsedReduser = (state: boolean = false, action: ActionType) => {
 	switch (action.type) {
 		case 'TOGGLE':
 			return !state;
-		default: return state;
+		default:
+			return state;
 	}
 };
 

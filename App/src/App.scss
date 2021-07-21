@@ -1,59 +1,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 :root {
-  --joyfull:  hsl(230,  80%,  70%);
-  --accent:   hsl(230,  50%,  75%);
-  --faded:    hsl(230,  40%,  85%);
-  --light:    hsl(230,  30%,  95%);
+	--joyfull:  hsl(230,  80%,  70%);
+	--accent:   hsl(230,  50%,  75%);
+	--faded:    hsl(230,  40%,  85%);
+	--light:    hsl(230,  30%,  95%);
 
-  --bgcolor:  hsl(  0,   0%,  90%);
+	--bgcolor:  hsl(  0,   0%,  90%);
 
-  --bright:   hsl(  0,   0%, 100%);
-  --gray:     hsl(  0,   0%,  33%);
-  --dark:     hsl(  0,   0%,   0%);
+	--bright:   hsl(  0,   0%, 100%);
+	--gray:     hsl(  0,   0%,  33%);
+	--dark:     hsl(  0,   0%,   0%);
 
-  --meat:     hsl(  0,  53%,  70%);
-  --dessert:  hsl( 50,  53%,  70%);
-  --salad:    hsl(100,  53%,  70%);
-  --vegan:    hsl(150,  53%,  70%);
-  --fish:     hsl(200,  53%,  70%);
-  --exotic:   hsl(250,  53%,  70%);
+	--meat:     hsl(  0,  53%,  70%);
+	--dessert:  hsl( 50,  53%,  70%);
+	--salad:    hsl(100,  53%,  70%);
+	--vegan:    hsl(150,  53%,  70%);
+	--fish:     hsl(200,  53%,  70%);
+	--exotic:   hsl(250,  53%,  70%);
 
-  --br: 15px;
-  --shadow: drop-shadow(4px 4px 4px hsla(0, 0%, 0%, 0.25));
+	--br: 15px;
+	--shadow: drop-shadow(4px 4px 4px hsla(0, 0%, 0%, 0.25));
 
-  --text-size: 21px;
+	--text-size: 21px;
 
-  --nav-min: 80px;
-  --nav-max: 350px;
+	--nav-min: 80px;
+	--nav-max: 350px;
 }
 
 
 #app {
 
-  position: fixed;
+	position: fixed;
 
-  display: grid;
-  grid-template-columns: min-content auto;
-  justify-items: center;
-  align-items: center;
+	display: grid;
+	grid-template-columns: min-content auto;
+	justify-items: center;
+	align-items: center;
 
-  overflow-x: hidden;
+	overflow-x: hidden;
 
-  height: 100vh;
-  width: 100vw;
+	height: 100vh;
+	width: 100vw;
 
-  background-color: var(--bgcolor);
-  color: var(--gray);
+	background-color: var(--bgcolor);
+	color: var(--gray);
 
-  font-family: Montserrat;
-  font-size: var(--text-size);
-  font-weight: 400;
+	font-family: Montserrat;
+	font-size: var(--text-size);
+	font-weight: 400;
 
-  overflow-y: scroll;
+	overflow-y: scroll;
 
-  & > div:not(#navbar) {
+	& > div:not(#navbar) {
 
 
-  }
+	}
 
 }

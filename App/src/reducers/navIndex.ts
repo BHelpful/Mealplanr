@@ -7,7 +7,7 @@ export const setNavIndex = (index: number = 0) => {
 };
 
 // Defining the type of the action in order for the reducer to know the content of the action
-type ActionType = ReturnType<typeof setNavIndex>
+type ActionType = ReturnType<typeof setNavIndex>;
 
 // Defining the reducer, which contains the functionality for each of the functions defined above
 // using action.type to identify the function.
@@ -16,7 +16,8 @@ const navIndexReducer = (state: number = 0, action: ActionType) => {
 		case 'PAGE':
 			state = action.payload;
 			return state;
-		default: return 0;
+		default:
+			return 0;
 	}
 };
 
