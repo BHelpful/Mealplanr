@@ -1,0 +1,11 @@
+# Global codeowners
+* @Andreasgdp @Toeffe3
+
+# Owns scss files if it is the only thing changed
+*.scss @BHelpful/Front-end-design
+
+# Owns all in the app folder
+/app/* @BHelpful/React.js
+
+# Owns the cypress folder (this overrules the rule before as it comes later)
+/app/cypress/* @BHelpful/Cypress
