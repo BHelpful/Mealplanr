@@ -1,7 +1,0 @@
-app/cypress/	@BHelpful/Cypress
-
-app/scr/			@BHelpful/React.js
-
-app/public/		@BHelpful/React.js
-
-*.scss				@BHelpful/Front-end-design
