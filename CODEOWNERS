@@ -2,7 +2,7 @@
 * @Andreasgdp @Toeffe3
 
 # Owns scss files if it is the only thing changed
-# *.scss @BHelpful/Front-end-design
+*.scss @Front-end-design
 
 # Owns all in the app folder
 # /app/* @BHelpful/React.js
