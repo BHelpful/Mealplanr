@@ -1,7 +1,6 @@
 import React from 'react';
 import { logIn, logOut } from '../../reducers/isLoggedIn';
-import { setNavIndex } from '../../reducers/navIndex';
-import { setNavCollapsed } from '../../reducers/navCollapsed';
+import { setNavIndex, setNavCollapsed } from '../../reducers/navState';
 
 import './Navbar.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,9 +36,9 @@ const navbarlist = [
 ];
 
 export default function Navbar() {
-	const navIndex = useSelector((state: RootState) => state.navgationIndex);
+	const navIndex = useSelector((state: RootState) => state.navState.index);
 	const navCollapsed = useSelector(
-		(state: RootState) => state.navgationCollapsed
+		(state: RootState) => state.navState.collapsed
 	);
 	const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
 	const dispatch = useDispatch();
@@ -51,13 +50,7 @@ export default function Navbar() {
 				<p>MealPlanr</p>
 				<div
 					className="burger icon"
-					onClick={() =>
-						dispatch(
-							setNavCollapsed(
-								navCollapsed === true ? false : true
-							)
-						)
-					}
+					onClick={() => dispatch(setNavCollapsed())}
 				>
 					x
 				</div>

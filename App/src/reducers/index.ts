@@ -1,14 +1,12 @@
+import { combineReducers } from 'redux';
 import counterReducer from './counter';
 import loggedInReducer from './isLoggedIn';
-import { combineReducers } from 'redux';
-import navCollapsedReducer from './navCollapsed';
-import navIndexReducer from './navIndex';
+import navStateReducer from './navState';
 
 export const rootReducer = combineReducers({
 	counter: counterReducer,
 	isLoggedIn: loggedInReducer,
-	navgationCollapsed: navCollapsedReducer,
-	navgationIndex: navIndexReducer,
+	navState: navStateReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

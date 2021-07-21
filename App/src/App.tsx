@@ -9,7 +9,7 @@ import Mealplan from './components/mealplan/Mealplan';
 import RecipeView from './components/recipeView/RecipeView';
 
 function App() {
-	const navIndex = useSelector((state: RootState) => state.navgationIndex);
+	const navIndex = useSelector((state: RootState) => state.navState.index);
 
 	const isLoggedIn = true; // For Testing purposes
 	//const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
