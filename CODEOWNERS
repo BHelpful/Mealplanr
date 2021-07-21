@@ -1,5 +1,4 @@
 # Global codeowners
-# * @Andreasgdp @Toeffe3
 
 # Owns scss files if it is the only thing changed
 *.scss @BHelpful/Front-end-design
