@@ -1,5 +1,5 @@
 # Global codeowners
-* @Andreasgdp @Toeffe3
+* @BHelpful/Mealplanr
 
 # Owns scss files
 *.scss @BHelpful/Front-end-design
