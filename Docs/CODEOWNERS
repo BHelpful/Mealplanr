@@ -1,0 +1,7 @@
+app/cypress/	@Cypress
+
+app/scr/			@React.js
+
+app/public/		@React.js
+
+*.scss				@Front-end-design
