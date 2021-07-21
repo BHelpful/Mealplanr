@@ -1,11 +1,11 @@
-import Container from './Container';
+import Container from '../container/Container';
 import './Mealplan.scss';
 import SelectionArea, {
 	Tag,
 	TagSearch,
 	WeekdaysButtons,
 	WeekdaysDropdown,
-} from './SelectionArea';
+} from '../selectionArea/SelectionArea';
 
 const mealplan = [
 	{

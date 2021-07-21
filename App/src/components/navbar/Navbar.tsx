@@ -1,11 +1,11 @@
 import React from 'react';
-import { logIn, logOut } from '../reducers/isLoggedIn';
-import { setNavIndex } from '../reducers/navIndex';
-import { setNavCollapsed } from '../reducers/navCollapsed';
+import { logIn, logOut } from '../../reducers/isLoggedIn';
+import { setNavIndex } from '../../reducers/navIndex';
+import { setNavCollapsed } from '../../reducers/navCollapsed';
 
 import './Navbar.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../reducers';
+import { RootState } from '../../reducers';
 //import { user } from "path/to/user";    // TODO: Create and import user object
 const user = {
 	firstname: 'Lars',

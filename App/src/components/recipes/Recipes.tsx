@@ -1,5 +1,4 @@
-import Container from './Container';
-import './Recepies.scss';
+import './Recipes.scss';
 
 const recepies = [
 	{
@@ -35,7 +34,7 @@ interface RecepiesProps {
 	showAddOwn?: 'true' | 'false';
 }
 
-export function Recepies(props: RecepiesProps) {
+export default function Recepies(props: RecepiesProps) {
 	const showAddOwn = props.showAddOwn === 'true' || false;
 	return (
 		<>
@@ -70,17 +69,5 @@ export function Recepies(props: RecepiesProps) {
 				</div>
 			))}
 		</>
-	);
-}
-
-export default function BrowseRecepies() {
-	return (
-		<Container id="browse">
-			<h1>Browse recepies</h1>
-			<div className="searchmenu"></div>
-			<div className="recepies">
-				<Recepies showAddOwn="true" />
-			</div>
-		</Container>
 	);
 }

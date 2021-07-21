@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
 
 import './App.scss';
-import Navbar from './components/Navbar';
-import Container from './components/Container';
+import Navbar from './components/navbar/Navbar';
+import Container from './components/container/Container';
 
 import { RootState } from './reducers';
-import Mealplan from './components/Mealplan';
-import BrowseRecepies from './components/Recepies';
+import Mealplan from './components/mealplan/Mealplan';
+import RecipeView from './components/recipeView/RecipeView';
 
 function App() {
 	const navIndex = useSelector((state: RootState) => state.navgationIndex);
@@ -135,7 +135,7 @@ function App() {
 				: {
 						/* ---- Page-select for users ---- */
 						0: <Mealplan />,
-						1: <BrowseRecepies />,
+						1: <RecipeView />,
 						2: (
 							<Container>
 								<h1>Create a collection</h1>
