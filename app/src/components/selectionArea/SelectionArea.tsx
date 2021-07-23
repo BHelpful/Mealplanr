@@ -13,15 +13,18 @@ export function Tag(props: TagProps) {
 
 interface TagSearchProps {
 	decription: string;
+	type: string;
 }
 
 class TagSearch extends Component<TagSearchProps> {
 	render() {
-		const { decription, children } = this.props;
+		const { decription, type, children } = this.props;
 		return (
 			<div className="search tags">
 				<p>{decription}</p>
-				<div className="search bar"></div>
+				<div className={"bar "+type}>
+					<span></span>
+				</div>
 				<div className="tags list">{children}</div>
 			</div>
 		);

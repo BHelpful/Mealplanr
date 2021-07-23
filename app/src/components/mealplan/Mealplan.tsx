@@ -19,9 +19,9 @@ const mealplan = [
 		time: '18:00',
 	},
 	{
-		recepieId: -1,
-		type: '',
-		time: '',
+		recepieId: 3500346,
+		type: 'vegan',
+		time: '16:45',
 	},
 	{
 		recepieId: -1,
@@ -51,17 +51,42 @@ const recepieInfo = (id: number) => {
 			return {
 				Title: 'Pyttipanna',
 				Desc: 'Pytt i panna, also pytt i panne, pytt i panne, pyttipannu, is a culinary dish consisting of chopped meat, potatoes, and onions fried, similar to a hash',
-				Img: '',
+				Images: 0,
+				Id: id,
+			};
+		
+		case 3500346:
+			return {
+				Title: 'Tomatobeef',
+				Desc: 'Greek originated totato-based beef.',
+				Images: 2,
+				Id: id,
 			};
 
 		default:
 			return {
 				Title: '',
 				Desc: '1',
-				Img: '',
+				Images: '',
+				Id: id,
 			};
 	}
 };
+
+function handleAltImg(e: any) {
+	e.target.src='/alt.png';
+	e.target.parentNode.classList.remove("shadow");
+}
+
+function handleNextImage(e: any) {
+	if(!e.target.parentElement.classList.contains("shadow")) return;
+	const max = e.target.dataset.images;
+	const [id, current] = e.target.src.replace(/http:\/\/localhost:3000\/temp\/recepie_(\d+)_(\d+).jpg/,"$1,$2").split(",")
+	const next = (Number(current) + 1) % max;
+	setTimeout(() => {
+		e.target.src = "/temp/recepie_"+id+"_"+next+".jpg"
+	},5000);
+}
 
 interface PlanProps {
 	recepie: number;
@@ -69,11 +94,14 @@ interface PlanProps {
 }
 
 function Plan(props: PlanProps) {
-	const { Title, Desc, Img } = recepieInfo(props.recepie);
+	const { Title, Desc, Id, Images } = recepieInfo(props.recepie);
 	if (props.recepie !== -1) {
 		return (
 			<>
-				<div className="image">{Img}</div>
+				<div className="rimage shadow">
+					<span className={"options"}></span>
+					<img src={"/temp/recepie_"+Id+"_1.jpg"} data-images={Images} onError={handleAltImg} alt="" onLoad={handleNextImage}></img>
+				</div>
 				<h3>{Title}</h3>
 				<p>{Desc}</p>
 				<div className="time">
@@ -114,8 +142,8 @@ export default function Mealplan() {
 				</div>
 				<div>
 					<TagSearch
-						decription={'What foods do you have at home already'}
-						>
+						type='search'
+						decription={'What foods do you have at home already'}>
 						<Tag type="salad" name="Gouda" />
 						<Tag type="meat" name="Chicken" />
 						<Tag type="dessert" name="Cocca" />
@@ -123,21 +151,22 @@ export default function Mealplan() {
 						<Tag type="exotic" name="Saffron " />
 						<Tag type="fish" name="Salmon" />
 					</TagSearch>
-					<TagSearch decription={'What stores do you prefer?'}>
+					<TagSearch
+						type='search'
+						decription={'What stores do you prefer?'}>
 						<Tag type="none" name="Rema1000" />
 						<Tag type="none" name="Føtex" />
 					</TagSearch>
 					<TagSearch
-						decription={
-							'What categories do you wish to have recipes from?'
-						}
-						>
+						type='search'
+						decription={'What categories do you wish to have recipes from?'}>
 						<Tag type="none" name="Spice" />
 						<Tag type="none" name="Asian" />
 					</TagSearch>
 				</div>
 			</SelectionArea>
 			<div className="plans">
+				<div className="scrollFiller"></div>
 				{mealplan.map((data: any, index: number) => (
 					<div
 					key={index.toString()}

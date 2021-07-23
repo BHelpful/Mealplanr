@@ -45,7 +45,7 @@
 		grid-column: span 6;
 
 		display: grid;
-		grid-template-columns: repeat(7, 150px) 20px;
+		grid-template-columns: 0px repeat(7, 150px) 30px;
 		grid-gap: 20px;
 
 		padding: 20px 40px;
@@ -109,18 +109,78 @@
 					background-image: none;
 
 					display: grid;
-					grid-template-rows: min-content min-content auto 40px;
+					grid-template-rows: 130px 5px auto 40px;
+					grid-template-columns: 100%;
+					grid-auto-flow: column;
 
-					.image {
-						width: 100%;
-						height: auto;
+					.rimage {
+
+						width: 130px;
+						height: 130px;
 						aspect-ratio: 1/1;
+	
+						border-radius: var(--br);
+	
+						grid-column: span 2;
+						overflow: hidden;
+						
+						position: relative;
+						display: flex;
+						justify-content: center;
+						
+						&.shadow::before {
+							
+							content: "";
+							box-shadow: inset -15px -55px 20px rgba(0, 0, 0, 0.4);
+							position: absolute;
+							top: 0; bottom: 0; left: 0; right: 0;
+							z-index: +1;
+							
+						}
+						
+						&:not(.shadow) {
+
+							:not(.options) {
+
+								filter: invert(100%);
+								top: -5px;
+
+							}
+	
+						}
+	
+						.options {
+
+							background-image: url("../../assets/Cog.svg");
+							display: block;
+							width: 20px;
+							height: 20px;
+							z-index: +1;
+							position: absolute;
+							left: 105px;
+							top: 10px;
+							filter: invert(100%);
+
+						}
+
+						img {
+							
+							height: 100%;
+							border-radius: var(--br);
+							position: relative;
+	
+						}
+	
 					}
 
 					h3 {
-						margin: 5px;
 
+						position: relative;
+						top: -2em;
+						margin: 5px;
+						z-index: +1;
 						font-size: 16px;
+
 					}
 
 					p {
@@ -149,9 +209,12 @@
 					}
 				}
 
-				&.meat {
-					background-color: var(--meat);
-				}
+				&.meat 		{ background-color: var(--meat); 		}
+				&.dessert { background-color: var(--dessert); }
+				&.salad 	{ background-color: var(--salad); 	}
+				&.vegan 	{ background-color: var(--vegan); 	}
+				&.fish 		{ background-color: var(--fish); 		}
+				&.exotic 	{ background-color: var(--exotic); 	}
 			}
 		}
 	}

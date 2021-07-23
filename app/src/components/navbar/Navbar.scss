@@ -32,17 +32,27 @@
 	}
 
 	.top {
+		
 		height: 80px;
 
 		display: grid;
 		align-items: center;
-		grid-template-columns: minmax(0px, 65px) minmax(0px, 350px) 45px;
+		grid-template-columns: minmax(0px, 65px) minmax(3px, 350px) 45px;
 
 		margin: 0 16px;
 
 		.logo.icon {
+			
 			width: auto;
 			height: 65px;
+
+			background-image: url("../../assets/mealplanr.svg");
+			filter: hue-rotate(6/6*360deg);
+			background-color: var(--bright);
+			border-radius: var(--br);
+			background-position: center;
+			background-size: 65px 65px;
+
 		}
 
 		p {
@@ -52,7 +62,15 @@
 		}
 
 		.burger.icon {
-			text-align: center;
+			
+			width: 2em;
+			height: 3em;
+
+			background-repeat: no-repeat;
+			background-position: center;
+			filter: invert(100%);
+			background-image: url("../../assets/Bar.svg");
+
 		}
 	}
 
@@ -73,24 +91,56 @@
 			transition: 1s background-color, 0.25s filter, 1s color;
 			background-color: var(--joyfull);
 
+			
 			&.selected {
+				
 				background-color: var(--accent);
+				
 			}
-
-			p {
-				padding-left: 10px;
-
-				width: 100%;
-
-				opacity: 0;
-				transition: 1s opacity;
-			}
-
+			
 			&:hover {
+
 				background-color: var(--bright);
 				filter: var(--shadow);
 				color: var(--dark);
+
+				.icon {
+
+					filter: invert(0%);
+
+				}
+
 			}
+
+			p {
+				
+				padding-left: 10px;
+				
+				width: 100%;
+				
+				opacity: 0;
+				transition: 1s opacity;
+				
+			}
+
+			.icon {
+
+				width: 60px;
+				height: 60px;
+
+				background-size: contain;
+				filter: invert(100%);
+
+				transition: 1s filter;
+
+				&.nbi0 { background-image: url("../../assets/Cheklist.svg"); 	}
+				&.nbi1 { background-image: url("../../assets/Lup.svg"); 			}
+				&.nbi2 { background-image: url("../../assets/Bookmark.svg"); 	}
+				&.nbi3 { background-image: url("../../assets/Ulist.svg"); 		}
+				&.nbi4 { background-image: url("../../assets/Cog.svg"); 			}
+
+			}
+
 		}
 	}
 

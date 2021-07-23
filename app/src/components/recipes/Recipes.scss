@@ -89,75 +89,136 @@
 			}
 
 			&:not(.empty) {
+
 				background-image: none;
 
 				display: grid;
 				grid-template-rows: 160px auto min-content;
-				grid-template-columns: repeat(2, 1fr);
+				grid-template-columns: auto auto 1.2em;
 
-				.image {
+				.rimage {
+
 					width: 100%;
 					height: auto;
 
-					border-radius: 0 0 var(--br) var(--br);
+					border-radius: var(--br);
 
-					grid-column: span 2;
+					grid-column: span 3;
+					overflow: hidden;
+					
+					position: relative;
+					display: flex;
+					justify-content: center;
+					
+					&.shadow::before {
+						
+						content: "";
+						box-shadow: inset 0px -55px 20px rgba(0, 0, 0, 0.4);
+						position: absolute;
+						top: 0; bottom: 0; left: 0; right: 0;
+						z-index: +1;
+						
+					}
+					
+					&:not(.shadow) {
+						
+						filter: invert(1);
+						top: -5px;
+
+					}
+
+					img {
+						
+						height: 100%;
+						border-radius: var(--br);
+						position: relative;
+
+					}
+
 				}
 
 				h3 {
+
 					margin: 5px;
 
 					font-size: 16px;
 
 					position: absolute;
 					top: calc(160px - 2em);
+
+					z-index: +1;
+
 				}
 
 				p {
+
 					margin: 5px;
-					margin-top: 0;
+					margin-top: 5px;
 
 					font-size: 14px;
 
 					overflow-x: scroll;
 					scrollbar-width: none;
 
-					grid-column: span 2;
+					grid-column: span 3;
+
 				}
 
 				.timebox,
-				.ratingbox {
-					align-self: center;
+				.ratingbox,
+				div:last-child {
 
-					font-size: 16px;
-
+					width: 100%;
+					align-items: center;
+					font-size: 14px;
 					height: 28px;
+					overflow: clip;
+					display: flex;
+					
+					.icon {
+						
+						height: 1em;
+						width: 1em;
+						display: inline-block;
+						scale: 2;
+						margin: 6px;
+						
+						&.time {
+							
+							background-image: url("../../assets/Clock.svg");
+							filter: invert(1);
+							
+						}
+						
+						&.rating {
+							
+							content: "";
+							background-image: url("../../assets/Hearth.svg");
+							background-repeat: no-repeat;
+							filter: invert(1);
+							background-position: left center;
+							height: 2em;
+							background-size: 2em 2em;
+							display: block;
+							margin: 0;
+							justify-content: center;
+							scale: 1;
+
+						}
+
+					}
+
 				}
+
 			}
 
-			&.meat {
-				background-color: var(--meat);
-			}
+			&.meat 		{ background-color: var(--meat); 		}
+			&.dessert { background-color: var(--dessert); }
+			&.salad 	{ background-color: var(--salad); 	}
+			&.vegan 	{ background-color: var(--vegan); 	}
+			&.fish 		{ background-color: var(--fish); 		}
+			&.exotic 	{ background-color: var(--exotic); 	}
 
-			&.dessert {
-				background-color: var(--dessert);
-			}
-
-			&.salad {
-				background-color: var(--salad);
-			}
-
-			&.vegan {
-				background-color: var(--vegan);
-			}
-
-			&.fish {
-				background-color: var(--fish);
-			}
-
-			&.exotic {
-				background-color: var(--exotic);
-			}
 		}
 	}
 }

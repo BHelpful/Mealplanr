@@ -51,9 +51,7 @@ export default function Navbar() {
 				<div
 					className="burger icon"
 					onClick={() => dispatch(setNavCollapsed())}
-				>
-					x
-				</div>
+				></div>
 			</div>
 			<div className="items">
 				{navbarlist.map((data: any, index: number) => (
@@ -64,7 +62,7 @@ export default function Navbar() {
 						}
 						onClick={() => dispatch(setNavIndex(index))}
 					>
-						<div className={'icon ' + index}></div>
+						<div className={'icon nbi' + index}></div>
 						<p>{data.title}</p>
 					</div>
 				))}
