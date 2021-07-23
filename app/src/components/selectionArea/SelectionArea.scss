@@ -24,12 +24,15 @@
 
 
 	& > div:first-child {
+		
 		width: 100%;
-		max-width: calc(100% - 400px);
-		min-width: 460px;
+		max-width: max-content;
+		margin: 0px auto;
+
 	}
 
 	.search.tags {
+
 		width: min-content;
 
 		.bar {
@@ -103,7 +106,13 @@
 			align-items: center;
 			justify-items: center;
 
+			overflow-x: auto;
+			scrollbar-width: none;
+
 			.day {
+
+				margin: 3px;
+
 				&.unavailable {
 					border: 1px solid var(--faded);
 					color: var(--faded);
@@ -120,6 +129,7 @@
 					background-color: var(--joyfull);
 					color: var(--bright);
 				}
+
 			}
 
 			&:not(.dropdowns) {

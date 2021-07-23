@@ -6,12 +6,17 @@
 	h1 {
 		grid-column: span 5;
 		margin: 0;
+		margin-right: 5px;
 		align-self: center;
+
+		white-space: nowrap;
+		text-overflow: clip;
+		overflow: hidden;
 	}
 
 	.button {
 		margin-left: auto;
-		margin-right: 20px;
+		margin-right: 0px;
 
 		align-self: center;
 
@@ -19,7 +24,7 @@
 		color: var(--bright);
 		padding: 5px;
 		border-radius: 10px;
-		width: 150px;
+		width: 130px;
 		text-align: center;
 
 		filter: var(--shadow);

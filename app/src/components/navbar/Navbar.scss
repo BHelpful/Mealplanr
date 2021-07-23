@@ -160,3 +160,14 @@
 		}
 	}
 }
+
+@media (max-width: 1000px) {
+	
+	#navbar {
+
+		position: absolute;
+		z-index: 99;
+
+	}
+
+}

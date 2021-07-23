@@ -52,3 +52,18 @@
 	overflow-y: scroll;
 
 }
+
+@media (max-width: 1000px) {
+
+	#app {
+
+		grid-template-columns: auto;
+		
+		& > div:last-child {
+		
+			margin-left: calc(var(--nav-min) + 40px);
+
+		}
+	}
+	
+}
