@@ -11,7 +11,10 @@ import RecipeView from './components/recipeView/RecipeView';
 function App() {
 	const navIndex = useSelector((state: RootState) => state.navState.index);
 
-	const isLoggedIn = true; // For Testing purposes
+	const user = {
+		id: 9272,
+	}
+	const isLoggedIn = user.id>0; // For Testing purposes
 	//const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
 
 	return (
@@ -136,34 +139,7 @@ function App() {
 						/* ---- Page-select for users ---- */
 						0: <Mealplan />,
 						1: <RecipeView />,
-						2: (
-							<Container>
-								<h1>Create a collection</h1>
-								<p>
-									Lorem ipsum dolor sit amet consectetur
-									adipisicing elit. Sapiente modi possimus
-									nobis nisi nulla voluptates numquam ea
-									provident aliquid, enim natus iusto ipsam
-									illum ipsum temporibus fuga, quidem, error
-									ipsa. Lorem ipsum dolor sit amet consectetur
-									adipisicing elit. Sapiente modi possimus
-									nobis nisi nulla voluptates numquam ea
-									provident aliquid, enim natus iusto ipsam
-									illum ipsum temporibus fuga, quidem, error
-									ipsa. Lorem ipsum dolor sit amet consectetur
-									adipisicing elit. Sapiente modi possimus
-									nobis nisi nulla voluptates numquam ea
-									provident aliquid, enim natus iusto ipsam
-									illum ipsum temporibus fuga, quidem, error
-									ipsa. Lorem ipsum dolor sit amet consectetur
-									adipisicing elit. Sapiente modi possimus
-									nobis nisi nulla voluptates numquam ea
-									provident aliquid, enim natus iusto ipsam
-									illum ipsum temporibus fuga, quidem, error
-									ipsa.
-								</p>
-							</Container>
-						),
+						2: <RecipeView personal/>,
 				  }[
 						navIndex
 				  ] /* In case of no result matching (default to): */ || (

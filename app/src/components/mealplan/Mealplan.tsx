@@ -7,118 +7,7 @@ import SelectionArea, {
 	WeekdaysButtons,
 	WeekdaysDropdown,
 } from '../selectionArea/SelectionArea';
-
-const mealplan = [
-	{
-		recepieId: -1,
-		type: '',
-		time: '',
-	},
-	{
-		recepieId: 252816,
-		type: 'meat',
-		time: '18:00',
-	},
-	{
-		recepieId: 3500346,
-		type: 'vegan',
-		time: '16:45',
-	},
-	{
-		recepieId: -1,
-		type: '',
-		time: '',
-	},
-	{
-		recepieId: -1,
-		type: '',
-		time: '',
-	},
-	{
-		recepieId: -1,
-		type: '',
-		time: '',
-	},
-	{
-		recepieId: -1,
-		type: '',
-		time: '',
-	},
-];
-
-const recepieInfo = (id: number) => {
-	switch (id) {
-		case 252816:
-			return {
-				Title: 'Pyttipanna',
-				Desc: 'Pytt i panna, also pytt i panne, pytt i panne, pyttipannu, is a culinary dish consisting of chopped meat, potatoes, and onions fried, similar to a hash',
-				Images: 0,
-				Id: id,
-			};
-		
-		case 3500346:
-			return {
-				Title: 'Tomatobeef',
-				Desc: 'Greek originated totato-based beef.',
-				Images: 2,
-				Id: id,
-			};
-
-		default:
-			return {
-				Title: '',
-				Desc: '1',
-				Images: '',
-				Id: id,
-			};
-	}
-};
-
-function handleAltImg(e: any) {
-	e.target.src='/alt.png';
-	e.target.parentNode.classList.remove("shadow");
-}
-
-function handleNextImage(e: any) {
-	if(!e.target.parentElement.classList.contains("shadow")) return;
-	const max = e.target.dataset.images;
-	const [id, current] = e.target.src.replace(/http:\/\/localhost:3000\/temp\/recepie_(\d+)_(\d+).jpg/,"$1,$2").split(",")
-	const next = (Number(current) + 1) % max;
-	setTimeout(() => {
-		e.target.src = "/temp/recepie_"+id+"_"+next+".jpg"
-	},5000);
-}
-
-interface PlanProps {
-	recepie: number;
-	time: string;
-}
-
-function Plan(props: PlanProps) {
-	const { Title, Desc, Id, Images } = recepieInfo(props.recepie);
-	if (props.recepie !== -1) {
-		return (
-			<>
-				<div className="rimage shadow">
-					<span className={"options"}></span>
-					<img src={"/temp/recepie_"+Id+"_1.jpg"} data-images={Images} onError={handleAltImg} alt="" onLoad={handleNextImage}></img>
-				</div>
-				<h3>{Title}</h3>
-				<p>{Desc}</p>
-				<div className="time">
-					<span>{props.time}</span>
-				</div>
-			</>
-		);
-	} else {
-		return (
-			<>
-				<h3>Add recepie</h3>
-				<p>+</p>
-			</>
-		);
-	}
-}
+import Recipes from '../recipes/Recipes';
 
 export default function Mealplan() {
 	return (
@@ -168,20 +57,7 @@ export default function Mealplan() {
 			</SelectionArea>
 			<div className="plans">
 				<div className="scrollFiller"></div>
-				{mealplan.map((data: any, index: number) => (
-					<div
-					key={index.toString()}
-					className={
-						'tall recepie ' +
-						(data.recepieId !== -1 ? data.type : 'empty')
-					}
-					onClick={() =>
-						console.log('Clicked recepie in mealplan')
-					}
-					>
-						<Plan recepie={data.recepieId} time={data.time} />
-					</div>
-				))}
+					<Recipes mealFrom='plan'/>
 				<div className="scrollFiller"></div>
 			</div>
 		</Container>

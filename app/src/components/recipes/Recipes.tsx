@@ -1,47 +1,96 @@
 import './Recipes.scss';
 
-const recepies = [
+const mealPlan = [
 	{
-		Type: 'meat',
-		Title: 'Pyttipanna',
-		Desc: 'Pytt i panna, also pytt i panne, pytt i panne, pyttipannu, is a culinary dish consisting of chopped meat, potatoes, and onions fried, similar to a hash',
-		Id: 2102013,
-		Images: 0,
-		Time: { value: 15, unit: 'min' },
-		Ratings: 233,
-		Rating: 700,
+		recepieId: -1,
+		time: '',
 	},
 	{
-		Type: 'dessert',
-		Title: 'Appel pie',
-		Desc: 'This is a sweet, tart and delicious apple pie. Guaranteed to please. Be sure to use Granny Smith apples since they work the best.',
-		Id: 2340076,
-		Images: 0,
-		Time: { value: 1, unit: 'hr' },
-		Ratings: 997,
-		Rating: 3267,
+		recepieId: 252816,
+		time: '18:00',
 	},
 	{
-		Type: 'salad',
-		Title: 'Watermelon salad',
-		Desc: 'Salad form the troppes.',
-		Id: 2500023,
-		Images: 0,
-		Time: { value: 10, unit: 'min' },
-		Ratings: 769,
-		Rating: 900,
+		recepieId: 3500346,
+		time: '16:45',
 	},
 	{
-		Type: 'vegan',
-		Title: 'Tomatobeef',
-		Desc: 'Greek originated totato-based beef.',
-		Id: 3500346,
-		Images: 2,
-		Time: { value: 2, unit: 'hr' },
-		Ratings: 1,
-		Rating: 5,
-	}
+		recepieId: -1,
+		time: '',
+	},
+	{
+		recepieId: -1,
+		time: '',
+	},
+	{
+		recepieId: -1,
+		time: '',
+	},
+	{
+		recepieId: -1,
+		time: '',
+	},
 ];
+
+const recipes = [
+	{ recepieId: 2102013, },
+	{ recepieId: 2340076, },
+	{ recepieId: 2500023,	},
+	{ recepieId: 3500346, }
+];
+
+const myRecipes = [
+	{ recepieId: 3500346, }
+]
+
+const recepieInfo = (id: number) => {
+	switch (id) {
+		case 252816: return {
+			Title: 'Pyttipanna',
+			Decs: 'Pytt i panna, also pytt i panne, pytt i panne, pyttipannu, is a culinary dish consisting of chopped meat, potatoes, and onions fried, similar to a hash',
+			Images: 0,
+			Time: { value: 15, unit: 'min' },
+			Ratings: 233,
+			Rating: 700,
+			category: 'meat',
+		};
+		case 3500346: return {
+			Title: 'Tomatobeef',
+			Decs: 'Greek originated totato-based beef.',
+			Images: 2,
+			Time: { value: 2, unit: 'hr' },
+			Ratings: 1,
+			Rating: 5,
+			category: 'vegan',
+		};
+		case 2340076: return {
+			Title: 'Appel pie',
+			Decs: 'This is a sweet, tart and delicious apple pie. Guaranteed to please. Be sure to use Granny Smith apples since they work the best.',
+			Images: 0,
+			Time: { value: 1, unit: 'hr' },
+			Ratings: 997,
+			Rating: 3267,
+			category: 'dessert',
+		}
+		case 2500023: return {
+			Title: 'Watermelon salad',
+			Decs: 'Salad form the troppes.',
+			Images: 0,
+			Time: { value: 10, unit: 'min' },
+			Ratings: 769,
+			Rating: 900,
+			category: 'salad',
+		}
+		default: return {
+			Title: 'Placeholder',
+			Decs: 'Decsripe the recipe',
+			Images: 0,
+			Time: {value: -1, unit: 'min'},
+			Rating: 0,
+			Ratings: 0,
+			category: 'meat',
+		};
+	}
+};
 
 function handleAltImg(e: any) {
 	e.target.src='/alt.png';
@@ -58,45 +107,82 @@ function handleNextImage(e: any) {
 	},5000)
 };
 
-interface RecepiesProps {
-	showAddOwn?: 'true' | 'false';
+interface RecipeProps {
+	type: 'wide'|'tall',
+	Id: number,
+	At?: string,
+	personal: boolean,
 }
 
-export default function Recepies(props: RecepiesProps) {
-	const showAddOwn = props.showAddOwn === 'true' || false;
+export function Recipe(props: RecipeProps) {
+	const {type, Id, At, personal} = {At: null, ...props};
+	const {Images, Title, Decs, Time, Rating, Ratings, category} = recepieInfo(Id);
+
 	return (
-		<>
-			{showAddOwn ? (
-				<div className="empty">
-					<h3>Add your own</h3>
-					<p>+</p>
+		<div className={type + ' recepie ' + (Id !== -1 ? category : 'empty')} onClick={() => console.log('Clicked recepie')}>
+			{ Id !== -1 ? <>
+				<div className="rimage shadow">
+					{	personal ? <span className={"options"}></span> : <></> }
+					<img src={"/temp/recepie_"+Id+"_1.jpg"} data-images={Images} onError={handleAltImg} alt="" onLoad={handleNextImage}></img>
 				</div>
-			) : (
-				''
-			)}
-			{recepies.map((data: any, index: number) => (
-				<div
-					key={index.toString()}
-					className={'wide recepie ' + data.Type}
-					onClick={() => console.log('Clicked recepie in browse')}
-				>
-					<div className="rimage shadow">
-						<img src={"/temp/recepie_"+data.Id+"_1.jpg"} data-images={data.Images} onError={handleAltImg} alt="" onLoad={handleNextImage}></img>
+				<h3>{Title}</h3>
+				<p>{Decs}</p>
+				{ type === 'tall' ? <>
+					<div className="time">
+						<span>{At??'00:00'}</span>
 					</div>
-					<h3>{data.Title}</h3>
-					<p>{data.Desc}</p>
+				</> : <>
 					<div className="timebox">
 						<div className="time icon"></div>
-						<span>{data.Time.value + ' ' + data.Time.unit}.</span>
+						<span>{Time.value + ' ' + Time.unit}.</span>
 					</div>
-					<div className="ratingbox">{data.Ratings} votes</div>
+					<div className="ratingbox">{Ratings} votes</div>
 					<div>
-						<span
-							className="rating icon"
-							style={{width: (data.Rating/data.Ratings/5*100)+"%"}}></span>
+						<span className="rating icon" style={{width: (Rating/Ratings/5*100)+"%"}}></span>
 					</div>
-				</div>
-			))}
-		</>
+				</> }
+			</> : <>
+				<h3>Add recepie</h3>
+				<p>+</p>
+			</> }
+		</div>
 	);
+}
+
+interface RecipesProps {
+	showAddOwn?: 'true' | 'false';
+	mealFrom: 'personal'|'plan'|'public';
+}
+
+export default function Recipes(props: RecipesProps) {
+	const showAddOwn = props.showAddOwn === 'true' || false;
+	const {mealFrom} = props;
+	const data = mealFrom === 'personal' ? myRecipes :
+								mealFrom === 'plan' ? mealPlan :
+									recipes;
+
+	if(mealFrom === 'plan')
+		return (
+			<>
+				{data.map((data: any) => (
+					<Recipe type='tall' Id={data.recepieId} At={data.time} personal={true} />
+				))}
+			</>
+		);
+	
+	else
+		return (
+			<>
+				{showAddOwn ? (
+					<div className="empty">
+						<h3>Add your own</h3>
+						<p>+</p>
+					</div>
+				) : ''}
+				{data.map((data: any) => (
+					<Recipe type='wide' Id={data.recepieId} personal={mealFrom==='personal'} />
+				))}
+			</>
+		);
+	
 }

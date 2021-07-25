@@ -3,13 +3,14 @@ import './Container.scss';
 
 interface ContainerProps {
 	id?: string;
+	className?: string;
 }
 
 class Container extends Component<ContainerProps> {
 	render() {
-		const { id, children } = this.props;
+		const { id, className, children } = {className: '', ...this.props};
 		return (
-			<div id={id} className="container">
+			<div id={id} className={"container "+className}>
 				{children}
 			</div>
 		);
