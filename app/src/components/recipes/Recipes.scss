@@ -1,117 +1,124 @@
-.recepies {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	grid-auto-rows: 270px;
-	grid-gap: 40px;
+/** 
+ * @Desc: Square or rectangular boxes that contains information about recepies - supports images
+ * @Occures: 0 to many times on {Plan-meals}, {Browse recipes} and {My collection}
+ * @Behavior: Constant width and height, text-overflow is hidden but can be revielded but scrolling
+ * @Media: None
+ */
+.recepies,
+.plans {
+
+	/* Clauses that should not apply to [Recipe]'s in [Mealplan] */
+	&:not(.plans) {
+
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		grid-auto-rows: 270px;
+		grid-gap: 40px;
+
+		.empty {
+
+			border: 3px dashed var(--gray);
+			border-radius: var(--br);
+
+		}
+
+	}
 
 	.empty {
-		border: 3px dashed var(--gray);
-		border-radius: var(--br);
 
 		display: inline-grid;
 		grid-template-rows: repeat(2, 1fr);
 		justify-items: center;
-
 		width: 250px;
 		height: 270px;
-
 		justify-self: center;
 		align-self: center;
 
 		h3 {
-			margin: 0;
 
+			margin: 0;
 			font-size: 16px;
 			font-weight: 400;
-
 			align-self: end;
-
 			transition: 0.3s font-size;
+
 		}
 
 		p {
-			margin: -10px;
 
+			margin: -10px;
 			font-size: 60px;
 			font-weight: 700;
+
 		}
+
 	}
 
 	.recepie {
+
 		border-color: inherit;
 		border-radius: var(--br);
 		filter: var(--shadow);
 		color: var(--bright);
 
-		&.wide {
-			height: 270px;
-			width: 250px;
+		&.wide,
+		&.tall {
 
 			justify-self: center;
 			align-self: center;
-
-			background-image: url(../../assets/boubbles.jpg);
+			background-image: url("../../assets/boubbles.jpg");
 			background-position: center;
 			background-size: 500%;
 
 			&.empty {
+
 				display: inline-grid;
 				text-align: center;
-
 				transition: 0.3s box-shadow, 0.3s padding;
 
 				h3 {
-					margin: 0;
 
+					margin: 0;
 					font-size: 16px;
 					font-weight: 400;
-
 					align-self: end;
-
 					transition: 0.3s font-size;
+
 				}
 
 				p {
-					margin: -10px;
 
+					margin: -10px;
 					font-size: 60px;
 					font-weight: 700;
+
 				}
 
 				&:hover {
+
 					box-shadow: inset 1000px 1000px 4px rgba(0, 0, 0, 0.25);
 					padding: 10px;
 
-					h3 {
-						font-size: 18px;
-					}
+					h3 { font-size: 18px; }
+
 				}
+
 			}
 
 			&:not(.empty) {
 
 				background-image: none;
-
 				display: grid;
-				grid-template-rows: 160px auto min-content;
-				grid-template-columns: auto auto 1.2em;
 
 				.rimage {
 
-					width: 100%;
-					height: auto;
-
-					border-radius: var(--br);
-
-					grid-column: span 3;
 					overflow: hidden;
-					
 					position: relative;
 					display: flex;
 					justify-content: center;
-					
+
 					&.shadow::before {
-						
+							
 						content: "";
 						box-shadow: inset 0px -55px 20px rgba(0, 0, 0, 0.4);
 						position: absolute;
@@ -119,13 +126,32 @@
 						z-index: +1;
 						
 					}
-					
-					&:not(.shadow) {
-						
-						filter: invert(1);
-						top: -5px;
 
-					}
+					&.shadow .options,
+					&:not(.shadow) > * { filter: invert(1); }
+					
+				}
+
+			}
+
+		}
+
+		&.wide {
+
+			height: 270px;
+			width: 250px;
+			
+			&:not(.empty) {
+
+				grid-template-rows: 160px auto min-content;
+				grid-template-columns: auto auto 1.2em;
+
+				.rimage {
+
+					width: 100%;
+					height: auto;
+					border-radius: var(--br);
+					grid-column: span 3;
 
 					img {
 						
@@ -140,12 +166,9 @@
 				h3 {
 
 					margin: 5px;
-
 					font-size: 16px;
-
 					position: absolute;
 					top: calc(160px - 2em);
-
 					z-index: +1;
 
 				}
@@ -154,12 +177,9 @@
 
 					margin: 5px;
 					margin-top: 5px;
-
 					font-size: 14px;
-
 					overflow-x: scroll;
 					scrollbar-width: none;
-
 					grid-column: span 3;
 
 				}
@@ -212,13 +232,89 @@
 
 			}
 
-			&.meat 		{ background-color: var(--meat); 		}
-			&.dessert { background-color: var(--dessert); }
-			&.salad 	{ background-color: var(--salad); 	}
-			&.vegan 	{ background-color: var(--vegan); 	}
-			&.fish 		{ background-color: var(--fish); 		}
-			&.exotic 	{ background-color: var(--exotic); 	}
-
 		}
+
+		&.tall {
+
+			height: 350px;
+			width: 130px;
+
+			&:not(.empty) {
+
+				grid-template-rows: 130px 5px auto 40px;
+				grid-template-columns: 100%;
+				grid-auto-flow: column;
+
+				.rimage {
+
+					width: 130px;
+					height: 130px;
+					aspect-ratio: 1/1;
+					border-radius: var(--br);
+					grid-column: span 2;
+
+					.options {
+
+						background-image: url("../../assets/Cog.svg");
+						display: block;
+						width: 20px;
+						height: 20px;
+						z-index: +1;
+						position: absolute;
+						left: 105px;
+						top: 5px;
+
+					}
+
+					img {
+						
+						height: 100%;
+						border-radius: var(--br);
+						position: relative;
+
+					}
+
+					&:not(.shadow) img { top: -5px; }
+
+				}
+
+				h3 {
+
+					position: relative;
+					top: -2em;
+					margin: 5px;
+					z-index: +1;
+					font-size: 16px;
+
+				}
+
+				p {
+
+					margin: 5px;
+					margin-top: 0;
+					font-size: 14px;
+					overflow-y: scroll;
+					scrollbar-width: none;
+
+				}
+
+				.time {
+
+					background-color: var(--bright);
+					color: var(--gray);
+					height: 20px;
+					width: auto;
+					border-radius: var(--br);
+					text-align: center;
+					font-weight: 700;
+					padding: 10px;
+
+				}
+
+			}
+			
+		}
+
 	}
+
 }

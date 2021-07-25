@@ -18,7 +18,7 @@ const navbarlist = [
 		url: '/plan',
 	},
 	{
-		title: 'Browse recepies',
+		title: 'Browse recipes',
 		url: '/browse',
 	},
 	{

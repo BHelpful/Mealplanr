@@ -1,5 +1,6 @@
 import Container from '../container/Container';
 import './Mealplan.scss';
+import '../recipes/Recipes.scss';
 import SelectionArea, {
 	Tag,
 	TagSearch,

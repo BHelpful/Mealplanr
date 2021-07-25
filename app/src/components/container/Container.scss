@@ -1,14 +1,17 @@
+/** 
+ * @Desc: White box with content for the current page 
+ * @Occures: 1 or more times on one each sub-page
+ * @Behavior: Fills the width of available content-space, adjust height to its own content
+ * @Media(vw <= 1590px): Will widen its content-area on thinner windows
+ */
 .container {
 
 	margin: 80px;
 	padding: 20px;
-
 	max-width: 1300px;
 	width: calc(100% - 160px);
 	height: max-content;
-
 	background-color: var(--bright);
-
 	border-color: inherit;
 	border-radius: var(--br);
 	filter: var(--shadow);
@@ -16,8 +19,12 @@
 }
 
 @media (max-width: 1590px) {
+
 	.container {
+
 		margin: 80px calc(100% - 100% + 80px);
 		width: calc(100% - 160px);
+
 	}
+
 }
