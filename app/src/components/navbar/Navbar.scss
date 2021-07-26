@@ -44,7 +44,7 @@
 			width: auto;
 			height: 65px;
 			background-image: url("../../assets/mealplanr.svg");
-			filter: hue-rotate(6/6*360deg);
+			filter: hue-rotate(calc((var(--c) - 230) * 1deg));		// Offset by icons hue and convert to deg
 			background-color: var(--bright);
 			border-radius: var(--br);
 			background-position: center;

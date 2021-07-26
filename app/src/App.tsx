@@ -13,9 +13,12 @@ function App() {
 
 	const user = {
 		id: 9272,
+		color: 30,
 	}
 	const isLoggedIn = user.id>0; // For Testing purposes
 	//const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
+
+	((hue: number) => document.documentElement.style.setProperty('--c', String(hue)))(user.color);
 
 	return (
 		<div id="app">
