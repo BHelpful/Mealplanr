@@ -16,12 +16,95 @@
 	flex-wrap: wrap;
 	justify-content: center;
 
+	& ~ .selectionarea {
+
+		margin-top: 40px;
+
+	}
+
 	& > div:first-child {
 		
 		width: 100%;
 		max-width: max-content;
 		margin: 0px auto;
 
+	}
+
+	.field {
+
+		p {
+
+			margin-top: 15px;
+			margin-bottom: 3px;
+
+		}
+
+		input[type=text] {
+			
+			height: 30px;
+			border: none;
+			padding: 5px 10px;
+			border-radius: 20px;
+			background-color: var(--accent);
+			width: calc(100% - 20px);
+			
+		}
+
+		input[type=button] {
+			
+			height: 30px;
+			width: 80px;
+			border: none;
+			border-radius: 20px;
+			background-color: var(--joyfull);
+			color: hsl(0, 0%, 100%);
+
+			&.danger {
+
+				background-color: hsl(0, 100%, 32%);
+
+			}
+
+		}
+
+		
+		&.button {
+			
+			width: calc(100% - 40px);
+			display: inline-grid;
+			grid-template-columns: auto 80px;
+			margin: 22.5px 20px;
+			
+			&.vertical {
+	
+				display: flex;
+				width: auto;flex-direction: column;
+
+				input[type=button] {
+
+					margin: 10px auto;
+					width: auto;
+					padding: 5px 10px;
+
+				}
+	
+			}
+
+			&:first-of-type {
+
+				margin-top: 55px;
+
+			}
+
+			span {
+
+				display: flex;
+				align-self: center;
+
+			}
+
+		}
+		
 	}
 
 	.search.tags {

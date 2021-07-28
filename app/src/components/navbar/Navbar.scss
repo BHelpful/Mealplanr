@@ -86,7 +86,7 @@
 			border-color: inherit;
 			border-radius: var(--br);
 			transition: 1s background-color, 0.25s filter, 1s color;
-			background-color: var(--joyfull);
+			background-color: transparent;
 			
 			&.selected { 	background-color: var(--accent); }
 			

@@ -1,0 +1,46 @@
+#settings {
+
+  .selectionarea {
+
+    flex-wrap: wrap;
+
+    align-items: center;
+    align-content: center;
+    
+    & > div {
+
+      width: 33%;
+      min-width: 200px;
+      height: 100%;
+      display: inline-grid;
+
+    }
+
+    & > div:nth-child(2) {
+
+      margin: auto;
+      width: auto;
+      
+    }
+
+  }
+
+}
+
+@media (max-width: 830px) {
+  
+  #settings {
+
+    .selectionarea {
+  
+      & > div {
+  
+        min-width: 100%;
+  
+      }
+  
+    }
+  
+  }
+
+}

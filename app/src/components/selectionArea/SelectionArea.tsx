@@ -178,6 +178,42 @@ export function WeekdaysDropdown(props: WeekdaysProps) {
 	);
 }
 
+interface TextFieldProps {
+	text?: string,
+	placeholder?: string,
+	submitBtnText?: string,
+}
+
+export function TextField(props: TextFieldProps) {
+	const {text, placeholder, submitBtnText} = props;
+	return (
+		<div className={"text field"}>
+			{ text ? <p>{text}</p> : <></> }
+			<input type={"text"} placeholder={placeholder?placeholder:''}></input>
+			{ submitBtnText ? <input value={submitBtnText} /> : <></> }
+		</div>
+	);
+}
+
+interface ButtonFieldProps {
+	text: string,
+	vertical?: boolean,
+	danger?: boolean
+}
+
+class ButtonField extends Component<ButtonFieldProps> {
+	render() {
+		const {text, vertical, danger, children} = this.props;
+
+		return (
+			<div className={"button field "+(vertical?"vertical":"")}>
+				{children}
+				<input type={"button"} className={danger?"danger":""} value={text} />
+			</div>
+		);
+	}
+}
+
 interface SelectionAreaProps {
 	cln?: string;
 	columns: number;
@@ -198,4 +234,4 @@ class SelectionArea extends Component<SelectionAreaProps> {
 }
 
 export default SelectionArea;
-export { TagSearch };
+export { TagSearch, ButtonField};
