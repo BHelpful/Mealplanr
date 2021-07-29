@@ -1,11 +1,10 @@
 import React from 'react';
-import { logIn, logOut } from '../../reducers/isLoggedIn';
 import { setNavIndex, setNavCollapsed } from '../../reducers/navState';
 
 import './Navbar.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../reducers';
-import { checkForUser } from '../../reducers/session';
+import { checkForUser, createUser, userLogin, userLogout } from '../../reducers/session';
 //import { user } from "path/to/user";    // TODO: Create and import user object
 const user = {
 	firstname: 'Lars',
@@ -44,6 +43,10 @@ export default function Navbar() {
 	const isLoggedIn = useSelector(
 		(state: RootState) => state.session.isLoggedIn
 	);
+	const refresh = useSelector((state: RootState) => state.session.refresh);
+	const authorization = useSelector(
+		(state: RootState) => state.session.authorization
+	);
 	const dispatch = useDispatch();
 
 	return (
@@ -78,7 +81,9 @@ export default function Navbar() {
 					</p>
 					<div
 						className="logout icon"
-						onClick={() => dispatch(checkForUser('test@test.test'))}
+						onClick={() =>
+							dispatch(userLogout(refresh, authorization))
+						}
 					></div>
 				</div>
 			) : (
@@ -86,7 +91,11 @@ export default function Navbar() {
 					<p>Log in / Sign up</p>
 					<div
 						className="login icon"
-						onClick={() => dispatch(checkForUser('test@test.test'))}
+						onClick={() =>
+							dispatch(
+								userLogin('andreasgdp@gmail.com', '123456')
+							)
+						}
 					></div>
 				</div>
 			)}

@@ -21,6 +21,7 @@ const setErrMsg = (err: string) => {
 	};
 };
 const createdUser = (
+	user: any,
 	informationFillded: boolean,
 	refresh: string,
 	authorization: string
@@ -28,6 +29,7 @@ const createdUser = (
 	return {
 		type: CREATED_USER,
 		payload: {
+			user: user,
 			informationFillded: informationFillded,
 			refresh: refresh,
 			authorization: authorization,
@@ -35,6 +37,7 @@ const createdUser = (
 	};
 };
 const logIn = (
+	user: any,
 	informationFillded: boolean,
 	refresh: string,
 	authorization: string
@@ -42,6 +45,7 @@ const logIn = (
 	return {
 		type: LOGIN,
 		payload: {
+			user: user,
 			informationFillded: informationFillded,
 			refresh: refresh,
 			authorization: authorization,
@@ -65,6 +69,7 @@ type ActionType = ReturnType<
 >;
 
 interface sessionType {
+	user: any;
 	created: boolean;
 	isLoggedIn: boolean;
 	informationFillded: boolean;
@@ -77,6 +82,7 @@ interface sessionType {
 // using action.type to identify the function.
 const sessionReducer = (
 	state: sessionType = {
+		user: {},
 		created: false,
 		isLoggedIn: false,
 		informationFillded: false,
@@ -92,6 +98,7 @@ const sessionReducer = (
 			return state;
 
 		case CREATED_USER:
+			state.user = get(action.payload, 'user');
 			state.created = true;
 			state.isLoggedIn = true;
 			state.refresh = get(action.payload, 'refresh');
@@ -102,6 +109,7 @@ const sessionReducer = (
 			return state;
 
 		case LOGIN:
+			state.user = get(action.payload, 'user');
 			state.created = true;
 			state.isLoggedIn = true;
 			state.refresh = get(action.payload, 'refresh');
@@ -133,7 +141,7 @@ export const checkForUser = (email: string) => {
 		);
 
 		if (user.status === 200) {
-			const response = await user.json();
+			// const response = await user.json();
 			dispatch(userExists());
 		} else {
 			try {
@@ -152,23 +160,124 @@ export const createUser = (
 	passwordConfirmation: string
 ) => {
 	return async function (dispatch: Function, getState: Function) {
-		const user = await fetch(
+		const userResponse = await fetch(`${config.apiUrl}/users`, {
+			body: JSON.stringify({
+				email: email,
+				password: password,
+				passwordConfirmation: passwordConfirmation,
+			}),
+			headers: { 'Content-Type': 'application/json' },
+			method: 'POST',
+		});
+
+		if (userResponse.status === 200) {
+			const sessionResponse = await fetch(`${config.apiUrl}/sessions`, {
+				body: JSON.stringify({
+					email: email,
+					password: password,
+				}),
+				headers: { 'Content-Type': 'application/json' },
+				method: 'POST',
+			});
+			if (sessionResponse.status === 200) {
+				const session = await sessionResponse.json();
+				const user = await userResponse.json();
+				if (user.name) {
+					dispatch(
+						createdUser(
+							user,
+							true,
+							session.refreshToken,
+							session.accessToken
+						)
+					);
+				} else {
+					dispatch(
+						createdUser(
+							user,
+							false,
+							session.refreshToken,
+							session.accessToken
+						)
+					);
+				}
+			} else {
+				const errorMessage = await sessionResponse.text();
+				dispatch(setErrMsg(errorMessage));
+			}
+		} else {
+			const errorMessage = await userResponse.text();
+			dispatch(setErrMsg(errorMessage));
+		}
+	};
+};
+
+export const userLogin = (email: string, password: string) => {
+	return async function (dispatch: Function, getState: Function) {
+		const userResponse = await fetch(
 			`${config.apiUrl}/users/?userMail=${email}&accessCode=${config.accessCode}`,
 			{
 				method: 'GET',
 			}
 		);
 
-		if (user.status === 200) {
-			const response = await user.json();
-			dispatch(userExists());
-		} else {
-			try {
-				const errorMessage = await user.text();
+		if (userResponse.status === 200) {
+			const sessionResponse = await fetch(`${config.apiUrl}/sessions`, {
+				body: JSON.stringify({
+					email: email,
+					password: password,
+				}),
+				headers: { 'Content-Type': 'application/json' },
+				method: 'POST',
+			});
+			if (sessionResponse.status === 200) {
+				const session = await sessionResponse.json();
+				const user = await userResponse.json();
+				if (user.name) {
+					dispatch(
+						logIn(
+							user,
+							true,
+							session.refreshToken,
+							session.accessToken
+						)
+					);
+				} else {
+					dispatch(
+						logIn(
+							user,
+							false,
+							session.refreshToken,
+							session.accessToken
+						)
+					);
+				}
+			} else {
+				const errorMessage = await sessionResponse.text();
 				dispatch(setErrMsg(errorMessage));
-			} catch (error) {
-				dispatch(setErrMsg(`Unhandled error: ${error}`));
 			}
+		} else {
+			const errorMessage = await userResponse.text();
+			dispatch(setErrMsg(errorMessage));
+		}
+	};
+};
+
+export const userLogout = (refresh: string, authorization: string) => {
+	return async function (dispatch: Function, getState: Function) {
+		const sessionResponse = await fetch(`${config.apiUrl}/sessions`, {
+			headers: {
+				'Content-Type': 'application/json',
+				'x-refresh': refresh,
+				authorization: authorization,
+			},
+			method: 'DELETE',
+		});
+		if (sessionResponse.status === 200) {
+			dispatch(logOut());
+		} else {
+			const errorMessage = await sessionResponse.text();
+			dispatch(setErrMsg(errorMessage));
 		}
 	};
 };
