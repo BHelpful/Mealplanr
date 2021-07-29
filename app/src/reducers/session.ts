@@ -282,6 +282,4 @@ export const userLogout = (refresh: string, authorization: string) => {
 	};
 };
 
-// TODO add methods like the one above for Create user, login and logout
-
 export default sessionReducer;
