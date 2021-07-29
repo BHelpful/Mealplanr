@@ -5,6 +5,7 @@ import { setNavIndex, setNavCollapsed } from '../../reducers/navState';
 import './Navbar.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../reducers';
+import { checkForUser } from '../../reducers/session';
 //import { user } from "path/to/user";    // TODO: Create and import user object
 const user = {
 	firstname: 'Lars',
@@ -40,7 +41,9 @@ export default function Navbar() {
 	const navCollapsed = useSelector(
 		(state: RootState) => state.navState.collapsed
 	);
-	const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
+	const isLoggedIn = useSelector(
+		(state: RootState) => state.session.isLoggedIn
+	);
 	const dispatch = useDispatch();
 
 	return (
@@ -73,12 +76,18 @@ export default function Navbar() {
 					<p>
 						{user.firstname} {user.lastname}
 					</p>
-					<div className="logout icon" onClick={() => logOut()}></div>
+					<div
+						className="logout icon"
+						onClick={() => dispatch(checkForUser('test@test.test'))}
+					></div>
 				</div>
 			) : (
 				<div className="bottom loggedout">
 					<p>Log in / Sign up</p>
-					<div className="login icon" onClick={() => logIn()}></div>
+					<div
+						className="login icon"
+						onClick={() => dispatch(checkForUser('test@test.test'))}
+					></div>
 				</div>
 			)}
 		</div>

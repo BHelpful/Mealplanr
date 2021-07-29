@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
-import thunk from 'redux-thunk';
+const thunk = require('redux-thunk').default;
 
 // defining the type for REDUX_DEVTOOLS_EXTENSION
 const composeEnhancers = composeWithDevTools({ trace: true, traceLimit: 25 });

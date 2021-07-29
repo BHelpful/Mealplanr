@@ -15,11 +15,16 @@ function App() {
 	const user = {
 		id: 9272,
 		color: 30,
-	}
-	const isLoggedIn = user.id>0; // For Testing purposes
-	//const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn);
+	};
+	// const isLoggedIn = user.id > 0; // For Testing purposes
+	const isLoggedIn = useSelector(
+		(state: RootState) => state.session.isLoggedIn
+	);
 
-	((hue: number) => document.documentElement.style.setProperty('--c', String(hue)))(user.color);
+	((hue: number) =>
+		document.documentElement.style.setProperty('--c', String(hue)))(
+		user.color
+	);
 
 	return (
 		<div id="app">
@@ -99,7 +104,7 @@ function App() {
 						/* ---- Page-select for users ---- */
 						0: <Mealplan />,
 						1: <RecipeView />,
-						2: <RecipeView personal/>,
+						2: <RecipeView personal />,
 						4: <Settings />,
 				  }[
 						navIndex
