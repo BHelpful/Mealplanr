@@ -1,6 +1,6 @@
 #settings {
 
-  .selectionarea {
+  .selectionarea:nth-child(3) {
 
     flex-wrap: wrap;
 
@@ -23,6 +23,51 @@
       
     }
 
+    .button.field:not(.vertical) {
+
+      span {
+        
+        height: 2em;
+        align-items: center;
+        margin-right: 10px;
+
+        img {
+
+          height: 100%;
+          margin-right: 10px;
+          padding: 5px;
+          background-color: white;
+          border-radius: var(--br);
+
+        }
+
+      }
+
+    }
+
+  }
+
+  .selectionarea:last-child {
+
+    & > div {
+
+      margin: 0 auto;
+      min-width: min-content;
+      padding: 5px;
+
+      .search {
+
+        .bar {
+
+          min-width: 220px;
+          width: auto;
+
+        }
+
+      }
+
+    }
+
   }
 
 }
@@ -36,6 +81,16 @@
       & > div {
   
         min-width: 100%;
+  
+      }
+    
+    }
+
+    .selectionarea:last-child {
+
+      & > div {
+  
+        margin: 0 100%!important;
   
       }
   

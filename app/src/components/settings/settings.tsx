@@ -1,5 +1,5 @@
 import Container from "../container/Container";
-import SelectionArea, { ButtonField, TextField } from "../selectionArea/SelectionArea";
+import SelectionArea, { ButtonField, MultipleChoice, Search, Tag, TextField } from "../selectionArea/SelectionArea";
 import "./settings.scss";
 
 interface kvsp {
@@ -50,34 +50,58 @@ export default function Settings() {
 
   return (
     <Container id={"settings"}>
+      <h1>Personal information</h1>
+      <div>Back</div>
       <SelectionArea columns={3}>
         <div>
-          <TextField text={"Email"} placeholder={"larsl@gmail.com"} />
-          <TextField text={"First name"} placeholder={"lars"} />
-          <TextField text={"Last name"} placeholder={"larsen"} />
+          <TextField decription={"Email"} placeholder={"larsl@gmail.com"} />
+          <TextField decription={"First name"} placeholder={"lars"} />
+          <TextField decription={"Last name"} placeholder={"larsen"} />
         </div>
         <div>
-          <ButtonField text="Connect">
-            <span><img src="google.com/favicon.ico" alt="" />Google</span>
+          <ButtonField decription="Connect">
+            <span><img src="https://calendar.google.com/googlecalendar/images/favicons_2020q4/calendar_29.ico" alt="" />Google</span>
           </ButtonField>
-        <ButtonField text="Connect">
-            <span><img src="microsoft.com/favicon.ico" alt="" />Microsoft</span>
+        <ButtonField decription="Connect">
+            <span><img src="https://www.outlook.com/favicon.ico" alt="" />Outlook</span>
           </ButtonField>
-        <ButtonField text="Connect">
-            <span><img src="apple.com/favicon.ico" alt="" />Apple</span>
+        <ButtonField decription="Connect">
+            <span><img src="https://www.icloud.com/favicon.ico" alt="" />iCloud</span>
           </ButtonField>
         </div>
         <div>
-          <ButtonField text="Request data" vertical>
+          <ButtonField decription="Request data" vertical>
             <span>Account data</span>
           </ButtonField>
-          <ButtonField text="Delete my account" vertical danger>
+          <ButtonField decription="Delete my account" vertical danger>
             <span>Danger zone</span>
           </ButtonField>
         </div>
       </SelectionArea>
+      <h1>Preferences</h1>
       <SelectionArea columns={3}>
-        <input id={"colorHueSelect"} type="range" min={0} max={360} step={1} onInput={sliderSnap} defaultValue={230}></input>
+        <div>
+          <Search decription="Contry" type="" />
+          <Search taglist decription="What stores do you prefer?">
+            <Tag type="none" name="Netto" />
+          </Search>
+        </div>
+        <div>
+          <Search decription="Diet" type="dropdown" />
+          <Search taglist decription="Allergies / intolerences">
+            <Tag type="exotic" name="Hazelnut" />
+            <Tag type="dariy" name="Lactose" />
+          </Search>
+          <MultipleChoice decription="Hide recepies containing these"  name="itolalgi"/>
+        </div>
+        <div>
+          <p>Notifications</p>
+          <MultipleChoice decription="Email" name="email"/>
+          <MultipleChoice decription="Web" name="web"/>
+          <MultipleChoice decription="Mobile" name="mobile"/>
+          <p>Theme</p>
+          <input id={"colorHueSelect"} type="range" min={0} max={360} step={1} onInput={sliderSnap} defaultValue={230}></input>
+        </div>
       </SelectionArea>
     </Container>
   );

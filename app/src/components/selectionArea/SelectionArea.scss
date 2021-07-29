@@ -16,16 +16,10 @@
 	flex-wrap: wrap;
 	justify-content: center;
 
-	& ~ .selectionarea {
-
-		margin-top: 40px;
-
-	}
-
 	& > div:first-child {
 		
-		width: 100%;
-		max-width: max-content;
+		//width: 100%;
+		//max-width: max-content;
 		margin: 0px auto;
 
 	}

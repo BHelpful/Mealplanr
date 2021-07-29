@@ -17,7 +17,7 @@
 	--dark:     hsl(  0,   0%,   0%);			--i-dark:     hsl(180,   0%, 100%);
 
 	--meat:     hsl(  0,  53%,  70%);			--i-meat:     hsl(180,  53%,  30%);
-	--dessert:  hsl( 50,  53%,  70%);			--i-dessert:  hsl(230,  53%,  30%);
+	--diray:		hsl( 50,  53%,  70%);			--i-diray:    hsl(230,  53%,  30%);
 	--salad:    hsl(100,  53%,  70%);			--i-salad:    hsl(280,  53%,  30%);
 	--vegan:    hsl(150,  53%,  70%);			--i-vegan:    hsl(330,  53%,  30%);
 	--fish:     hsl(200,  53%,  70%);			--i-fish:     hsl( 20,  53%,  30%);
@@ -56,7 +56,7 @@
 	overflow-y: scroll;
 
 	.meat 		{ background-color: var(--meat); 		}
-	.dessert 	{ background-color: var(--dessert); }
+	.diray 	  { background-color: var(--diray);   }
 	.salad 		{ background-color: var(--salad); 	}
 	.vegan 		{ background-color: var(--vegan); 	}
 	.fish 		{ background-color: var(--fish); 		}

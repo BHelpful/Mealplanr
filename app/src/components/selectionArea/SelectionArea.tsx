@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './SelectionArea.scss';
 
 interface TagProps {
-	type: string;
-	name: string;
+	type: string,
+	name: string,
 }
 
 export function Tag(props: TagProps) {
@@ -11,24 +11,37 @@ export function Tag(props: TagProps) {
 	return <div className={'tag ' + type}>{name}</div>;
 }
 
-interface TagSearchProps {
-	decription: string;
-	type: string;
+interface SearchProps {
+	taglist?: boolean,
+	decription: string,
+	type?: string,
 }
 
-class TagSearch extends Component<TagSearchProps> {
+class Search extends Component<SearchProps> {
 	render() {
-		const { decription, type, children } = this.props;
+		const { taglist, decription, type, children } = this.props;
 		return (
 			<div className="search tags">
 				<p>{decription}</p>
-				<div className={"bar "+type}>
+				<div className={"bar "+type||''}>
 					<span></span>
 				</div>
-				<div className="tags list">{children}</div>
+				{taglist ? <div className="tags list">{children}</div> : ''}
 			</div>
 		);
 	}
+}
+
+interface MultipleChoiceProps {
+	decription: string,
+	name: string,
+}
+
+export function MultipleChoice(props: MultipleChoiceProps) {
+	const {decription, name} = props;
+	return (
+		<div><input type="checkbox" id={name} /><label htmlFor={name}>{decription}</label></div>
+	);
 }
 
 const weekdaysNamesArr = (len = 2, uppercase = true, offset = 1) => {
@@ -179,16 +192,16 @@ export function WeekdaysDropdown(props: WeekdaysProps) {
 }
 
 interface TextFieldProps {
-	text?: string,
+	decription?: string,
 	placeholder?: string,
 	submitBtnText?: string,
 }
 
 export function TextField(props: TextFieldProps) {
-	const {text, placeholder, submitBtnText} = props;
+	const {decription, placeholder, submitBtnText} = props;
 	return (
 		<div className={"text field"}>
-			{ text ? <p>{text}</p> : <></> }
+			{ decription ? <p>{decription}</p> : <></> }
 			<input type={"text"} placeholder={placeholder?placeholder:''}></input>
 			{ submitBtnText ? <input value={submitBtnText} /> : <></> }
 		</div>
@@ -196,19 +209,19 @@ export function TextField(props: TextFieldProps) {
 }
 
 interface ButtonFieldProps {
-	text: string,
+	decription: string,
 	vertical?: boolean,
 	danger?: boolean
 }
 
 class ButtonField extends Component<ButtonFieldProps> {
 	render() {
-		const {text, vertical, danger, children} = this.props;
+		const {decription, vertical, danger, children} = this.props;
 
 		return (
 			<div className={"button field "+(vertical?"vertical":"")}>
 				{children}
-				<input type={"button"} className={danger?"danger":""} value={text} />
+				<input type={"button"} className={danger?"danger":""} value={decription} />
 			</div>
 		);
 	}
@@ -234,4 +247,4 @@ class SelectionArea extends Component<SelectionAreaProps> {
 }
 
 export default SelectionArea;
-export { TagSearch, ButtonField};
+export { Search, ButtonField};

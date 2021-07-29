@@ -69,7 +69,7 @@ const recepieInfo = (id: number) => {
 			Time: { value: 1, unit: 'hr' },
 			Ratings: 997,
 			Rating: 3267,
-			category: 'dessert',
+			category: 'diray',
 		}
 		case 2500023: return {
 			Title: 'Watermelon salad',

@@ -3,7 +3,7 @@ import './Mealplan.scss';
 import '../recipes/Recipes.scss';
 import SelectionArea, {
 	Tag,
-	TagSearch,
+	Search,
 	WeekdaysButtons,
 	WeekdaysDropdown,
 } from '../selectionArea/SelectionArea';
@@ -31,28 +31,28 @@ export default function Mealplan() {
 					<div></div>
 				</div>
 				<div>
-					<TagSearch
+					<Search taglist
 						type='search'
 						decription={'What foods do you have at home already'}>
 						<Tag type="salad" name="Gouda" />
 						<Tag type="meat" name="Chicken" />
-						<Tag type="dessert" name="Cocca" />
+						<Tag type="diray" name="Milk" />
 						<Tag type="vegan" name="Carrots" />
 						<Tag type="exotic" name="Saffron " />
 						<Tag type="fish" name="Salmon" />
-					</TagSearch>
-					<TagSearch
+					</Search>
+					<Search taglist
 						type='search'
 						decription={'What stores do you prefer?'}>
 						<Tag type="none" name="Rema1000" />
 						<Tag type="none" name="Føtex" />
-					</TagSearch>
-					<TagSearch
+					</Search>
+					<Search taglist
 						type='search'
 						decription={'What categories do you wish to have recipes from?'}>
 						<Tag type="none" name="Spice" />
 						<Tag type="none" name="Asian" />
-					</TagSearch>
+					</Search>
 				</div>
 			</SelectionArea>
 			<div className="plans">
