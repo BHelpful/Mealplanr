@@ -1,49 +1,56 @@
 import config from '../config.json';
 import { get } from 'lodash';
 
+const USER_EXISTS = 'USER_EXISTS';
+const ERROR = 'ERROR';
+const CREATED_USER = 'CREATED_USER';
+const LOGIN = 'LOGIN';
+const LOGOUT = 'LOGOUT';
+
 // Function definitions - Defining what parameters and the object structure
-export const userExists = () => {
+const userExists = () => {
 	return {
-		type: 'USER_EXISTS',
+		type: USER_EXISTS,
 		payload: '',
 	};
 };
-
-export const setErrMsg = (err: string) => {
+const setErrMsg = (err: string) => {
 	return {
-		type: 'ERROR',
+		type: ERROR,
 		payload: err,
 	};
 };
-
-export const createdUser = (
-	email: string,
-	password: string,
-	passwordConfirm: string
+const createdUser = (
+	informationFillded: boolean,
+	refresh: string,
+	authorization: string
 ) => {
 	return {
-		type: 'CREATED_USER',
+		type: CREATED_USER,
 		payload: {
-			email: email,
-			password: password,
-			passwordconfirmation: passwordConfirm,
+			informationFillded: informationFillded,
+			refresh: refresh,
+			authorization: authorization,
 		},
 	};
 };
-
-export const logIn = (email: string, password: string) => {
+const logIn = (
+	informationFillded: boolean,
+	refresh: string,
+	authorization: string
+) => {
 	return {
-		type: 'LOGIN',
+		type: LOGIN,
 		payload: {
-			email: email,
-			password: password,
+			informationFillded: informationFillded,
+			refresh: refresh,
+			authorization: authorization,
 		},
 	};
 };
-
-export const logOut = () => {
+const logOut = () => {
 	return {
-		type: 'LOGOUT',
+		type: LOGOUT,
 		payload: '',
 	};
 };
@@ -80,26 +87,35 @@ const sessionReducer = (
 	action: ActionType
 ) => {
 	switch (action.type) {
-		case 'USER_EXISTS':
+		case USER_EXISTS:
 			state.created = true;
 			return state;
 
-		case 'CREATED_USER':
+		case CREATED_USER:
 			state.created = true;
-			return state;
-
-		case 'LOGIN':
 			state.isLoggedIn = true;
-			if (action.payload) {
+			state.refresh = get(action.payload, 'refresh');
+			state.authorization = get(action.payload, 'authorization');
+			if (get(action.payload, 'informationFillded')) {
 				state.informationFillded = true;
 			}
 			return state;
 
-		case 'LOGOUT':
+		case LOGIN:
+			state.created = true;
+			state.isLoggedIn = true;
+			state.refresh = get(action.payload, 'refresh');
+			state.authorization = get(action.payload, 'authorization');
+			if (get(action.payload, 'informationFillded')) {
+				state.informationFillded = true;
+			}
+			return state;
+
+		case LOGOUT:
 			state.isLoggedIn = false;
 			return state;
 
-		case 'ERROR':
+		case ERROR:
 			state.errorMessage = String(action.payload);
 			return state;
 		default:
@@ -129,5 +145,34 @@ export const checkForUser = (email: string) => {
 		}
 	};
 };
+
+export const createUser = (
+	email: string,
+	password: string,
+	passwordConfirmation: string
+) => {
+	return async function (dispatch: Function, getState: Function) {
+		const user = await fetch(
+			`${config.apiUrl}/users/?userMail=${email}&accessCode=${config.accessCode}`,
+			{
+				method: 'GET',
+			}
+		);
+
+		if (user.status === 200) {
+			const response = await user.json();
+			dispatch(userExists());
+		} else {
+			try {
+				const errorMessage = await user.text();
+				dispatch(setErrMsg(errorMessage));
+			} catch (error) {
+				dispatch(setErrMsg(`Unhandled error: ${error}`));
+			}
+		}
+	};
+};
+
+// TODO add methods like the one above for Create user, login and logout
 
 export default sessionReducer;
