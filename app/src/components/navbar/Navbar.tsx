@@ -1,10 +1,10 @@
 import React from 'react';
-import { setNavIndex, setNavCollapsed } from '../../reducers/navState';
+import { setNavIndex, setNavCollapsed, setUserPopup } from '../../reducers/navState';
 
 import './Navbar.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../reducers';
-import { checkForUser, createUser, userLogin, userLogout } from '../../reducers/session';
+import { userLogout } from '../../reducers/session';
 //import { user } from "path/to/user";    // TODO: Create and import user object
 const user = {
 	firstname: 'Lars',
@@ -37,16 +37,10 @@ const navbarlist = [
 
 export default function Navbar() {
 	const navIndex = useSelector((state: RootState) => state.navState.index);
-	const navCollapsed = useSelector(
-		(state: RootState) => state.navState.collapsed
-	);
-	const isLoggedIn = useSelector(
-		(state: RootState) => state.session.isLoggedIn
-	);
+	const navCollapsed = useSelector((state: RootState) => state.navState.collapsed);
+	const isLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
 	const refresh = useSelector((state: RootState) => state.session.refresh);
-	const authorization = useSelector(
-		(state: RootState) => state.session.authorization
-	);
+	const authorization = useSelector((state: RootState) => state.session.authorization);
 	const dispatch = useDispatch();
 
 	return (
@@ -91,11 +85,7 @@ export default function Navbar() {
 					<p>Log in / Sign up</p>
 					<div
 						className="login icon"
-						onClick={() =>
-							dispatch(
-								userLogin('andreasgdp@gmail.com', '123456')
-							)
-						}
+						onClick={() => dispatch(setUserPopup(1))}
 					></div>
 				</div>
 			)}

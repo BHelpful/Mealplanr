@@ -85,8 +85,7 @@
 			height: auto;
 			display: grid;
 			align-items: center;
-			grid-gap: 30px;
-			grid-template-columns: 45px auto;
+			grid-template-columns: minmax(60px, 85px) auto;
 			border-color: inherit;
 			border-radius: var(--br);
 			transition: 1s background-color, 0.25s filter, 1s color;
@@ -106,8 +105,7 @@
 
 			p {
 				
-				padding-left: 10px;
-				width: 100%;
+				width: auto;
 				opacity: 0;
 				transition: 1s opacity;
 				

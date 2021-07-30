@@ -1,5 +1,6 @@
 import config from '../config.json';
 import { get } from 'lodash';
+import { setUserPopup } from './navState';
 
 const USER_EXISTS = 'USER_EXISTS';
 const ERROR = 'ERROR';
@@ -143,7 +144,9 @@ export const checkForUser = (email: string) => {
 		if (user.status === 200) {
 			// const response = await user.json();
 			dispatch(userExists());
+			dispatch(setUserPopup(2));
 		} else {
+			dispatch(setUserPopup(3));
 			try {
 				const errorMessage = await user.text();
 				dispatch(setErrMsg(errorMessage));
@@ -182,6 +185,8 @@ export const createUser = (
 			if (sessionResponse.status === 200) {
 				const session = await sessionResponse.json();
 				const user = await userResponse.json();
+				dispatch(setUserPopup(0));
+				dispatch(userLogin(email, password));
 				if (user.name) {
 					dispatch(
 						createdUser(
@@ -233,6 +238,7 @@ export const userLogin = (email: string, password: string) => {
 			if (sessionResponse.status === 200) {
 				const session = await sessionResponse.json();
 				const user = await userResponse.json();
+				dispatch(setUserPopup(0));
 				if (user.name) {
 					dispatch(
 						logIn(
