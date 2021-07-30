@@ -3,21 +3,30 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
-const thunk = require('redux-thunk').default;
+import { applyMiddleware, createStore } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
-// defining the type for REDUX_DEVTOOLS_EXTENSION
-const composeEnhancers = composeWithDevTools({ trace: true, traceLimit: 25 });
-// const composeEnhancers = composeWithDevTools();
+function configureStore(preloadedState: any) {
+	const middlewares = [thunkMiddleware];
+	const middlewareEnhancer = applyMiddleware(...middlewares);
+  const enhancers = [middlewareEnhancer];
+	const composedEnhancers = composeWithDevTools(...enhancers); // removed: { trace: true, traceLimit: 25 }
+	// Combine all parts
+  const store = createStore(rootReducer, preloadedState, composedEnhancers);
+  return store;
+}
 
-// create store
-const store = createStore(
-	rootReducer,
-	composeEnhancers(applyMiddleware(thunk))
-);
+// Load or set default state based on localstoarge
+const localState = localStorage.getItem('reduxState');
+const persistedState = localState ? JSON.parse(localState) : {reducers: rootReducer}
+const store = configureStore(persistedState);
+
+store.subscribe(() => {
+  localStorage.setItem('reduxState', JSON.stringify(store.getState()));
+});
 
 ReactDOM.render(
 	<React.StrictMode>

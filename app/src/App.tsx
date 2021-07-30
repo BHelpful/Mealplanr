@@ -16,7 +16,7 @@ function App() {
 		id: 9272,
 		color: 30,
 	};
-	// const isLoggedIn = user.id > 0; // For Testing purposes
+
 	const isLoggedIn = useSelector(
 		(state: RootState) => state.session.isLoggedIn
 	);
