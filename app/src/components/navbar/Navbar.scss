@@ -74,11 +74,15 @@
 
 	.items {
 
+		height: calc(100vh - 175px);
+		max-height: 400px;
+		display: grid;
+
 		.bar {
 
-			margin: 16px 10px;
+			margin: auto 10px;
 			width: auto;
-			height: 60px;
+			height: auto;
 			display: grid;
 			align-items: center;
 			grid-gap: 30px;
@@ -166,7 +170,7 @@
 		
 		p {
 
-			padding: 0 14px;
+			margin: 0 14px;
 			font-weight: 700;
 
 		}

@@ -164,8 +164,8 @@ export default function Recipes(props: RecipesProps) {
 	if(mealFrom === 'plan')
 		return (
 			<>
-				{data.map((data: any) => (
-					<Recipe type='tall' Id={data.recepieId} At={data.time} personal={true} />
+				{data.map((data: any, index: number) => (
+					<Recipe key={index} type='tall' Id={data.recepieId} At={data.time} personal={true} />
 				))}
 			</>
 		);
@@ -179,8 +179,8 @@ export default function Recipes(props: RecipesProps) {
 						<p>+</p>
 					</div>
 				) : ''}
-				{data.map((data: any) => (
-					<Recipe type='wide' Id={data.recepieId} personal={mealFrom==='personal'} />
+				{data.map((data: any, index: number) => (
+					<Recipe key={index} type='wide' Id={data.recepieId} personal={mealFrom==='personal'} />
 				))}
 			</>
 		);
