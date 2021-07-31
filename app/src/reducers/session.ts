@@ -135,14 +135,13 @@ const sessionReducer = (
 export const checkForUser = (email: string) => {
 	return async function (dispatch: Function, getState: Function) {
 		const user = await fetch(
-			`${config.apiUrl}/users/?userMail=${email}&accessCode=${config.accessCode}`,
+			`${config.apiUrl}/users/exists/?userMail=${email}`,
 			{
 				method: 'GET',
 			}
 		);
 
 		if (user.status === 200) {
-			// const response = await user.json();
 			dispatch(userExists());
 			dispatch(setUserPopup(2));
 		} else {
@@ -219,24 +218,26 @@ export const createUser = (
 
 export const userLogin = (email: string, password: string) => {
 	return async function (dispatch: Function, getState: Function) {
-		const userResponse = await fetch(
-			`${config.apiUrl}/users/?userMail=${email}&accessCode=${config.accessCode}`,
-			{
+		const sessionResponse = await fetch(`${config.apiUrl}/sessions`, {
+			body: JSON.stringify({
+				email: email,
+				password: password,
+			}),
+			headers: { 'Content-Type': 'application/json' },
+			method: 'POST',
+		});
+		if (sessionResponse.status === 200) {
+			const session = await sessionResponse.json();
+			const userResponse = await fetch(`${config.apiUrl}/users/`, {
+				headers: {
+					'Content-Type': 'application/json',
+					'x-refresh': session.refreshToken,
+					authorization: session.accessToken,
+				},
 				method: 'GET',
-			}
-		);
-
-		if (userResponse.status === 200) {
-			const sessionResponse = await fetch(`${config.apiUrl}/sessions`, {
-				body: JSON.stringify({
-					email: email,
-					password: password,
-				}),
-				headers: { 'Content-Type': 'application/json' },
-				method: 'POST',
 			});
-			if (sessionResponse.status === 200) {
-				const session = await sessionResponse.json();
+
+			if (userResponse.status === 200) {
 				const user = await userResponse.json();
 				dispatch(setUserPopup(0));
 				if (user.name) {
@@ -259,11 +260,11 @@ export const userLogin = (email: string, password: string) => {
 					);
 				}
 			} else {
-				const errorMessage = await sessionResponse.text();
+				const errorMessage = await userResponse.text();
 				dispatch(setErrMsg(errorMessage));
 			}
 		} else {
-			const errorMessage = await userResponse.text();
+			const errorMessage = await sessionResponse.text();
 			dispatch(setErrMsg(errorMessage));
 		}
 	};
