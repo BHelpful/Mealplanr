@@ -1,0 +1,32 @@
+.showcase {
+  
+  .selectionarea.showcase.trailer {
+    
+    display: grid;
+    grid-template-columns: 1fr auto;
+    
+    div:first-child {
+      
+      width: 100%;
+      
+      div {
+        
+        display: inline;
+        
+      }
+      
+    }
+    
+    div > div.image {
+      
+      min-width: 200px;
+      width: 100%;
+      display: block;
+      
+    }
+    
+  }
+  
+  
+
+}

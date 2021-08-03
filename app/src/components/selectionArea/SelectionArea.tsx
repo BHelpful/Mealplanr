@@ -1,5 +1,45 @@
-import React, { Component } from 'react';
+import React, { Children, Component } from 'react';
 import './SelectionArea.scss';
+
+export function Quantaty() {
+	return (
+		<div className={"quantity"}>
+			<p>-</p>
+			<p><span>2</span> portions</p>
+			<p>+</p>
+		</div>
+	);
+}
+
+const allowDrag = () => {
+	return ;
+}
+interface ListingProps {
+	name: string;
+	drag?: boolean;
+}
+class Listing extends Component<ListingProps> {
+	render () {
+		const {name, drag, children} = this.props;
+		if (!drag) return (<><p>{name}</p><div className={"listing"}>{children}</div></>);
+		else return (<><p>{name}</p><div className={"listing drag"} onDragOver={allowDrag}>{children}</div></>);
+	}
+}
+
+interface ItemProps {
+	name: string
+}
+
+export function Item(props: ItemProps) {
+	const {name} = props;
+	return (
+		<div className={"item"}>
+			<input type="checkbox" />
+			<p>{name}</p>
+			<p><span>5</span><span>stk</span></p>
+		</div>
+	);
+}
 
 interface TagProps {
 	type: string,
@@ -247,4 +287,4 @@ class SelectionArea extends Component<SelectionAreaProps> {
 }
 
 export default SelectionArea;
-export { Search, ButtonField};
+export { Listing, Search, ButtonField };

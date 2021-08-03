@@ -92,7 +92,7 @@ export default function Settings() {
             <Tag type="exotic" name="Hazelnut" />
             <Tag type="dariy" name="Lactose" />
           </Search>
-          <MultipleChoice decription="Hide recepies containing these"  name="itolalgi"/>
+          <MultipleChoice decription="Hide recipes containing these"  name="itolalgi"/>
         </div>
         <div>
           <p>Notifications</p>

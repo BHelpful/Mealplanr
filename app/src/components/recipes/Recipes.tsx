@@ -2,47 +2,47 @@ import './Recipes.scss';
 
 const mealPlan = [
 	{
-		recepieId: -1,
+		recipeId: -1,
 		time: '',
 	},
 	{
-		recepieId: 252816,
+		recipeId: 252816,
 		time: '18:00',
 	},
 	{
-		recepieId: 3500346,
+		recipeId: 3500346,
 		time: '16:45',
 	},
 	{
-		recepieId: -1,
+		recipeId: -1,
 		time: '',
 	},
 	{
-		recepieId: -1,
+		recipeId: -1,
 		time: '',
 	},
 	{
-		recepieId: -1,
+		recipeId: -1,
 		time: '',
 	},
 	{
-		recepieId: -1,
+		recipeId: -1,
 		time: '',
 	},
 ];
 
 const recipes = [
-	{ recepieId: 2102013, },
-	{ recepieId: 2340076, },
-	{ recepieId: 2500023,	},
-	{ recepieId: 3500346, }
+	{ recipeId: 2102013, },
+	{ recipeId: 2340076, },
+	{ recipeId: 2500023,	},
+	{ recipeId: 3500346, }
 ];
 
 const myRecipes = [
-	{ recepieId: 3500346, }
+	{ recipeId: 3500346, }
 ]
 
-const recepieInfo = (id: number) => {
+const recipeInfo = (id: number) => {
 	switch (id) {
 		case 252816: return {
 			Title: 'Pyttipanna',
@@ -100,10 +100,10 @@ function handleAltImg(e: any) {
 function handleNextImage(e: any) {
 	if(!e.target.parentElement.classList.contains("shadow")) return;
 	const max = e.target.dataset.images;
-	const [id, current] = e.target.src.replace(/http:\/\/localhost:3000\/temp\/recepie_(\d+)_(\d+).jpg/,"$1,$2").split(",")
+	const [id, current] = e.target.src.replace(/http:\/\/localhost:3000\/temp\/recipe_(\d+)_(\d+).jpg/,"$1,$2").split(",")
 	const next = (Number(current) + 1) % max;
 	setTimeout(() => {
-		e.target.src = "/temp/recepie_"+id+"_"+next+".jpg"
+		e.target.src = "/temp/recipe_"+id+"_"+next+".jpg"
 	},5000)
 };
 
@@ -116,14 +116,14 @@ interface RecipeProps {
 
 export function Recipe(props: RecipeProps) {
 	const {type, Id, At, personal} = {At: null, ...props};
-	const {Images, Title, Decs, Time, Rating, Ratings, category} = recepieInfo(Id);
+	const {Images, Title, Decs, Time, Rating, Ratings, category} = recipeInfo(Id);
 
 	return (
-		<div className={type + ' recepie ' + (Id !== -1 ? category : 'empty')} onClick={() => console.log('Clicked recepie')}>
+		<div className={type + ' recipe ' + (Id !== -1 ? category : 'empty')} onClick={() => console.log('Clicked recipe')}>
 			{ Id !== -1 ? <>
 				<div className="rimage shadow">
 					{	personal ? <span className={"options"}></span> : <></> }
-					<img src={"/temp/recepie_"+Id+"_1.jpg"} data-images={Images} onError={handleAltImg} alt="" onLoad={handleNextImage}></img>
+					<img src={"/temp/recipe_"+Id+"_1.jpg"} data-images={Images} onError={handleAltImg} alt="" onLoad={handleNextImage}></img>
 				</div>
 				<h3>{Title}</h3>
 				<p>{Decs}</p>
@@ -142,7 +142,7 @@ export function Recipe(props: RecipeProps) {
 					</div>
 				</> }
 			</> : <>
-				<h3>Add recepie</h3>
+				<h3>Add recipe</h3>
 				<p>+</p>
 			</> }
 		</div>
@@ -165,7 +165,7 @@ export default function Recipes(props: RecipesProps) {
 		return (
 			<>
 				{data.map((data: any, index: number) => (
-					<Recipe key={index} type='tall' Id={data.recepieId} At={data.time} personal={true} />
+					<Recipe key={index} type='tall' Id={data.recipeId} At={data.time} personal={true} />
 				))}
 			</>
 		);
@@ -180,7 +180,7 @@ export default function Recipes(props: RecipesProps) {
 					</div>
 				) : ''}
 				{data.map((data: any, index: number) => (
-					<Recipe key={index} type='wide' Id={data.recepieId} personal={mealFrom==='personal'} />
+					<Recipe key={index} type='wide' Id={data.recipeId} personal={mealFrom==='personal'} />
 				))}
 			</>
 		);

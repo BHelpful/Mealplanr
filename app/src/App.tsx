@@ -9,6 +9,8 @@ import RecipeView from './components/recipeView/RecipeView';
 import Settings from './components/settings/settings';
 import Popup from './components/popup/Popup';
 import './App.scss';
+import showcase from './components/showcase/showcase';
+import Showcase from './components/showcase/showcase';
 
 const user = {
 	id: 9272,
@@ -58,7 +60,6 @@ function App() {
 					</> : <></> }
 				</Popup>
 			: <></> }
-			
 			<Navbar />
 			{!isLoggedIn /* ---- Page-select for not-yet-logged-in-users ---- */
 				? {
@@ -71,7 +72,7 @@ function App() {
 						),
 						1: (
 							<Container>
-								<h1>Browse recepies</h1>
+								<h1>Browse recipes</h1>
 								<p></p>
 							</Container>
 						),
@@ -136,6 +137,7 @@ function App() {
 						0: <Mealplan />,
 						1: <RecipeView />,
 						2: <RecipeView personal />,
+						3: <Showcase />,
 						4: <Settings />,
 				  }[
 						navIndex
