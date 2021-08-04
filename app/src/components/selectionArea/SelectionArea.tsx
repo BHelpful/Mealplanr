@@ -267,6 +267,36 @@ class ButtonField extends Component<ButtonFieldProps> {
 	}
 }
 
+interface StepProps {
+	decs: string;
+}
+
+export function Step(props: StepProps) {
+	const {decs} = props;
+	return (
+		<div className={"step"}>
+			<input type="checkbox" />
+			<p>{decs}</p>
+		</div>
+	);
+}
+
+interface GuideProps {
+	title: string;
+}
+class Guide extends Component<GuideProps> {
+	render() {
+		const {title, children} = this.props;
+
+		return (
+			<div className={"guide"}>
+				<h3>{title}</h3>
+				{children}
+			</div>
+		);
+	}
+}
+
 interface SelectionAreaProps {
 	cln?: string;
 	columns: number;
@@ -287,4 +317,4 @@ class SelectionArea extends Component<SelectionAreaProps> {
 }
 
 export default SelectionArea;
-export { Listing, Search, ButtonField };
+export { Listing, Guide, Search, ButtonField };

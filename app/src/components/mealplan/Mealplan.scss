@@ -6,46 +6,6 @@
  */
 #mealplan {
 
-	display: grid;
-	grid-template-columns: minmax(100px, 100%) minmax(130px, 160px);
-	grid-template-rows: 60px auto;
-
-	h1 {
-
-		margin: 0;
-		margin-right: 5px;
-		align-self: center;
-		white-space: nowrap;
-		text-overflow: clip;
-		overflow: hidden;
-
-	}
-
-	.button {
-
-		margin-left: auto;
-		margin-right: 0px;
-		align-self: center;
-		background-color: var(--accent);
-		color: var(--bright);
-		padding: 5px;
-		border-radius: 10px;
-		width: 130px;
-		text-align: center;
-		filter: var(--shadow);
-		transition: 0.5s filter, 0.1s margin;
-
-		&:hover {
-
-			filter: none;
-			margin-top: 5px;
-
-		}
-
-	}
-
-	.selectionarea { grid-column: span 2; }
-
 	.plans {
 
 		grid-column: span 2;
@@ -55,6 +15,7 @@
 		padding: 20px 40px;
 		overflow-x: scroll;
 		height: 390px;
+		align-content: center;
 
 	}
 

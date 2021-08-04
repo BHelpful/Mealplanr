@@ -16,7 +16,7 @@
 	flex-wrap: wrap;
 	justify-content: center;
 
-	& > div:first-child {
+	> div:first-child {
 		
 		//width: 100%;
 		//max-width: max-content;
@@ -124,7 +124,7 @@
 
 			}
 
-			& > span {
+			> span {
 
 				content: "";
 				background-image: url("../../assets/Lup.svg");
@@ -161,6 +161,7 @@
 			justify-content: center;
 			color: var(--gray);
 			background-color: var(--bgcolor);
+			filter: var(--shadow);
 
 		}
 
@@ -168,16 +169,17 @@
 
 	.weekdays.selection {
 
-		margin-bottom: 40px;
+		margin-bottom: 20px;
 		width: auto;
 
-		p { margin-bottom: 0; }
+		p { margin: 0; }
 
 		.week {
 
 			display: grid;
 			grid-template-columns: repeat(7, 1fr);
-			align-items: center;
+			height: 65px;
+			align-items: top;
 			justify-items: center;
 			overflow-x: auto;
 			scrollbar-width: none;
@@ -185,20 +187,21 @@
 			.day {
 
 				margin: 3px;
-
+				
 				&.unavailable {
-
+					
 					border: 1px solid var(--faded);
 					color: var(--faded);
 					background-color: transparent;
-
+					
 				}
-
+				
 				&.available {
-
+					
 					border: 2px solid var(--joyfull);
 					color: var(--joyfull);
 					background-color: transparent;
+					filter: var(--shadow);
 
 				}
 
@@ -206,6 +209,7 @@
 
 					background-color: var(--joyfull);
 					color: var(--bright);
+					filter: var(--shadow);
 
 				}
 
@@ -230,10 +234,15 @@
 
 			&.dropdowns {
 
+				width: auto;
+				margin-top: 10px;
+				padding: 0 10px;
+
 				.day {
 
 					text-align: center;
 					color: var(--joyfull);
+					filter: var(--shadow);
 
 					&.unavailable {
 
@@ -286,9 +295,10 @@
     width: 150px;
     height: 30px;
     border-radius: var(--br);
-    background-color: var(--accent);
+    background-color: var(--faded);
     grid-template-columns: 30px auto 30px;
     align-items: center;
+		filter: var(--shadow);
     
     p {
       
@@ -316,7 +326,7 @@
     
     display: flex;
     flex-direction: column;
-    width: 500px;
+		filter: var(--shadow);
     
     .item {
       
@@ -330,7 +340,7 @@
       align-items: center;
       margin: 4px auto;
       
-      & > * {
+      > * {
         
         margin: auto 10px;
         
@@ -356,5 +366,45 @@
     }
     
   }
+
+	.guide {
+
+		h3 {
+
+
+
+		}
+
+		.step {
+
+			width: 100%;
+			height: fit-content;
+			background-color: var(--joyfull);
+			border-radius: var(--br);
+			color: var(--bright);
+			margin: 10px 0;
+			filter: var(--shadow);
+			display: flex;
+
+
+			input[type=checkbox] {
+
+				width: 1.3em;
+				height: 1.3em;
+				margin: 10px;
+
+			}
+
+			p {
+
+				margin: auto 0;
+				padding: .7em 0;
+				flex: 1 1;
+
+			}
+
+		}
+
+	}
 
 }

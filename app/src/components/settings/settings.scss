@@ -7,7 +7,7 @@
     align-items: center;
     align-content: center;
     
-    & > div {
+    > div {
 
       width: 33%;
       min-width: 200px;
@@ -16,7 +16,7 @@
 
     }
 
-    & > div:nth-child(2) {
+    > div:nth-child(2) {
 
       margin: auto;
       width: auto;
@@ -49,7 +49,7 @@
 
   .selectionarea:last-child {
 
-    & > div {
+    > div {
 
       margin: 0 auto;
       min-width: min-content;
@@ -78,7 +78,7 @@
 
     .selectionarea {
   
-      & > div {
+      > div {
   
         min-width: 100%;
   
@@ -88,7 +88,7 @@
 
     .selectionarea:last-child {
 
-      & > div {
+      > div {
   
         margin: 0 100%!important;
   

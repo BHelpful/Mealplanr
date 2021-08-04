@@ -1,13 +1,13 @@
 import Container from "../container/Container";
-import SelectionArea, { Item, Listing, Quantaty, Tag } from "../selectionArea/SelectionArea";
+import SelectionArea, { Guide, Item, Listing, Quantaty, Step, Tag } from "../selectionArea/SelectionArea";
 import "./showcase.scss";
 
 export default function Showcase () {
   return (
-    <Container className={"showcase"}>
+    <Container id="showcase">
       <h1>Recipe showcase</h1>
-      <div>Edit</div>
-      <SelectionArea columns={2} cln={"showcase trailer"}>
+      <div className="button">Edit</div>
+      <SelectionArea columns={2} cln={"trailer"}>
         <div>
           <h2>Title</h2>
           <div>
@@ -24,7 +24,7 @@ export default function Showcase () {
           <div className={"image"}></div>
         </div>
       </SelectionArea>
-      <SelectionArea columns={2}>
+      <SelectionArea columns={2} cln={"guide"}>
         <div>
           <p>Ingredients</p>
           <Quantaty />
@@ -36,6 +36,14 @@ export default function Showcase () {
             <Item name={"Carrot"} />
             <Item name={"Carrot"} />
           </Listing>
+        </div>
+        <div>
+          <Guide title={"Pointless"}>
+            <Step decs={"Do one thing"} />
+            <Step decs={"Chop something - not your fingers!"} />
+            <Step decs={"Do one thing once again"} />
+            <Step decs={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."} />
+          </Guide>
         </div>
       </SelectionArea>
     </Container>

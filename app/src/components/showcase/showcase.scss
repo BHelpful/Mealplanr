@@ -1,32 +1,70 @@
-.showcase {
-  
-  .selectionarea.showcase.trailer {
-    
-    display: grid;
-    grid-template-columns: 1fr auto;
-    
-    div:first-child {
+#showcase {
+
+  .selectionarea {
+
+    div {
+
+      min-width: 300px;
+
+    }
+
+    &.trailer {
       
-      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
       
-      div {
+      > div:first-child {
         
-        display: inline;
+        width: 100%;
+        
+        div {display: inline;}
+        
+      }
+      
+      > div:last-child {
+        
+        filter: var(--shadow);
+        border-radius: var(--br);
+        background-color: var(--faded);
+        margin: 20px;
+        
+        div.image {
+        
+          min-width: 200px;
+          width: 100%;
+          display: block;
+          height: 100%;
+          aspect-ratio: 1/1;
+
+          background-image: url("../../assets/Duck.svg");
+          background-repeat: no-repeat;
+          background-position: center;
+
+          filter: invert(1) var(--shadow);
+        
+        }
         
       }
       
     }
-    
-    div > div.image {
+
+    &.guide {
+
+      > div { 
       
-      min-width: 200px;
-      width: 100%;
-      display: block;
+        margin: 20px;
+
+        > * {
+          margin: 0 40px;
+        }
+        
+        &:first-child { flex: 1 2; }
+        &:last-child { flex: 1 3; }
       
+      }
+
     }
-    
+  
   }
-  
-  
 
 }
