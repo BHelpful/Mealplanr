@@ -12,37 +12,42 @@
 	padding: 20px;
 	font-size: 14px;
 	max-width: calc(100% - 40px);
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+	display: grid;
+	justify-items: center;
+	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 
-	> div:first-child {
+	> div {
 		
-		//width: 100%;
-		//max-width: max-content;
-		margin: 0px auto;
+		margin-block: 20px;
+		width: 80%;
+	
+	}
+
+	textarea {
+
+		min-height: 90px;
+		font-family: sans-serif;
+		font-size: 10pt;
+		resize: none;
 
 	}
 
+	input[type=text], textarea {
+		
+		height: 30px;
+		border: none;
+		padding: 5px 10px;
+		border-radius: 20px;
+		background-color: var(--accent);
+		width: calc(100% - 20px);
+		
+	}
+
 	.field {
-
-		p {
-
-			margin-top: 15px;
-			margin-bottom: 3px;
-
-		}
-
-		input[type=text] {
-			
-			height: 30px;
-			border: none;
-			padding: 5px 10px;
-			border-radius: 20px;
-			background-color: var(--accent);
-			width: calc(100% - 20px);
-			
-		}
+		
+		&:first-of-type p { margin-top: 0; }
+		
+		p { margin-block: 15px 3px; }
 
 		input[type=button] {
 			
@@ -53,14 +58,9 @@
 			background-color: var(--joyfull);
 			color: hsl(0, 0%, 100%);
 
-			&.danger {
-
-				background-color: hsl(0, 100%, 32%);
-
-			}
+			&.danger { background-color: hsl(0, 100%, 32%); }
 
 		}
-
 		
 		&.button {
 			
@@ -72,7 +72,10 @@
 			&.vertical {
 	
 				display: flex;
-				width: auto;flex-direction: column;
+				width: auto;
+				height: calc(30px + 22.5px * 2);
+				flex-direction: column;
+				margin: 0 auto;
 
 				input[type=button] {
 
@@ -82,12 +85,6 @@
 
 				}
 	
-			}
-
-			&:first-of-type {
-
-				margin-top: 55px;
-
 			}
 
 			span {
@@ -170,7 +167,7 @@
 	.weekdays.selection {
 
 		margin-bottom: 20px;
-		width: auto;
+		margin: auto;
 
 		p { margin: 0; }
 
@@ -258,7 +255,7 @@
 						background-color: var(--joyfull);
 						color: var(--bright);
 						text-align: center;
-						width: 65px;
+						width: 55px;
 						height: 30px;
 						padding-left: calc(50% - 0.5em);
 						letter-spacing: 20px;
@@ -292,41 +289,50 @@
 	.quantity {
     
     display: grid;
-    width: 150px;
     height: 30px;
     border-radius: var(--br);
     background-color: var(--faded);
-    grid-template-columns: 30px auto 30px;
     align-items: center;
 		filter: var(--shadow);
-    
-    p {
-      
-      text-align: center;
-      margin: 0;
-      
-      &:first-child,
-      &:last-child {
-        
-        width: 35px;
-        
-      }
-      
-      span {
-        
-        margin-right: 5px;
-        
-      }
-      
-    }
-    
-  }
+		
+		&.time {
+			
+			grid-template-columns: 1fr 1fr;
+			justify-items: center;
+			width: 100px;
+
+			p { margin: auto; }
+			
+		}
+		
+		&.amount {
+			
+			width: 150px;
+			grid-template-columns: 30px auto 30px;
+			
+			p {
+				
+				text-align: center;
+				margin: 0;
+				
+				&:first-child,
+				&:last-child { width: 35px; }
+				span { margin-right: 5px; }
+				
+			}
+			
+		}
+		
+	}
   
   .listing {
     
     display: flex;
     flex-direction: column;
 		filter: var(--shadow);
+		height: max-content;
+
+		&.drag { height: max-content!important; }
     
     .item {
       
@@ -336,44 +342,50 @@
       background-color: var(--joyfull);
       color: var(--bright);
       display: inline-grid;
-      grid-template-columns: 30px auto min-content;
+      grid-template-columns: 30px auto auto;
       align-items: center;
       margin: 4px auto;
       
-      > * {
-        
-        margin: auto 10px;
-        
-      }
-      
-      p:last-of-type {
-        
-        span {
-          
-          margin: 0 5px;
-          
-        }
-        
-      }
-      
+			:last-child {
+
+				justify-self: end;
+				
+			}
+			
       input[type=checkbox] {
-        
-        width: 1.3em;
+				
+				width: 1.3em;
         height: 1.3em;
         
       }
+			
+			> * {
+				
+				margin: 5px 10px;
+				pointer-events: none; // Prevents drag event to target children
+				
+			}
+			
+			.cross.icon {
+				
+				background-image: url("../../assets/Cross.svg");
+				background-position: center;
+				background-position-x: right;
+				margin-right: 5px;
+				background-repeat: no-repeat;
+				height: 100%;
+				width: 100%;
+				display: block;
+				filter: var(--shadow) invert(1);
+
+			
+			}
       
     }
     
   }
 
 	.guide {
-
-		h3 {
-
-
-
-		}
 
 		.step {
 

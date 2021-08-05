@@ -1,9 +1,22 @@
-import React, { Children, Component } from 'react';
+import React, { Component } from 'react';
 import './SelectionArea.scss';
 
-export function Quantaty() {
-	return (
-		<div className={"quantity"}>
+interface QuantityPorps {
+	time?: boolean;
+	ingredients?: boolean;
+}
+
+export function Quantaty(props: QuantityPorps) {
+	const {time, ingredients} = props;
+	if(time) return (
+		<div className={"quantity time"}>
+			<p><span>60</span></p>
+			<p><span>min</span></p>
+	</div>
+	); else if (ingredients) return (
+		<></>
+	); else return (
+		<div className={"quantity amount"}>
 			<p>-</p>
 			<p><span>2</span> portions</p>
 			<p>+</p>
@@ -11,9 +24,37 @@ export function Quantaty() {
 	);
 }
 
-const allowDrag = () => {
-	return ;
+var dragSrcEl: any;
+
+const handleDragStart = (evt: any) => {
+  evt.target.style.opacity = '0.4';
+  dragSrcEl = evt.target;
+  evt.dataTransfer.effectAllowed = 'move';
+  evt.dataTransfer.setData('text/html', evt.target.innerHTML);
+};
+const handleDragEnter = (evt: any) => evt.target.classList.add('over');
+const handleDragLeave = (evt: any) => {
+  evt.stopPropagation();
+  evt.target.classList.remove('over');
+};
+const handleDragOver = (evt: any) => {
+  evt.preventDefault();
+  evt.dataTransfer.dropEffect = 'move';
+  return false;
+};
+const handleDragDrop = (evt: any) => {
+  if (dragSrcEl !== this) {
+    dragSrcEl.innerHTML = evt.target.innerHTML;
+    evt.target.innerHTML = evt.dataTransfer.getData('text/html');
+  }
+  return false;
 }
+const handleDragEnd = (evt: any) => {
+  var listItens = document.querySelectorAll('.draggable');
+  [].forEach.call(listItens, (item: any) => item.classList.remove('over'));
+  evt.target.style.opacity = '1';
+}
+
 interface ListingProps {
 	name: string;
 	drag?: boolean;
@@ -21,18 +62,44 @@ interface ListingProps {
 class Listing extends Component<ListingProps> {
 	render () {
 		const {name, drag, children} = this.props;
-		if (!drag) return (<><p>{name}</p><div className={"listing"}>{children}</div></>);
-		else return (<><p>{name}</p><div className={"listing drag"} onDragOver={allowDrag}>{children}</div></>);
+		if (drag) return (
+			<>
+				<p>{name}</p>
+				<input type="text" placeholder={"Clean/wash beans"}></input>
+				<div className={"button"}>Add</div>
+				<div className={"listing drag"}>{children}</div>
+			</>
+		);
+		else return (
+			<>
+				<p>{name}</p>
+				<div className={"listing"}>{children}</div>
+			</>
+		);
 	}
 }
 
 interface ItemProps {
-	name: string
+	name: string;
+	drag?: boolean;
 }
 
 export function Item(props: ItemProps) {
-	const {name} = props;
-	return (
+	const {name, drag} = props;
+	if (drag) return (
+		<div className={"item drag"} draggable={true}
+			onDragEnter={handleDragEnter}
+			onDragOver=	{handleDragOver}
+			onDragLeave={handleDragLeave}
+			onDragStart={handleDragStart}
+			onDrop=			{handleDragDrop}
+			onDragEnd=	{handleDragEnd}>
+			<div className={"drag icon"}></div>
+			<p>{name}</p>
+			<div className={"cross icon"}></div>
+		</div>
+	);
+	else return (
 		<div className={"item"}>
 			<input type="checkbox" />
 			<p>{name}</p>
@@ -232,14 +299,21 @@ export function WeekdaysDropdown(props: WeekdaysProps) {
 }
 
 interface TextFieldProps {
+	large?: boolean,
 	decription?: string,
 	placeholder?: string,
 	submitBtnText?: string,
 }
 
 export function TextField(props: TextFieldProps) {
-	const {decription, placeholder, submitBtnText} = props;
-	return (
+	const {large, decription, placeholder, submitBtnText} = props;
+	if(large) return (
+		<div className={"text field large"}>
+			{ decription ? <p>{decription}</p> : <></> }
+			<textarea placeholder={placeholder?placeholder:''}></textarea>
+			{ submitBtnText ? <input value={submitBtnText} /> : <></> }
+		</div>
+	); else return (
 		<div className={"text field"}>
 			{ decription ? <p>{decription}</p> : <></> }
 			<input type={"text"} placeholder={placeholder?placeholder:''}></input>

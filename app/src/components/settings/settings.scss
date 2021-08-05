@@ -2,17 +2,62 @@
 
   .selectionarea:nth-child(3) {
 
-    flex-wrap: wrap;
-
     align-items: center;
     align-content: center;
+    justify-content: center;
     
     > div {
 
       width: 33%;
       min-width: 200px;
-      height: 100%;
-      display: inline-grid;
+      width: 100%;
+
+      &:first-child { width: 80%; }
+
+      &:nth-child(3) {
+
+        height: 100%;
+
+        > .button {
+        
+          align-self: center;
+          background-color: var(--joyfull);
+          color: var(--bright);
+          padding: 5px;
+          border-radius: var(--br);
+          width: 130px;
+          text-align: center;
+          filter: var(--shadow);
+          margin: 10px auto;
+
+        }
+
+        > div:first-child {
+        
+          filter: var(--shadow);
+          border-radius: var(--br);
+          background-color: var(--faded);
+          max-height: 250px;
+          margin: 20px auto;
+          aspect-ratio: 1/1;
+          
+          .image {
+          
+            min-width: 200px;
+            width: 100%;
+            display: block;
+            height: 100%;
+            aspect-ratio: 1/1;
+            background-image: url("../../assets/Duck.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: invert(1) var(--shadow);
+          
+          }
+          
+        }
+
+      }
 
     }
 
@@ -20,6 +65,7 @@
 
       margin: auto;
       width: auto;
+      display: inline-grid;
       
     }
 
@@ -51,9 +97,11 @@
 
     > div {
 
-      margin: 0 auto;
       min-width: min-content;
       padding: 5px;
+
+      justify-items: center;
+      display: grid;
 
       .search {
 
@@ -77,22 +125,16 @@
   #settings {
 
     .selectionarea {
+
+      grid-template-columns: repeat(1, minmax(200px, 1fr));
   
-      > div {
-  
-        min-width: 100%;
-  
-      }
+      > div { min-width: 100%; }
     
     }
 
     .selectionarea:last-child {
 
-      > div {
-  
-        margin: 0 100%!important;
-  
-      }
+      > div { margin: 0 100%!important; }
   
     }
   

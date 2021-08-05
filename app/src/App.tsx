@@ -2,15 +2,15 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './reducers';
 import { checkForUser, createUser, userLogin } from './reducers/session';
+import './App.scss';
 import Navbar from './components/navbar/Navbar';
 import Container from './components/container/Container';
 import Mealplan from './components/mealplan/Mealplan';
 import RecipeView from './components/recipeView/RecipeView';
-import Settings from './components/settings/settings';
+import Settings from './components/settings/Settings';
 import Popup from './components/popup/Popup';
-import './App.scss';
-import showcase from './components/showcase/showcase';
-import Showcase from './components/showcase/showcase';
+import Showcase from './components/showcase/Showcase';
+import CreateRecipe from './components/createRecipe/CreateRecipe';
 
 const user = {
 	id: 9272,
@@ -137,7 +137,8 @@ function App() {
 						0: <Mealplan />,
 						1: <RecipeView />,
 						2: <RecipeView personal />,
-						3: <Showcase />,
+						3: <CreateRecipe />,
+						5: <Showcase />,
 						4: <Settings />,
 				  }[
 						navIndex

@@ -1,6 +1,6 @@
 import Container from "../container/Container";
 import SelectionArea, { ButtonField, MultipleChoice, Search, Tag, TextField } from "../selectionArea/SelectionArea";
-import "./settings.scss";
+import "./Settings.scss";
 
 interface kvsp {
   [index: number]: string
@@ -51,7 +51,7 @@ export default function Settings() {
   return (
     <Container id={"settings"}>
       <h1>Personal information</h1>
-      <div>Back</div>
+      <div className={"button"}>Back</div>
       <SelectionArea columns={3}>
         <div>
           <TextField decription={"Email"} placeholder={"larsl@gmail.com"} />
@@ -70,8 +70,17 @@ export default function Settings() {
           </ButtonField>
         </div>
         <div>
+          <div>
+            <div className={"image"}></div>
+          </div>
+          <div className={"button"}>Change profile picture</div>
+        </div>
+        <div className={"infrequent"}>
           <ButtonField decription="Request data" vertical>
             <span>Account data</span>
+          </ButtonField>
+          <ButtonField decription="Change password" vertical danger>
+            <span>Access</span>
           </ButtonField>
           <ButtonField decription="Delete my account" vertical danger>
             <span>Danger zone</span>

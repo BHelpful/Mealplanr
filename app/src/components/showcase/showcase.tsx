@@ -1,6 +1,6 @@
 import Container from "../container/Container";
 import SelectionArea, { Guide, Item, Listing, Quantaty, Step, Tag } from "../selectionArea/SelectionArea";
-import "./showcase.scss";
+import "./Showcase.scss";
 
 export default function Showcase () {
   return (

@@ -33,6 +33,10 @@ const navbarlist = [
 		title: 'Settings',
 		url: '/settings',
 	},
+	{
+		title: 'Test',
+		url: '/test',
+	},
 ];
 
 export default function Navbar() {

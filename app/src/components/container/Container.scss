@@ -16,66 +16,66 @@
 	border-radius: var(--br);
 	filter: var(--shadow);
 
-	&#mealplan,
-	&#showcase {
+	> h1 {
 
-		display: grid;
-		grid-template-columns: minmax(100px, 100%) minmax(130px, 160px);
-		grid-template-rows: 60px auto;
+		margin: 0;
+		margin-right: 5px;
+		align-self: center;
+		white-space: nowrap;
+		text-overflow: clip;
+		overflow: hidden;
 
-		h1 {
+	}
 
-			margin: 0;
-			margin-right: 5px;
-			align-self: center;
-			white-space: nowrap;
-			text-overflow: clip;
-			overflow: hidden;
+	> .button {
 
-		}
+		margin-inline: auto 0px;
+		align-self: center;
+		background-color: var(--accent);
+		color: var(--bright);
+		padding: 5px;
+		border-radius: 10px;
+		width: 130px;
+		text-align: center;
+		filter: var(--shadow);
+		transition: 0.5s filter, 0.1s margin;
 
-		.button {
+		&:hover {
 
-			margin-left: auto;
-			margin-right: 0px;
-			align-self: center;
-			background-color: var(--accent);
-			color: var(--bright);
-			padding: 5px;
-			border-radius: 10px;
-			width: 130px;
-			text-align: center;
-			filter: var(--shadow);
-			transition: 0.5s filter, 0.1s margin;
+			filter: none;
+			margin-top: 5px;
 
-			&:hover {
-
-				filter: none;
-				margin-top: 5px;
-
-			}
-
-		}
-
-		.selectionarea {
-			
-			grid-column: span 2;
-			
-			& ~ .selectionarea {
-
-				margin-top: 20px;
-
-			}
 		}
 
 	}
 	
+	&#mealplan,
+	&#showcase,
+	&#createrecipe,
+	&#settings {
+		
+		display: grid;
+		grid-template-columns: minmax(100px, 100%) minmax(130px, 160px);
+		grid-template-rows: 60px auto;
+		
+		.selectionarea {
+			
+			grid-column: span 2;
+			
+			& ~ .selectionarea { margin-top: 20px; }
+
+		}
+		
+	}
+	
+	&#showcase { grid-template-columns: minmax(200px, 1000px) minmax(100px, 500px); }
+
 }
 
 @media (max-width: 1590px) {
-
+	
 	.container {
-
+		
 		margin: 80px calc(100% - 100% + 80px);
 		width: calc(100% - 160px);
 
