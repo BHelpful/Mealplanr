@@ -1,0 +1,15 @@
+name: "Set Issue Label"
+on:
+  issues:
+    types: [assigned]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Naturalclar/issue-action@v1.0.0
+        with:
+          keywords: '[""]'
+          labels: '["assigned"]'
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      
