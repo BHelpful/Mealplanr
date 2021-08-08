@@ -17,52 +17,6 @@ jobs:
 # ! Repo Project---------------------------------------------------------------------------------------
     - name: Assign issues to repo project
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: |
-        github.event == 'issue' &&
-        (
-          github.event.action == 'opened'
-        )
+      if: github.event.action == 'opened'
       with:
         project: 'https://github.com/BHelpful/Mealplanr/projects/1'
-
-    - name: Assign pull requests repo project
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: |
-        github.event == 'pull_request' &&
-        (
-          github.event.action == 'opened'
-        )
-      with:
-        project: 'https://github.com/BHelpful/Mealplanr/projects/1'
-
-# ! Mealplanr Project---------------------------------------------------------------------------------------
-    - name: Assign issues to MealPlanr project
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: |
-        github.event == 'issue' &&
-        (
-          github.event.action == 'opened'
-        )
-      with:
-        project: 'https://github.com/orgs/BHelpful/projects/2'
-
-    - name: Assign pull requests MealPlanr project
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: |
-        github.event == 'pull_request' &&
-        (
-          github.event.action == 'opened'
-        )
-      with:
-        project: 'https://github.com/orgs/BHelpful/projects/2'
-
-# ! BHelpful Project---------------------------------------------------------------------------------------
-    - name: Assign pull requests BHelpful project
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: |
-        github.event == 'pull_request' &&
-        (
-          github.event.action == 'opened'
-        )
-      with:
-        project: 'https://github.com/orgs/BHelpful/projects/1'
