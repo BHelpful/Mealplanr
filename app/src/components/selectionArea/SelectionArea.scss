@@ -1,0 +1,422 @@
+/** 
+ * @Desc: Light(colured) area with types of different selection fields; buttons, tag-search adropdowns, etc.
+ * @Occures: 0 or more, can be hidden or shown, even multiple at once.
+ * @Behavior: Static layout with flex-warp for small content area, constrained to its current content area.
+ * @Media: None
+ */
+.selectionarea {
+
+	background-color: var(--light);
+	border-radius: var(--br);
+	filter: var(--shadow);
+	padding: 20px;
+	font-size: 14px;
+	max-width: calc(100% - 40px);
+	display: grid;
+	justify-items: center;
+	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+
+	> div {
+		
+		margin-block: 20px;
+		width: 80%;
+	
+	}
+
+	textarea {
+
+		min-height: 90px;
+		font-family: sans-serif;
+		font-size: 10pt;
+		resize: none;
+
+	}
+
+	input[type=text], textarea {
+		
+		height: 30px;
+		border: none;
+		padding: 5px 10px;
+		border-radius: 20px;
+		background-color: var(--accent);
+		width: calc(100% - 20px);
+		
+	}
+
+	.field {
+		
+		&:first-of-type p { margin-top: 0; }
+		
+		p { margin-block: 15px 3px; }
+
+		input[type=button] {
+			
+			height: 30px;
+			width: 80px;
+			border: none;
+			border-radius: 20px;
+			background-color: var(--joyfull);
+			color: hsl(0, 0%, 100%);
+
+			&.danger { background-color: hsl(0, 100%, 32%); }
+
+		}
+		
+		&.button {
+			
+			width: calc(100% - 40px);
+			display: inline-grid;
+			grid-template-columns: auto 80px;
+			margin: 22.5px 20px;
+			
+			&.vertical {
+	
+				display: flex;
+				width: auto;
+				height: calc(30px + 22.5px * 2);
+				flex-direction: column;
+				margin: 0 auto;
+
+				input[type=button] {
+
+					margin: 10px auto;
+					width: auto;
+					padding: 5px 10px;
+
+				}
+	
+			}
+
+			span {
+
+				display: flex;
+				align-self: center;
+
+			}
+
+		}
+		
+	}
+
+	.search.tags {
+
+		width: min-content;
+
+		.bar {
+			
+			width: 300px;
+			height: 50px;
+			display: block;
+			background-color: var(--faded);
+			border-radius: var(--br);
+
+			&::before {
+
+				content: "Search";
+				width: calc(100% - 70px);
+				height: calc(100% - 20px);
+				display: inline-flex;
+				align-items: center;
+				padding: 10px;
+
+			}
+
+			> span {
+
+				content: "";
+				background-image: url("../../assets/Lup.svg");
+				width: 40px;
+				height: 40px;
+				float: right;
+				display: block;
+				margin: 5px;
+				filter: contrast(50%) opacity(.75);
+
+			}
+
+		}
+
+	}
+
+	.list {
+
+		display: flex;
+		flex-wrap: wrap;
+
+		.tag {
+
+			display: flex;
+			flex-flow: column;
+			width: auto;
+			max-width: max-content;
+			height: 1em;
+			padding: 5px 10px;
+			margin: 5px;
+			border-radius: var(--br);
+			line-height: 0;
+			text-align: center;
+			justify-content: center;
+			color: var(--gray);
+			background-color: var(--bgcolor);
+			filter: var(--shadow);
+
+		}
+
+	}
+
+	.weekdays.selection {
+
+		margin-bottom: 20px;
+		margin: auto;
+
+		p { margin: 0; }
+
+		.week {
+
+			display: grid;
+			grid-template-columns: repeat(7, 1fr);
+			height: 65px;
+			align-items: top;
+			justify-items: center;
+			overflow-x: auto;
+			scrollbar-width: none;
+
+			.day {
+
+				margin: 3px;
+				
+				&.unavailable {
+					
+					border: 1px solid var(--faded);
+					color: var(--faded);
+					background-color: transparent;
+					
+				}
+				
+				&.available {
+					
+					border: 2px solid var(--joyfull);
+					color: var(--joyfull);
+					background-color: transparent;
+					filter: var(--shadow);
+
+				}
+
+				&.selected {
+
+					background-color: var(--joyfull);
+					color: var(--bright);
+					filter: var(--shadow);
+
+				}
+
+			}
+
+			&:not(.dropdowns) {
+
+				margin-top: 20px;
+
+				.day {
+
+					border-radius: 50%;
+					width: 50px;
+					height: 50px;
+					text-align: center;
+					font-size: 16px;
+					line-height: 3.1em;
+
+				}
+
+			}
+
+			&.dropdowns {
+
+				width: auto;
+				margin-top: 10px;
+				padding: 0 10px;
+
+				.day {
+
+					text-align: center;
+					color: var(--joyfull);
+					filter: var(--shadow);
+
+					&.unavailable {
+
+						color: var(--faded);
+						border: 0;
+
+					}
+
+					.dropdownbox {
+
+						border-radius: var(--br);
+						border: 0;
+						background-color: var(--joyfull);
+						color: var(--bright);
+						text-align: center;
+						width: 55px;
+						height: 30px;
+						padding-left: calc(50% - 0.5em);
+						letter-spacing: 20px;
+
+						&:disabled {
+
+							color: var(--faded);
+							background-color: var(--faded);
+
+						}
+
+						&:hover {
+
+							background-color: var(--bright);
+							color: var(--gray);
+
+						}
+
+						option { width: 75px; }
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	.quantity {
+    
+    display: grid;
+    height: 30px;
+    border-radius: var(--br);
+    background-color: var(--faded);
+    align-items: center;
+		filter: var(--shadow);
+		
+		&.time {
+			
+			grid-template-columns: 1fr 1fr;
+			justify-items: center;
+			width: 100px;
+
+			p { margin: auto; }
+			
+		}
+		
+		&.amount {
+			
+			width: 150px;
+			grid-template-columns: 30px auto 30px;
+			
+			p {
+				
+				text-align: center;
+				margin: 0;
+				
+				&:first-child,
+				&:last-child { width: 35px; }
+				span { margin-right: 5px; }
+				
+			}
+			
+		}
+		
+	}
+  
+  .listing {
+    
+    display: flex;
+    flex-direction: column;
+		filter: var(--shadow);
+		height: max-content;
+
+		&.drag { height: max-content!important; }
+    
+    .item {
+      
+      width: 100%;
+      height: 30px;
+      border-radius: var(--br);
+      background-color: var(--joyfull);
+      color: var(--bright);
+      display: inline-grid;
+      grid-template-columns: 30px auto auto;
+      align-items: center;
+      margin: 4px auto;
+      
+			:last-child {
+
+				justify-self: end;
+				
+			}
+			
+      input[type=checkbox] {
+				
+				width: 1.3em;
+        height: 1.3em;
+        
+      }
+			
+			> * {
+				
+				margin: 5px 10px;
+				pointer-events: none; // Prevents drag event to target children
+				
+			}
+			
+			.cross.icon {
+				
+				background-image: url("../../assets/Cross.svg");
+				background-position: center;
+				background-position-x: right;
+				margin-right: 5px;
+				background-repeat: no-repeat;
+				height: 100%;
+				width: 100%;
+				display: block;
+				filter: var(--shadow) invert(1);
+
+			
+			}
+      
+    }
+    
+  }
+
+	.guide {
+
+		.step {
+
+			width: 100%;
+			height: fit-content;
+			background-color: var(--joyfull);
+			border-radius: var(--br);
+			color: var(--bright);
+			margin: 10px 0;
+			filter: var(--shadow);
+			display: flex;
+
+
+			input[type=checkbox] {
+
+				width: 1.3em;
+				height: 1.3em;
+				margin: 10px;
+
+			}
+
+			p {
+
+				margin: auto 0;
+				padding: .7em 0;
+				flex: 1 1;
+
+			}
+
+		}
+
+	}
+
+}

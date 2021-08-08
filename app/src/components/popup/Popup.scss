@@ -1,0 +1,47 @@
+.popup {
+
+  &#userpopup {
+    
+    position: fixed;
+    background-color: var(--joyfull);
+    border-radius: var(--br);
+    z-index: 100;
+    box-shadow: 0px 0px 100px 50vw #000b;
+    padding: 20px;
+    height: 270px;
+    width: 500px;
+    color: var(--bright);
+
+    input {
+
+      border-radius: var(--br);
+      border: 0px solid;
+      height: 20px;
+      width: 250px;
+      display: block;
+      margin: auto;
+      padding: 5px 10px;
+
+    }
+
+    div {
+
+      width: max-content;
+      display: block;
+      margin: 15px auto;
+      padding: 10px;
+      color: var(--dark);
+      border-radius: var(--br);
+      background-color: var(--faded);
+      
+      &:hover {
+        
+        background-color: var(--bright);
+
+      }
+
+    }
+
+  }
+
+}
