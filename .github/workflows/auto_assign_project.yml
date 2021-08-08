@@ -2,7 +2,7 @@ name: Auto Assign to Project(s)
 
 on:
   issues:
-    types: [opened, assigned]
+    types: [opened]
   pull_request:
     types: [opened]
 env:
@@ -25,17 +25,6 @@ jobs:
       with:
         project: 'https://github.com/BHelpful/Mealplanr/projects/1'
 
-    - name: Assign issues to repo project in In progress column when assigned
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: |
-        github.event == 'issue' &&
-        (
-          github.event.action == 'assigned'
-        )
-      with:
-        project: 'https://github.com/BHelpful/Mealplanr/projects/1'
-        column_name: 'In progress'
-
     - name: Assign pull requests repo project
       uses: srggrs/assign-one-project-github-action@1.2.1
       if: |
@@ -56,17 +45,6 @@ jobs:
         )
       with:
         project: 'https://github.com/orgs/BHelpful/projects/2'
-
-    - name: Assign issues to MealPlanr project in In progress column when assigned
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: |
-        github.event == 'issue' &&
-        (
-          github.event.action == 'assigned'
-        )
-      with:
-        project: 'https://github.com/orgs/BHelpful/projects/2'
-        column_name: 'In progress'
 
     - name: Assign pull requests MealPlanr project
       uses: srggrs/assign-one-project-github-action@1.2.1
