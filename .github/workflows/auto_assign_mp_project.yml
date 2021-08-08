@@ -1,4 +1,4 @@
-name: Auto Assign Project
+name: Auto Assign MealPlanr Project
 
 on: [pull_request, issues]
 env:

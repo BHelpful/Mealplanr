@@ -1,4 +1,4 @@
-name: Auto Assign Project
+name: Auto Assign BHelpful Project
 
 on: [pull_request]
 env:
