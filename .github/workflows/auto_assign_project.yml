@@ -2,7 +2,7 @@ name: Auto Assign to Project(s)
 
 on:
   issues:
-    types: [opened, labeled]
+    types: [opened]
   pull_request:
     types: [opened]
 env:
@@ -20,14 +20,3 @@ jobs:
       if: github.event.action == 'opened'
       with:
         project: 'https://github.com/BHelpful/Mealplanr/projects/1'
-
-    - name: Assign issues to repo project in In progress column when assigned
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: |
-        github.event == 'issue' &&
-        (
-          contains(github.event.issue.labels.*.name, 'assigned')
-        )
-      with:
-        project: 'https://github.com/BHelpful/Mealplanr/projects/1'
-        column_name: 'In progress'
