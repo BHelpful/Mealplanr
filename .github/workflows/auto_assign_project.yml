@@ -14,7 +14,6 @@ jobs:
     name: Assign to One Project
     steps:
 
-# ! Repo Project---------------------------------------------------------------------------------------
     - name: Assign issues to repo project
       uses: srggrs/assign-one-project-github-action@1.2.1
       if: |
@@ -46,7 +45,6 @@ jobs:
       with:
         project: 'https://github.com/BHelpful/Mealplanr/projects/1'
 
-# ! Mealplanr Project---------------------------------------------------------------------------------------
     - name: Assign issues to MealPlanr project
       uses: srggrs/assign-one-project-github-action@1.2.1
       if: |
@@ -78,7 +76,6 @@ jobs:
       with:
         project: 'https://github.com/orgs/BHelpful/projects/2'
 
-# ! BHelpful Project---------------------------------------------------------------------------------------
     - name: Assign pull requests BHelpful project
       uses: srggrs/assign-one-project-github-action@1.2.1
       if: |
