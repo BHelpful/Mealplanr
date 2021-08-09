@@ -100,11 +100,12 @@ export function Item(props: ItemProps) {
 		</div>
 	);
 	else return (
-		<div className={"item"}>
+		<label className={"item cc"}>
 			<input type="checkbox" />
+			<span className="mark"></span>
 			<p>{name}</p>
 			<p><span>5</span><span>stk</span></p>
-		</div>
+		</label>
 	);
 }
 
@@ -348,10 +349,11 @@ interface StepProps {
 export function Step(props: StepProps) {
 	const {decs} = props;
 	return (
-		<div className={"step"}>
+		<label className={"step cc"}>
 			<input type="checkbox" />
+			<span className="mark"></span>
 			<p>{decs}</p>
-		</div>
+		</label>
 	);
 }
 
