@@ -294,6 +294,8 @@
     background-color: var(--faded);
     align-items: center;
 		filter: var(--shadow);
+		color: var(--accent);
+		font-weight: 600;
 		
 		&.time {
 			
@@ -307,16 +309,32 @@
 		
 		&.amount {
 			
-			width: 150px;
-			grid-template-columns: 30px auto 30px;
+			width: max-content;
+			grid-template-columns: min-content auto min-content;
 			
 			p {
 				
 				text-align: center;
 				margin: 0;
+				padding-inline: 10px;
+				
 				
 				&:first-child,
-				&:last-child { width: 35px; }
+				&:last-child { 
+					
+					width: 35px;
+					font-weight: 800;
+					font-size: 35px;
+					color: var(--joyfull);
+					line-height: 10px;
+					position: relative;
+					margin: 0 5px;
+					padding: 0;
+					
+				}
+				
+				&:first-child { top: -2px };
+				&:nth-child(2) { border-inline: 2px solid var(--accent); }
 				span { margin-right: 5px; }
 				
 			}
