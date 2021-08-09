@@ -364,11 +364,16 @@
       align-items: center;
       margin: 4px auto;
       
-			:last-child {
+			& > :last-child {
 
-				justify-self: end;
+				border-left: 1px solid var(--bright);
+
+				span {padding: 3px;}
+				span:first-child { padding-left: 15px; }
 				
 			}
+			
+			p { justify-self: end; }
 			
 			> * {
 				
@@ -409,16 +414,13 @@
 			filter: var(--shadow);
 			display: flex;
 
-			.mark {
-
-				margin: .7em;
-
-			}
+			.mark { margin: .7em; }
 
 			p {
 
 				margin: auto 0;
 				padding: .7em 0;
+				padding-right: 10px;
 				flex: 1 1;
 
 			}
@@ -439,7 +441,6 @@
 			height: 20px;
 			margin: auto;
 			visibility: hidden;
-
 
 			&:checked ~ .mark {
 
@@ -465,7 +466,7 @@
 				content: "";
 				position: absolute;
 				display: none;
-				left: 5px;
+				left: .3em;
 				top: 1px;
 				width: 5px;
 				height: 10px;
