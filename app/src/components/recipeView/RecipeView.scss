@@ -8,4 +8,26 @@
 
 	width: -moz-available;
 
+	.selectionarea {
+
+		grid-template-columns: auto min-content min-content;
+		margin-block: 20px 40px;
+
+		.search {
+
+			width: calc(100% - 40px);
+			margin: 20px;
+
+			.normal { width: 100%; }
+
+			> :not(.normal) {
+
+				width: 200px;
+
+			}
+
+		}
+
+	}
+
 }
