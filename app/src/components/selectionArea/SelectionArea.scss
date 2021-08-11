@@ -317,6 +317,7 @@
 				text-align: center;
 				margin: 0;
 				padding-inline: 10px;
+				color: var(--joyfull);
 				
 				
 				&:first-child,
@@ -325,7 +326,6 @@
 					width: 35px;
 					font-weight: 800;
 					font-size: 35px;
-					color: var(--joyfull);
 					line-height: 10px;
 					position: relative;
 					margin: 0 5px;
@@ -334,7 +334,7 @@
 				}
 				
 				&:first-child { top: -2px };
-				&:nth-child(2) { border-inline: 2px solid var(--accent); }
+				&:nth-child(2) { border-inline: 1px solid var(--accent); }
 				span { margin-right: 5px; }
 				
 			}
@@ -350,7 +350,19 @@
 		filter: var(--shadow);
 		height: max-content;
 
-		&.drag { height: max-content!important; }
+		&.drag {
+			
+			height: max-content!important;
+		
+			p {
+
+				display: inline-grid;
+				grid-template-columns: 1fr max-content max-content;
+				grid-gap: 10px;
+
+			}
+
+		}
     
     .item {
       
@@ -360,7 +372,7 @@
       background-color: var(--joyfull);
       color: var(--bright);
       display: inline-grid;
-      grid-template-columns: 30px auto auto;
+      grid-template-columns: 30px auto minmax(35px, min-content);
       align-items: center;
       margin: 4px auto;
       
@@ -373,11 +385,11 @@
 				
 			}
 			
-			p { justify-self: end; }
+			p { justify-self: baseline; }
 			
 			> * {
 				
-				margin: 5px 10px;
+				margin: 5px;
 				pointer-events: none; // Prevents drag event to target children
 				
 			}
@@ -442,11 +454,18 @@
 			margin: auto;
 			visibility: hidden;
 
-			&:checked ~ .mark {
+			&:checked {
+				
+				
+				& ~ .mark {
+					
+					background-color: var(--bright);
+					
+					&::after { display: block; }
+					& ~ p,
+					& ~ span { text-decoration: line-through; }
 
-				background-color: var(--bright);
-
-				&::after { display: block; }
+				}
 
 			}
 

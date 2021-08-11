@@ -5,10 +5,10 @@
 	Standard colors                         Inverted colors */
 	--c: 				230;												--i: calc((var(--c) + 180) % 360);
 
-	--joyfull:  hsl(var(--c),  80%,  70%);	--i-joyfull:	hsl(var(--i),  80%,  30%);
-	--accent:   hsl(var(--c),  50%,  75%);	--i-accent: 	hsl(var(--i),  50%,  25%);
+	--joyfull:  hsl(var(--c),  80%,  65%);	--i-joyfull:	hsl(var(--i),  80%,  35%);
+	--accent:   hsl(var(--c),  60%,  70%);	--i-accent: 	hsl(var(--i),  60%,  30%);
 	--faded:    hsl(var(--c),  40%,  85%);	--i-faded: 		hsl(var(--i),  40%,  15%);
-	--light:    hsl(var(--c),  30%,  95%);	--i-light: 		hsl(var(--i),  30%,   5%);
+	--light:    hsl(var(--c),  20%,  95%);	--i-light: 		hsl(var(--i),  20%,   5%);
 
 	--bgcolor:  hsl(  0,   0%,  90%);			--i-bgcolor:	hsl(180,   0%,  10%);
 

@@ -81,11 +81,15 @@ class Listing extends Component<ListingProps> {
 
 interface ItemProps {
 	name: string;
+	amount?: number;
+	unit?: "kg"|"g"|"mg"|"L"|"dL"|"cL"|"mL"|"tbsp"|"tsp"|"dsp"|"pcs"|"tin"|"bag"|"sm"|"med"|"lrg"|""|"°C";
 	drag?: boolean;
 }
 
 export function Item(props: ItemProps) {
-	const {name, drag} = props;
+	const {name, amount, unit, drag} = {amount: "", unit: "", ...props};
+	console.log(amount);
+	
 	if (drag) return (
 		<div className={"item drag"} draggable={true}
 			onDragEnter={handleDragEnter}
@@ -95,7 +99,7 @@ export function Item(props: ItemProps) {
 			onDrop=			{handleDragDrop}
 			onDragEnd=	{handleDragEnd}>
 			<div className={"drag icon"}></div>
-			<p>{name}</p>
+			<p><span>{name}</span>{amount?<span>Note: {amount}</span>:<span></span>}<span>{unit}</span></p>
 			<div className={"cross icon"}></div>
 		</div>
 	);
@@ -104,7 +108,7 @@ export function Item(props: ItemProps) {
 			<input type="checkbox" />
 			<span className="mark"></span>
 			<p>{name}</p>
-			<p><span>5</span><span>stk</span></p>
+			<p><span>{amount}</span><span>{unit}</span></p>
 		</label>
 	);
 }
