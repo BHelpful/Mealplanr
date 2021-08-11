@@ -81,11 +81,15 @@ class Listing extends Component<ListingProps> {
 
 interface ItemProps {
 	name: string;
+	amount?: number;
+	unit?: "kg"|"g"|"mg"|"L"|"dL"|"cL"|"mL"|"tbsp"|"tsp"|"dsp"|"pcs"|"tin"|"bag"|"sm"|"med"|"lrg"|""|"°C";
 	drag?: boolean;
 }
 
 export function Item(props: ItemProps) {
-	const {name, drag} = props;
+	const {name, amount, unit, drag} = {amount: "", unit: "", ...props};
+	console.log(amount);
+	
 	if (drag) return (
 		<div className={"item drag"} draggable={true}
 			onDragEnter={handleDragEnter}
@@ -95,16 +99,17 @@ export function Item(props: ItemProps) {
 			onDrop=			{handleDragDrop}
 			onDragEnd=	{handleDragEnd}>
 			<div className={"drag icon"}></div>
-			<p>{name}</p>
+			<p><span>{name}</span>{amount?<span>Note: {amount}</span>:<span></span>}<span>{unit}</span></p>
 			<div className={"cross icon"}></div>
 		</div>
 	);
 	else return (
-		<div className={"item"}>
+		<label className={"item cc"}>
 			<input type="checkbox" />
+			<span className="mark"></span>
 			<p>{name}</p>
-			<p><span>5</span><span>stk</span></p>
-		</div>
+			<p><span>{amount}</span><span>{unit}</span></p>
+		</label>
 	);
 }
 
@@ -348,10 +353,11 @@ interface StepProps {
 export function Step(props: StepProps) {
 	const {decs} = props;
 	return (
-		<div className={"step"}>
+		<label className={"step cc"}>
 			<input type="checkbox" />
+			<span className="mark"></span>
 			<p>{decs}</p>
-		</div>
+		</label>
 	);
 }
 
