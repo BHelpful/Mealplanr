@@ -4,7 +4,8 @@
  * @Behavior: Should follow the width of [Container] but allow downward expansion
  * @Media: None
  */
-#browse {
+#browse,
+#collection {
 
 	width: -moz-available;
 
