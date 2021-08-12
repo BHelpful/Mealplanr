@@ -113,6 +113,8 @@ export function Item(props: ItemProps) {
 	);
 }
 
+const handleTagRemove = (evt: any) => evt.target.parentElement.remove();
+
 interface TagProps {
 	type: string,
 	name: string,
@@ -120,7 +122,7 @@ interface TagProps {
 
 export function Tag(props: TagProps) {
 	const { type, name } = props;
-	return <div className={'tag ' + type}>{name}</div>;
+	return <div className={'tag ' + type}><p>{name}</p><span onClick={handleTagRemove}></span></div>;
 }
 
 const openDropdown = (evt: any) => {
@@ -133,20 +135,30 @@ const openDropdown = (evt: any) => {
 	}
 }
 
+const varToString = (varObj: any) => (Object.keys(varObj)[0]).toString();
+
 interface SearchProps {
-	taglist?: boolean,
-	decription: string,
-	type?: string,
+	taglist?: boolean;
+	decription: string;
+	type?: string;
+	datalist?: Array<string>;
 }
 
 class Search extends Component<SearchProps> {
 	render() {
-		const { taglist, decription, type, children } = this.props;
+		const { taglist, decription, type, datalist, children } = this.props;
 		return (
 			<div className={"search "+(taglist ? "tags":"")}>
-				<input className={"bar "+type||''} onClick={type==="dropdown"?openDropdown:()=>{}} placeholder={decription} />
+				<div className={"bar "+type||''}>
+					<input onClick={type==="dropdown"?openDropdown:()=>{}} placeholder={decription} list={datalist?varToString(datalist):''}/>
+					{datalist ?
+						<datalist id={varToString(datalist)}>
+							{datalist.map((v: string) => (<option value={v}></option>))}
+						</datalist>
+					: type === "dropdown" ? <div className="dropdown list">{children}</div> : ''}
+					<span></span>
+				</div>
 				{taglist ? <div className="tags list">{children}</div> : ''}
-				{type === "dropdown" ? <div className="dropdown list">{children}</div> : ''}
 			</div>
 		);
 	}

@@ -9,6 +9,18 @@ import SelectionArea, {
 } from '../selectionArea/SelectionArea';
 import Recipes from '../recipes/Recipes';
 
+const foodSuggestions = [
+	'Carrot', 'Chicken', 'Milk', 'Gauda', 'Salmon', 'Egg', 'Pineapple', 'Bacon'
+]
+
+const storesSuggestions = [
+	'Rema1000', 'Fakta', 'Bilka', 'Meny', 'Netto', 'SuperBrugsen', 'Liva'
+]
+
+const categorySuggestions = [
+	'Spice', 'Asian', 'Indian', 'American', 'Traditional', 'Nordic'
+]
+
 export default function Mealplan() {
 	return (
 		<Container id="mealplan">
@@ -33,7 +45,8 @@ export default function Mealplan() {
 				<div>
 					<Search taglist
 						type='search'
-						decription={'What foods do you have at home already'}>
+						decription={'What foods do you have at home already'}
+						datalist={foodSuggestions}>
 						<Tag type="salad" name="Gouda" />
 						<Tag type="meat" name="Chicken" />
 						<Tag type="diray" name="Milk" />
@@ -43,13 +56,15 @@ export default function Mealplan() {
 					</Search>
 					<Search taglist
 						type='search'
-						decription={'What stores do you prefer?'}>
+						decription={'What stores do you prefer?'}
+						datalist={storesSuggestions}>
 						<Tag type="none" name="Rema1000" />
 						<Tag type="none" name="Føtex" />
 					</Search>
 					<Search taglist
 						type='search'
-						decription={'What categories do you wish to have recipes from?'}>
+						decription={'What categories do you wish to have recipes from?'}
+						datalist={categorySuggestions}>
 						<Tag type="none" name="Spice" />
 						<Tag type="none" name="Asian" />
 					</Search>
