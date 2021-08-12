@@ -14,13 +14,9 @@
 	max-width: calc(100% - 40px);
 	display: grid;
 	justify-items: center;
-<<<<<<< Updated upstream
-	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-=======
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	z-index: +5;
 	position: relative;
->>>>>>> Stashed changes
 
 	> div {
 		
