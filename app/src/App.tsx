@@ -9,7 +9,7 @@ import Mealplan from './components/mealplan/Mealplan';
 import RecipeView from './components/recipeView/RecipeView';
 import Settings from './components/settings/Settings';
 import Popup from './components/popup/Popup';
-import Showcase from './components/showcase/showcase1';
+import Showcase from './components/showcase/Showcase';
 import CreateRecipe from './components/createRecipe/CreateRecipe';
 
 const user = {
