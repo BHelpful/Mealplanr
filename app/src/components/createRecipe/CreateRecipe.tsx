@@ -19,7 +19,7 @@ export default function CreateRecipe() {
         </div>
         <div>
           <Listing drag name={"Prerequisites"}>
-            <Item drag name={"Turn on the oven"}></Item>
+            <Item drag name={"Turn on the oven"} amount={200} unit={"°C"}></Item>
             <Item drag name={"Clean the beans"}></Item>
           </Listing>
         </div>
@@ -35,12 +35,12 @@ export default function CreateRecipe() {
           <p>Ingredients</p>
           <Quantaty />
           <Listing drag={false} name={"Main course"}>
-            <Item name={"Carrot"} />
-            <Item name={"Carrot"} />
+            <Item name={"Carrot"} amount={5} unit={"pcs"}/>
+            <Item name={"Carrot"} amount={10} unit={"bag"}/>
           </Listing>
           <Listing drag={false} name={"Dessert"}>
-            <Item name={"Carrot"} />
-            <Item name={"Carrot"} />
+            <Item name={"Carrot"} amount={5} unit={"pcs"}/>
+            <Item name={"Carrot"} amount={5} unit={"pcs"}/>
           </Listing>
         </div>
         <div>
