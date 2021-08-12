@@ -15,6 +15,8 @@
 	display: grid;
 	justify-items: center;
 	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+	z-index: +5;
+	position: relative;
 
 	> div {
 		
@@ -98,7 +100,7 @@
 		
 	}
 
-	.search.tags {
+	.search {
 
 		width: min-content;
 
@@ -109,6 +111,10 @@
 			display: block;
 			background-color: var(--faded);
 			border-radius: var(--br);
+			border: 0;
+			padding-inline: 10px;
+			margin: 10px auto;
+
 
 			&::before {
 
@@ -121,18 +127,17 @@
 
 			}
 
-			> span {
+		
+			
+			&.dropdown {
 
-				content: "";
-				background-image: url("../../assets/Lup.svg");
-				width: 40px;
-				height: 40px;
-				float: right;
-				display: block;
-				margin: 5px;
-				filter: contrast(50%) opacity(.75);
-
+				&::before { content: "Select"; }
+				> span { transition: .5s; background-image: url("../../assets/Arrow.svg"); }
+				&.open > span { transform: rotate(180deg); }
+				
 			}
+
+			&:not(.dropdown) > span { background-image: url("../../assets/Lup.svg"); }
 
 		}
 
@@ -159,6 +164,36 @@
 			color: var(--gray);
 			background-color: var(--bgcolor);
 			filter: var(--shadow);
+
+		}
+
+		&.dropdown {
+
+			position: absolute;
+			background-color: var(--bright);
+			border-radius: var(--br);
+			margin-top: 10px;
+			z-index: +10;
+			filter: var(--shadow);
+			display: none;
+
+			div {
+
+				width: 100%;
+				padding: 5px;
+				padding-left: 20px;
+
+				&:hover { background-color: var(--faded); }
+				&:first-child { margin-top: 10px; }
+				&:last-child { margin-bottom: 10px; }
+
+			}
+
+			&.open {
+
+				display: flex;
+
+			}
 
 		}
 
@@ -376,7 +411,7 @@
       align-items: center;
       margin: 4px auto;
       
-			& > :last-child {
+			> :last-child {
 
 				border-left: 1px solid var(--bright);
 

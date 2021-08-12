@@ -123,6 +123,16 @@ export function Tag(props: TagProps) {
 	return <div className={'tag ' + type}>{name}</div>;
 }
 
+const openDropdown = (evt: any) => {
+	if(evt.target.classList.contains('open')) {
+		evt.target.classList.remove('open');
+		evt.target.nextElementSibling.classList.remove('open');
+	} else {
+		evt.target.classList.add('open');
+		evt.target.nextElementSibling.classList.add('open');
+	}
+}
+
 interface SearchProps {
 	taglist?: boolean,
 	decription: string,
@@ -133,12 +143,10 @@ class Search extends Component<SearchProps> {
 	render() {
 		const { taglist, decription, type, children } = this.props;
 		return (
-			<div className="search tags">
-				<p>{decription}</p>
-				<div className={"bar "+type||''}>
-					<span></span>
-				</div>
+			<div className={"search "+(taglist ? "tags":"")}>
+				<input className={"bar "+type||''} onClick={type==="dropdown"?openDropdown:()=>{}} placeholder={decription} />
 				{taglist ? <div className="tags list">{children}</div> : ''}
+				{type === "dropdown" ? <div className="dropdown list">{children}</div> : ''}
 			</div>
 		);
 	}
