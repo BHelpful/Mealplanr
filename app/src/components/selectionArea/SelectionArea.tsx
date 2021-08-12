@@ -144,10 +144,7 @@ class Search extends Component<SearchProps> {
 		const { taglist, decription, type, children } = this.props;
 		return (
 			<div className={"search "+(taglist ? "tags":"")}>
-				<p>{decription}</p>
-				<div className={"bar "+type||''} onClick={type==="dropdown"?openDropdown:()=>{}}>
-					<span></span>
-				</div>
+				<input className={"bar "+type||''} onClick={type==="dropdown"?openDropdown:()=>{}} placeholder={decription} />
 				{taglist ? <div className="tags list">{children}</div> : ''}
 				{type === "dropdown" ? <div className="dropdown list">{children}</div> : ''}
 			</div>
