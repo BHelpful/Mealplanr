@@ -1,4 +1,3 @@
-import { ObjectIteratee, ObjectIterator } from "lodash";
 import Container from "../container/Container";
 import SelectionArea, { ButtonField, MultipleChoice, Search, Tag, TextField } from "../selectionArea/SelectionArea";
 import "./Settings.scss";
@@ -7,7 +6,7 @@ interface kvsp {
   [index: number]: string;
 }
 
-const keypoints: any = {
+const keypoints: kvsp = {
    30: 'orange',
    50: 'yellow',
   120: 'green',
@@ -118,7 +117,7 @@ export default function Settings() {
           <datalist id={"data-list-colors"}>
             {Object.keys(keypoints).map((s: string, i: number) => {
               const style = {left: .1+Number(s)/3.9+"%"}
-              return ( <option value={Number(s)} label={capitalize(keypoints[s])} style={style}></option> );
+              return ( <option key={i} value={Number(s)} label={capitalize(keypoints[Number(s)])} style={style}></option> );
             })}
           </datalist>
         </div>
