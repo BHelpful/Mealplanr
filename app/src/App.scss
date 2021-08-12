@@ -3,7 +3,7 @@
 
 	/*
 	Standard colors                         Inverted colors */
-	--c: 				230;												--i: calc((var(--c) + 180) % 360);
+	--c: 				210;												--i: calc((var(--c) + 180) % 360);
 
 	--joyfull:  hsl(var(--c),  80%,  70%);	--i-joyfull:	hsl(var(--i),  80%,  30%);
 	--accent:   hsl(var(--c),  50%,  75%);	--i-accent: 	hsl(var(--i),  50%,  25%);

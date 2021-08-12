@@ -1,14 +1,15 @@
+import { ObjectIteratee, ObjectIterator } from "lodash";
 import Container from "../container/Container";
 import SelectionArea, { ButtonField, MultipleChoice, Search, Tag, TextField } from "../selectionArea/SelectionArea";
 import "./Settings.scss";
 
 interface kvsp {
-  [index: number]: string
+  [index: number]: string;
 }
 
-const keypoints: kvsp = {
+const keypoints: any = {
    30: 'orange',
-   60: 'yellow',
+   50: 'yellow',
   120: 'green',
   160: 'mint',
   180: 'turquise',
@@ -17,9 +18,10 @@ const keypoints: kvsp = {
   270: 'purple',
   290: 'pink',
   330: 'rose',
-  360: 'red'
+  360: 'red',
 }
 
+const capitalize = (s: string) => s.split('').map((e,i) => !i?e.toUpperCase():e).join('');
 const setcolor = (hue: number) => document.documentElement.style.setProperty('--c', String(hue));
 
 //             val, nearest, diff
@@ -30,7 +32,7 @@ const sliderSnap = (evt: any) => {
   const { valueAsNumber } = evt.target;
 
   nearest[0] = valueAsNumber;
-  setcolor(nearest[0]);
+  setcolor(nearest[1]);
   
   let least = Infinity;
   for(const i of Object.keys(keypoints)) {
@@ -41,9 +43,11 @@ const sliderSnap = (evt: any) => {
       least = v;
     }
   }
-
-  console.log(`Nearest color: ${keypoints[nearest[1]]}`);
   
+  evt.target.value = nearest[1];
+  let e = document.getElementById("colorHueText");
+  if(e) e.innerHTML = capitalize(keypoints[nearest[1]]);
+
 }
 
 export default function Settings() {
@@ -108,8 +112,15 @@ export default function Settings() {
           <MultipleChoice decription="Email" name="email"/>
           <MultipleChoice decription="Web" name="web"/>
           <MultipleChoice decription="Mobile" name="mobile"/>
-          <p>Theme</p>
-          <input id={"colorHueSelect"} type="range" min={0} max={360} step={1} onInput={sliderSnap} defaultValue={230}></input>
+          <label htmlFor="colorHueSelect">Theme</label>
+          <label htmlFor="colorHueSelect" id={"colorHueText"}>Blue</label>
+          <input id={"colorHueSelect"} list={"data-list-colors"} type="range" min={0} max={360} step={1} onChange={sliderSnap} defaultValue={210}></input>
+          <datalist id={"data-list-colors"}>
+            {Object.keys(keypoints).map((s: string, i: number) => {
+              const style = {left: .1+Number(s)/3.9+"%"}
+              return ( <option value={Number(s)} label={capitalize(keypoints[s])} style={style}></option> );
+            })}
+          </datalist>
         </div>
       </SelectionArea>
     </Container>

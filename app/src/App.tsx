@@ -14,7 +14,7 @@ import CreateRecipe from './components/createRecipe/CreateRecipe';
 
 const user = {
 	id: 9272,
-	color: 30,
+	color: 210,
 	email: "test@test.test",
 	pass: "123456",
 };

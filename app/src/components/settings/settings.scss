@@ -102,6 +102,45 @@
 
       justify-items: center;
       display: grid;
+      
+      &:last-child {
+
+        grid-template-columns: 60px calc(100% - 60px);
+        grid-auto-rows: min-content;
+        grid-gap: 5px;
+
+        p, label, input { height: 1em; margin: 5px auto;}
+        p:first-of-type { margin-block: 20px; }
+        label:nth-of-type(4) { margin-block: 40px 20px; }
+
+        :first-child,
+        :nth-child(8) { grid-column: span 2; }
+        input { width: inherit; }
+
+        datalist {
+
+          display: block;
+          writing-mode: vertical-lr;
+          font-size: 10px;
+          margin: 0;
+          padding: 0;
+          line-height: -0.1em;
+          grid-column: 2;
+          height: 80px;
+          width: 80%;
+          position: relative;
+
+          option {
+
+            position: absolute;
+            padding: 0;
+            margin: auto;
+
+          }
+
+        }
+
+      }
 
       .search {
 
