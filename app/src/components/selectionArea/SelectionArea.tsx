@@ -149,7 +149,7 @@ const handleKeyDown = (createTag: any, tags: any) => (evt: any) => {
 
 function* HTMLIDgenerator(): Generator<string> {
 	var n = Math.floor(Math.random() * 63);
-	while (++n) yield (String.fromCharCode((n + 64) % 121) + String.fromCharCode((n / 64) % 121))+"";
+	while (++n) yield (String.fromCharCode((n % 26) + 64) + String.fromCharCode(Math.floor(n / 26) + 64));
 }
 
 const htmlID = HTMLIDgenerator();
@@ -157,6 +157,14 @@ const getHTMLID: Array<string> = [];
 const generateHTMLID = (): string => {
 	getHTMLID.push(htmlID.next().value);
 	return getHTMLID.slice(-1)[0];
+}
+
+const handleMouseDown = (evt: any) => {
+	const parent = evt.target.parentElement;
+	parent.classList.remove("open");
+	const elem: any = document.getElementById(parent.dataset.for);
+	elem.value = evt.target.innerHTML;
+	elem.classList.remove("open");
 }
 
 interface SearchProps {
@@ -176,8 +184,8 @@ function Search(props: SearchProps) {
 				<input id={generateHTMLID()} onClick={type==="dropdown"?openDropdown:()=>{}} onKeyDown={taglist ? handleKeyDown(createTag, tags):()=>{}} placeholder={decription} list={datalist?varToString(datalist):''}/>
 				{datalist ?
 					type === "dropdown" ?
-						<div className="dropdown list">
-							{datalist.map((v: string, i: number) => (<div key={i}>{v}</div>))}
+						<div className="dropdown list" data-for={getHTMLID.slice(-1)[0]}>
+							{datalist.map((v: string, i: number) => (<div key={i} onMouseDown={handleMouseDown}>{v}</div>))}
 						</div>
 					: 
 						<datalist id={varToString(datalist)}>
