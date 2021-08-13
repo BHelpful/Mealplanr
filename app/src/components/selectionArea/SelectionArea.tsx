@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './SelectionArea.scss';
 
 interface QuantityPorps {
@@ -136,6 +136,28 @@ const openDropdown = (evt: any) => {
 }
 
 const varToString = (varObj: any) => (Object.keys(varObj)[0]).toString();
+const handleSubmit = (evt: any) => 0;
+const handleKeyDown = (createTag: any, tags: any) => (evt: any) => {
+	if(evt.key === 'Enter' || evt.key === ",") {
+		evt.preventDefault();
+		const elem = evt.target.parentElement.nextElementSibling;
+		if(elem.classList.contains('tags'))
+			if(evt.target.value.match(/(\w{2,} ?)+/))
+				createTag([...tags, {"name": evt.target.value, "type": ""}]);
+	}
+};
+
+function* HTMLIDgenerator(): Generator<string> {
+	var n = Math.floor(Math.random() * 63);
+	while (++n) yield (String.fromCharCode((n + 64) % 121) + String.fromCharCode((n / 64) % 121))+"";
+}
+
+const htmlID = HTMLIDgenerator();
+const getHTMLID: Array<string> = [];
+const generateHTMLID = (): string => {
+	getHTMLID.push(htmlID.next().value);
+	return getHTMLID.slice(-1)[0];
+}
 
 interface SearchProps {
 	taglist?: boolean;
@@ -144,24 +166,31 @@ interface SearchProps {
 	datalist?: Array<string>;
 }
 
-class Search extends Component<SearchProps> {
-	render() {
-		const { taglist, decription, type, datalist, children } = this.props;
-		return (
-			<div className={"search "+(taglist ? "tags":"")}>
-				<div className={"bar "+type||''}>
-					<input onClick={type==="dropdown"?openDropdown:()=>{}} placeholder={decription} list={datalist?varToString(datalist):''}/>
-					{datalist ?
+function Search(props: SearchProps) {
+	const { taglist, decription, type, datalist} = props;
+	const [tags, createTag] = useState([{name:'',type:''}]);
+	if(tags[0] && tags[0].name === '') tags.pop();
+	return (
+		<div className={"search "+(taglist ? "tags":"")}>
+			<div className={"bar "+type||''}>
+				<input id={generateHTMLID()} onClick={type==="dropdown"?openDropdown:()=>{}} onKeyDown={taglist ? handleKeyDown(createTag, tags):()=>{}} placeholder={decription} list={datalist?varToString(datalist):''}/>
+				{datalist ?
+					type === "dropdown" ?
+						<div className="dropdown list">
+							{datalist.map((v: string, i: number) => (<div key={i}>{v}</div>))}
+						</div>
+					: 
 						<datalist id={varToString(datalist)}>
-							{datalist.map((v: string) => (<option value={v}></option>))}
+							{datalist.map((v: string, i: number) => (<option value={v} key={i}></option>))}
 						</datalist>
-					: type === "dropdown" ? <div className="dropdown list">{children}</div> : ''}
-					<span></span>
-				</div>
-				{taglist ? <div className="tags list">{children}</div> : ''}
+				: ''}
+				<label htmlFor={getHTMLID.slice(-1)[0]} onClick={type!=="dropdown"?handleSubmit:()=>{}}></label>
 			</div>
-		);
-	}
+			{taglist ? <div className="tags list">
+				{tags.length > 0 ? tags.map((v, i) => (<Tag key={i} name={v.name} type={v.type} />)) : ''}
+			</div>: ''}
+		</div>
+	);
 }
 
 interface MultipleChoiceProps {
