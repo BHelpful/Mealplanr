@@ -142,8 +142,10 @@ const handleKeyDown = (createTag: any, tags: any) => (evt: any) => {
 		evt.preventDefault();
 		const elem = evt.target.parentElement.nextElementSibling;
 		if(elem.classList.contains('tags'))
-			if(evt.target.value.match(/(\w{2,} ?)+/))
+			if(evt.target.value.match(/(\w{2,} ?)+/)) {
 				createTag([...tags, {"name": evt.target.value, "type": ""}]);
+				evt.target.value = '';
+			}
 	}
 };
 

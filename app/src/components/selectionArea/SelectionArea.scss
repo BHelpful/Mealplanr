@@ -18,12 +18,7 @@
 	z-index: +5;
 	position: relative;
 
-	> div {
-		
-		margin-block: 20px;
-		width: 80%;
-	
-	}
+	> div {width: 80%; }
 
 	textarea {
 
@@ -142,8 +137,8 @@
 				
 			}
 			
-			> span { transition: .3s; background-image: url("../../assets/Arrow.svg"); }
-			&:not(.dropdown) > span { background-image: url("../../assets/Lup.svg"); }
+			> label { transition: .3s; background-image: url("../../assets/Arrow.svg"); }
+			&:not(.dropdown) > label { background-image: url("../../assets/Lup.svg"); }
 
 				
 		}
