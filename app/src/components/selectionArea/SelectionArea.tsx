@@ -125,27 +125,44 @@ export function Tag(props: TagProps) {
 	return <div className={'tag ' + type}><p>{name}</p><span onClick={handleTagRemove}></span></div>;
 }
 
-const openDropdown = (evt: any) => {
-	if(evt.target.classList.contains('open')) {
+const toggleDropdown = (toggle = true) => (evt: any) => {
+	evt.preventDefault();
+	if(!toggle || evt.target.classList.contains('open')) {
 		evt.target.classList.remove('open');
-		evt.target.nextElementSibling.classList.remove('open');
 	} else {
 		evt.target.classList.add('open');
-		evt.target.nextElementSibling.classList.add('open');
 	}
+}
+
+const toFirstUpperCase = (v: string) => v.replace(/(\w)(.*)/, (...args: any[]) => args[1].toUpperCase()+args[2]);
+
+const lookupType = (name: string) => {
+	switch(name.toLowerCase()) {
+		case 'chicken': return 'meat';
+		default: return 'unkown';
+	}
+}
+
+interface KeyboardEventWithData extends KeyboardEvent {
+	data?: HTMLElement;
 }
 
 const varToString = (varObj: any) => (Object.keys(varObj)[0]).toString();
 const handleSubmit = (evt: any) => 0;
 const handleKeyDown = (createTag: any, tags: any) => (evt: any) => {
 	if(evt.key === 'Enter' || evt.key === ",") {
+		const target: any = evt.target||evt.data;
 		evt.preventDefault();
-		const elem = evt.target.parentElement.nextElementSibling;
-		if(elem.classList.contains('tags'))
-			if(evt.target.value.match(/(\w{2,} ?)+/)) {
-				createTag([...tags, {"name": evt.target.value, "type": ""}]);
-				evt.target.value = '';
-			}
+		const elem = target.parentElement.nextElementSibling;
+		const newTaglist = tags;
+		if(elem.classList.contains('tags')) {
+			const v = target.value;
+			if(v.match(/(\w{2,} ?)+/)) newTaglist.push({"name": toFirstUpperCase(v), "type": lookupType(v)});
+			target.value.split(',').forEach((v: string) => {
+			});
+			target.value = '';
+			createTag(newTaglist.filter((v:any,i:number,a:any)=>a.findIndex((t:any)=>(t.name === v.name))===i));
+		}
 	}
 };
 
@@ -161,12 +178,17 @@ const generateHTMLID = (): string => {
 	return getHTMLID.slice(-1)[0];
 }
 
-const handleMouseDown = (evt: any) => {
+const handleMouseDown = (dropdown: boolean, createTag?:any, tags?:any) => (evt: any) => {
 	const parent = evt.target.parentElement;
 	parent.classList.remove("open");
 	const elem: any = document.getElementById(parent.dataset.for);
 	elem.value = evt.target.innerHTML;
 	elem.classList.remove("open");
+	if(!dropdown && createTag && tags) {
+		var ke: KeyboardEventWithData = new KeyboardEvent('keydown', {key: ','});
+		ke.data = elem;
+		handleKeyDown(createTag, tags)(ke);
+	}
 }
 
 interface SearchProps {
@@ -178,21 +200,24 @@ interface SearchProps {
 
 function Search(props: SearchProps) {
 	const { taglist, decription, type, datalist} = props;
+	const dropdown = type==="dropdown";
 	const [tags, createTag] = useState([{name:'',type:''}]);
 	if(tags[0] && tags[0].name === '') tags.pop();
 	return (
 		<div className={"search "+(taglist ? "tags":"")}>
 			<div className={"bar "+type||''}>
-				<input id={generateHTMLID()} onClick={type==="dropdown"?openDropdown:()=>{}} onKeyDown={taglist ? handleKeyDown(createTag, tags):()=>{}} placeholder={decription} list={datalist?varToString(datalist):''}/>
+				<input
+					id={generateHTMLID()}
+					onClick={toggleDropdown()}
+					onBlur={toggleDropdown(false)}
+					onChange={(evt:any)=>evt.preventDefault()}
+					onKeyDown={taglist ? handleKeyDown(createTag, tags):()=>{}}
+					placeholder={decription}
+					list={datalist?varToString(datalist):''}/>
 				{datalist ?
-					type === "dropdown" ?
-						<div className="dropdown list" data-for={getHTMLID.slice(-1)[0]}>
-							{datalist.map((v: string, i: number) => (<div key={i} onMouseDown={handleMouseDown}>{v}</div>))}
-						</div>
-					: 
-						<datalist id={varToString(datalist)}>
-							{datalist.map((v: string, i: number) => (<option value={v} key={i}></option>))}
-						</datalist>
+					<div className="dropdown list" data-for={getHTMLID.slice(-1)[0]}>
+						{datalist.map((v: string, i: number) => (<div key={i} onMouseDown={handleMouseDown(dropdown, createTag, tags)}>{v}</div>))}
+					</div>
 				: ''}
 				<label htmlFor={getHTMLID.slice(-1)[0]} onClick={type!=="dropdown"?handleSubmit:()=>{}}></label>
 			</div>

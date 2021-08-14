@@ -120,14 +120,11 @@
 				width: calc(100% - 60px);
 				
 				&:focus,
-				&:focus-visible {
-
-					outline: none;
-
-				}
-
-			}
+				&:focus-visible { outline: none; }
+				&.open ~ div { display: flex; }
 			
+			}
+
 			> label {
 				
 				display: inline-block;
@@ -137,9 +134,14 @@
 				
 			}
 			
-			> label { transition: .3s; background-image: url("../../assets/Arrow.svg"); }
-			&:not(.dropdown) > label { background-image: url("../../assets/Lup.svg"); }
+			&.dropdown input {
 
+				~ label { transition: .3s; background-image: url("../../assets/Arrow.svg"); }
+				&.open ~ div ~ label { transform: rotate(180deg); }
+
+			}
+
+			&:not(.dropdown) label { background-image: url("../../assets/Lup.svg"); }
 				
 		}
 
@@ -217,14 +219,6 @@
 				&:first-child { margin-top: 10px; }
 				&:last-child { margin-bottom: 10px; }
 
-			}
-
-			&.open {
-
-				display: flex;
-				
-				&.open ~ span { transform: rotate(180deg); }
-				
 			}
 
 		}

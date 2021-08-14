@@ -1,15 +1,14 @@
 #settings {
-
+  
   .selectionarea:nth-child(3) {
-
+    
+    grid-template-columns: repeat(4, 25%);
     align-items: center;
     align-content: center;
     justify-content: center;
     
     > div {
 
-      width: 33%;
-      min-width: 200px;
       width: 100%;
 
       &:first-child { width: 80%; }
@@ -64,18 +63,22 @@
     > div:nth-child(2) {
 
       margin: auto;
-      width: auto;
+      width: calc(100% - 20px);
       display: inline-grid;
+      justify-items: center;
       
     }
 
     .button.field:not(.vertical) {
+
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 
       span {
         
         height: 2em;
         align-items: center;
         margin-right: 10px;
+        margin: 5px auto;
 
         img {
 
@@ -88,6 +91,8 @@
         }
 
       }
+
+      > input { margin: auto; }
 
     }
 
@@ -120,7 +125,7 @@
 
 }
 
-@media (max-width: 830px) {
+@media (max-width: 930px) {
   
   #settings {
 
