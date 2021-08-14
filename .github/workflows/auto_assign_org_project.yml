@@ -16,7 +16,6 @@ jobs:
 # ! Mealplanr Project---------------------------------------------------------------------------------------
     - name: Assign issues and PRs to repo project
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: github.event.action == 'opened' || github.event.action == 'reopened'
       with:
         project: 'https://github.com/orgs/BHelpful/projects/2'
 
