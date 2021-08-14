@@ -1,4 +1,4 @@
-name: Auto Assign to Project(s)
+name: Assign project
 
 on:
   issues:
@@ -11,7 +11,7 @@ env:
 jobs:
   assign_one_project:
     runs-on: ubuntu-latest
-    name: Assign to One Project
+    name: Assign to repo project
     steps:
 
 # ! Repo Project---------------------------------------------------------------------------------------
