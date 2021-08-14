@@ -7,7 +7,7 @@ jobs:
       # ! Repo Project---------------------------------------------------------------------------------------
       - name: add-new-issues-to-repository-based-project-column
         uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-        if: github.event_name == 'issues' && (github.event.action == 'opened' || github.event.action == 'reopened')
+        if: github.event_name == 'issues' && github.event.action == 'opened'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_PROJECT_URL: https://github.com/BHelpful/Mealplanr/projects/1
@@ -15,7 +15,7 @@ jobs:
 
       - name: add-new-prs-to-repository-based-project-column
         uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-        if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'reopened')
+        if: github.event_name == 'pull_request' && github.event.action == 'opened'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_PROJECT_URL: https://github.com/BHelpful/Mealplanr/projects/1
@@ -40,7 +40,7 @@ jobs:
       # ! Mealplanr Project----------------------------------------------------------------------------------
       - name: add-new-issues-to-organization-based-project-column
         uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-        if: github.event_name == 'issues' && (github.event.action == 'opened' || github.event.action == 'reopened')
+        if: github.event_name == 'issues' && github.event.action == 'opened'
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           GITHUB_PROJECT_URL: https://github.com/orgs/BHelpful/projects/2
@@ -48,7 +48,7 @@ jobs:
 
       - name: add-new-prs-to-organization-based-project-column
         uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-        if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'reopened')
+        if: github.event_name == 'pull_request' && github.event.action == 'opened'
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           GITHUB_PROJECT_URL: https://github.com/orgs/BHelpful/projects/2
@@ -72,7 +72,7 @@ jobs:
 # ! BHelpful Project---------------------------------------------------------------------------------------
       - name: add-new-prs-to-organization-based-project-column
         uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-        if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'reopened')
+        if: github.event_name == 'pull_request' && github.event.action == 'opened'
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           GITHUB_PROJECT_URL: https://github.com/orgs/BHelpful/projects/1
