@@ -42,7 +42,7 @@ jobs:
         uses: docker://takanabe/github-actions-automate-projects:v0.0.1
         if: github.event_name == 'issues' && github.event.action == 'opened'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_TOKEN_TO_ADD_PROJECT }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           GITHUB_PROJECT_URL: https://github.com/orgs/BHelpful/projects/2
           GITHUB_PROJECT_COLUMN_NAME: To Do
 
@@ -50,7 +50,7 @@ jobs:
         uses: docker://takanabe/github-actions-automate-projects:v0.0.1
         if: github.event_name == 'pull_request' && github.event.action == 'opened'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_TOKEN_TO_ADD_PROJECT }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           GITHUB_PROJECT_URL: https://github.com/orgs/BHelpful/projects/2
           GITHUB_PROJECT_COLUMN_NAME: In progress
       
@@ -58,7 +58,7 @@ jobs:
         uses: docker://takanabe/github-actions-automate-projects:v0.0.1
         if: github.event_name == 'issues' && github.event.action == 'assigned'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           GITHUB_PROJECT_URL: https://github.com/orgs/BHelpful/projects/2
           GITHUB_PROJECT_COLUMN_NAME: In progress
 
@@ -66,7 +66,7 @@ jobs:
         uses: docker://takanabe/github-actions-automate-projects:v0.0.1
         if: github.event_name == 'issues' && github.event.action == 'unassigned'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           GITHUB_PROJECT_URL: https://github.com/orgs/BHelpful/projects/2
           GITHUB_PROJECT_COLUMN_NAME: To do
 # ! BHelpful Project---------------------------------------------------------------------------------------
@@ -74,6 +74,6 @@ jobs:
         uses: docker://takanabe/github-actions-automate-projects:v0.0.1
         if: github.event_name == 'pull_request' && github.event.action == 'opened'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_TOKEN_TO_ADD_PROJECT }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           GITHUB_PROJECT_URL: https://github.com/orgs/BHelpful/projects/1
           GITHUB_PROJECT_COLUMN_NAME: In progress
