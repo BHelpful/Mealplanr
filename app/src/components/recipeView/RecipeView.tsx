@@ -18,8 +18,8 @@ export default function RecipeView(props: RecipeViewProps) {
 			<h1>{ !personal ? 'Browse recipes' : 'My collection' } </h1>
 			<SelectionArea columns={1}>
 				<Search decription={"Search"} type={"normal"}/>
-				<Search decription={"Allergies/intolerances"} type={"list"} taglist />
-				<Search decription={"Sort"} type={"dropdown"} taglist={false} datalist={sortDatalist} />
+				<Search decription={"Include/Exclude filter"} type={"list"} taglist toggable={true} />
+				<Search decription={"Sort"} type={"dropdown"} datalist={sortDatalist} />
 			</SelectionArea>
 			<div className="recipes">
 				<Recipes showAddOwn="true" mealFrom={personal?'personal':'public'}/>

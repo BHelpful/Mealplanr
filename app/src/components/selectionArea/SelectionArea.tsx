@@ -1,3 +1,4 @@
+import { capitalize } from 'lodash';
 import React, { Component, useState } from 'react';
 import './SelectionArea.scss';
 
@@ -114,15 +115,26 @@ export function Item(props: ItemProps) {
 }
 
 const handleTagRemove = (evt: any) => evt.target.parentElement.remove();
+const toggleTag = (evt: any) => {
+	const elem = evt.target;
+	const old = elem.classList[0] || "include";
+	elem.classList.remove(old);
+	elem.classList.add(old==="include" ? "exclude" : "include");
+	elem.title = `${capitalize(old)} item by clicking`;
+}
 
 interface TagProps {
 	type: string,
 	name: string,
+	toggable?: boolean,
 }
 
 export function Tag(props: TagProps) {
-	const { type, name } = props;
-	return <div className={'tag ' + type}><p>{name}</p><span onClick={handleTagRemove}></span></div>;
+	const { type, name, toggable } = props;
+	return <div className={'tag ' + type}>
+					<p onClick={toggable?toggleTag:()=>{}}>{name}</p>
+					<span onClick={handleTagRemove}></span>
+				</div>;
 }
 
 const toggleDropdown = (toggle = true) => (evt: any) => {
@@ -158,8 +170,7 @@ const handleKeyDown = (createTag: any, tags: any) => (evt: any) => {
 		if(elem.classList.contains('tags')) {
 			const v = target.value;
 			if(v.match(/(\w{2,} ?)+/)) newTaglist.push({"name": toFirstUpperCase(v), "type": lookupType(v)});
-			target.value.split(',').forEach((v: string) => {
-			});
+			target.value.split(',').forEach((v: string) => {});
 			target.value = '';
 			createTag(newTaglist.filter((v:any,i:number,a:any)=>a.findIndex((t:any)=>(t.name === v.name))===i));
 		}
@@ -196,10 +207,11 @@ interface SearchProps {
 	decription: string;
 	type?: string;
 	datalist?: Array<string>;
+	toggable?: boolean;
 }
 
 function Search(props: SearchProps) {
-	const { taglist, decription, type, datalist} = props;
+	const { taglist, decription, type, datalist, toggable } = props;
 	const dropdown = type==="dropdown";
 	const [tags, createTag] = useState([{name:'',type:''}]);
 	if(tags[0] && tags[0].name === '') tags.pop();
@@ -222,7 +234,7 @@ function Search(props: SearchProps) {
 				<label htmlFor={getHTMLID.slice(-1)[0]} onClick={type!=="dropdown"?handleSubmit:()=>{}}></label>
 			</div>
 			{taglist ? <div className="tags list">
-				{tags.length > 0 ? tags.map((v, i) => (<Tag key={i} name={v.name} type={v.type} />)) : ''}
+				{tags.length > 0 ? tags.map((v, i) => (<Tag key={i} name={v.name} type={v.type} toggable={toggable} />)) : ''}
 			</div>: ''}
 		</div>
 	);

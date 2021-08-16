@@ -11,7 +11,7 @@
 
 	.selectionarea {
 
-		grid-template-columns: auto min-content min-content;
+		grid-template-columns: minmax(200px, 3fr) 1fr 1fr;
 		margin-block: 20px 40px;
 
 		.search {
