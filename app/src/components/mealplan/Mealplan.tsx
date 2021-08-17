@@ -2,12 +2,23 @@ import Container from '../container/Container';
 import './Mealplan.scss';
 import '../recipes/Recipes.scss';
 import SelectionArea, {
-	Tag,
 	Search,
 	WeekdaysButtons,
 	WeekdaysDropdown,
 } from '../selectionArea/SelectionArea';
 import Recipes from '../recipes/Recipes';
+
+const foodSuggestions = [
+	'Carrot', 'Chicken', 'Milk', 'Gauda', 'Salmon', 'Egg', 'Pineapple', 'Bacon'
+]
+
+const storesSuggestions = [
+	'Rema1000', 'Fakta', 'Bilka', 'Meny', 'Netto', 'SuperBrugsen', 'Liva'
+]
+
+const categorySuggestions = [
+	'Spice', 'Asian', 'Indian', 'American', 'Traditional', 'Nordic'
+]
 
 export default function Mealplan() {
 	return (
@@ -31,28 +42,24 @@ export default function Mealplan() {
 					<div></div>
 				</div>
 				<div>
-					<Search taglist
-						type='search'
-						decription={'What foods do you have at home already'}>
-						<Tag type="salad" name="Gouda" />
+					{/* <Tag type="salad" name="Gouda" />
 						<Tag type="meat" name="Chicken" />
 						<Tag type="diray" name="Milk" />
 						<Tag type="vegan" name="Carrots" />
 						<Tag type="exotic" name="Saffron " />
-						<Tag type="fish" name="Salmon" />
-					</Search>
+						<Tag type="fish" name="Salmon" /> */}
 					<Search taglist
 						type='search'
-						decription={'What stores do you prefer?'}>
-						<Tag type="none" name="Rema1000" />
-						<Tag type="none" name="Føtex" />
-					</Search>
+						decription={'What foods do you have at home already'}
+						datalist={foodSuggestions} />
 					<Search taglist
 						type='search'
-						decription={'What categories do you wish to have recipes from?'}>
-						<Tag type="none" name="Spice" />
-						<Tag type="none" name="Asian" />
-					</Search>
+						decription={'What stores do you prefer?'}
+						datalist={storesSuggestions} />
+					<Search taglist
+						type='search'
+						decription={'What categories do you wish to have recipes from?'}
+						datalist={categorySuggestions} />
 				</div>
 			</SelectionArea>
 			<div className="plans">
