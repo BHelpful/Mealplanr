@@ -126,13 +126,13 @@ const toggleTag = (evt: any) => {
 interface TagProps {
 	type: string,
 	name: string,
-	toggable?: boolean,
+	toggleable?: boolean,
 }
 
 export function Tag(props: TagProps) {
-	const { type, name, toggable } = props;
+	const { type, name, toggleable } = props;
 	return <div className={'tag ' + type}>
-					<p onClick={toggable?toggleTag:()=>{}}>{name}</p>
+					<p onClick={toggleable?toggleTag:()=>{}}>{name}</p>
 					<span onClick={handleTagRemove}></span>
 				</div>;
 }
@@ -207,11 +207,11 @@ interface SearchProps {
 	decription: string;
 	type?: string;
 	datalist?: Array<string>;
-	toggable?: boolean;
+	toggleable?: boolean;
 }
 
 function Search(props: SearchProps) {
-	const { taglist, decription, type, datalist, toggable } = props;
+	const { taglist, decription, type, datalist, toggleable } = props;
 	const dropdown = type==="dropdown";
 	const [tags, createTag] = useState([{name:'',type:''}]);
 	if(tags[0] && tags[0].name === '') tags.pop();
@@ -234,7 +234,7 @@ function Search(props: SearchProps) {
 				<label htmlFor={getHTMLID.slice(-1)[0]} onClick={type!=="dropdown"?handleSubmit:()=>{}}></label>
 			</div>
 			{taglist ? <div className="tags list">
-				{tags.length > 0 ? tags.map((v, i) => (<Tag key={i} name={v.name} type={v.type} toggable={toggable} />)) : ''}
+				{tags.length > 0 ? tags.map((v, i) => (<Tag key={i} name={v.name} type={v.type} toggleable={toggleable} />)) : ''}
 			</div>: ''}
 		</div>
 	);

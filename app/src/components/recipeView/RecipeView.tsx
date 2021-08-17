@@ -18,7 +18,7 @@ export default function RecipeView(props: RecipeViewProps) {
 			<h1>{ !personal ? 'Browse recipes' : 'My collection' } </h1>
 			<SelectionArea columns={1}>
 				<Search decription={"Search"} type={"normal"}/>
-				<Search decription={"Include/Exclude filter"} type={"list"} taglist toggable={true} />
+				<Search decription={"Include/Exclude filter"} type={"list"} taglist toggleable={true} />
 				<Search decription={"Sort"} type={"dropdown"} datalist={sortDatalist} />
 			</SelectionArea>
 			<div className="recipes">
