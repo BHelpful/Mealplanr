@@ -236,11 +236,11 @@
 
 		margin-bottom: 20px;
 		margin: auto;
-
+		
 		p { margin: 0; }
-
+		
 		.week {
-
+			
 			display: grid;
 			grid-template-columns: repeat(7, 1fr);
 			height: 65px;
@@ -248,10 +248,13 @@
 			justify-items: center;
 			overflow-x: auto;
 			scrollbar-width: none;
-
+			padding-top: 20px;
+			margin-top: 0px;
+			
 			.day {
 
 				margin: 3px;
+				transition: transform .3s, filter .2s;
 				
 				&.unavailable {
 					
@@ -268,21 +271,23 @@
 					background-color: transparent;
 					filter: var(--shadow);
 
+					&:hover { transform: scale(1.2); }
+
 				}
 
 				&.selected {
 
 					background-color: var(--joyfull);
 					color: var(--bright);
-					filter: var(--shadow);
+
+					&:hover { transform: scale(.9); }
+					&:not(:hover) { filter: var(--shadow); }
 
 				}
 
 			}
 
 			&:not(.dropdowns) {
-
-				margin-top: 20px;
 
 				.day {
 

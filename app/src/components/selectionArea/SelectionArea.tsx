@@ -314,6 +314,26 @@ interface WeekdaysProps {
 	uppercase?: boolean;
 }
 
+const handleWeekSelection = (evt: any) => {
+	const elem = evt.target;
+	if(!elem.classList.contains("unavailable")) {
+		const old = elem.classList.contains("available") ? "available" : "selected"
+		elem.classList.remove(old);
+		elem.classList.add(old==="available" ? "selected" : "available");
+		const distantSibling: any  = document.getElementsByClassName(elem.id)[0];
+		if(distantSibling) {
+			if(old==="available") {
+				distantSibling.classList.remove("unavailable");
+				distantSibling.children[1].disabled = false;
+			}
+			else {
+				distantSibling.classList.add("unavailable");
+				distantSibling.children[1].disabled = true;
+			}
+		}
+	}
+}
+
 export function WeekdaysButtons(props: WeekdaysProps) {
 	const { decription, namelength, uppercase, offset } = {
 		namelength: 2,
@@ -347,7 +367,7 @@ export function WeekdaysButtons(props: WeekdaysProps) {
 			<p>{decription}</p>
 			<div className="week">
 				{days.map((v: string, index: number) => (
-					<div key={index} className={'day ' + selected[index]}>
+					<div key={index} id={generateHTMLID()} className={'day ' + selected[index]} onClick={handleWeekSelection}>
 						{v}
 					</div>
 				))}
@@ -376,7 +396,7 @@ export function WeekdaysDropdown(props: WeekdaysProps) {
 				{days.map((v: string, index: number) => (
 					<div
 						key={index}
-						className={'day ' + (selected[index] ?? 'unavailable')}
+						className={'day ' + (getHTMLID.slice(index-7)[0]) + " " + (selected[index] ?? 'unavailable')}
 					>
 						<p>{v}</p>
 						<select
