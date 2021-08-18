@@ -24,7 +24,7 @@ export default function Mealplan() {
 	return (
 		<Container id="mealplan">
 			<h1>My meal plan</h1>
-			<div className="button">Create Plan</div>
+			<div className="button">Cancel</div>
 			<SelectionArea columns={2}>
 				<div>
 					<WeekdaysButtons
@@ -39,7 +39,6 @@ export default function Mealplan() {
 						namelength={3}
 						uppercase={false}
 						/>
-					<div></div>
 				</div>
 				<div>
 					{/* <Tag type="salad" name="Gouda" />
@@ -47,7 +46,7 @@ export default function Mealplan() {
 						<Tag type="diray" name="Milk" />
 						<Tag type="vegan" name="Carrots" />
 						<Tag type="exotic" name="Saffron " />
-						<Tag type="fish" name="Salmon" /> */}
+					<Tag type="fish" name="Salmon" /> */}
 					<Search taglist
 						type='search'
 						decription={'What foods do you have at home already'}
@@ -60,6 +59,9 @@ export default function Mealplan() {
 						type='search'
 						decription={'What categories do you wish to have recipes from?'}
 						datalist={categorySuggestions} />
+				</div>
+				<div>
+					<div className={"big button"}>Create mealplan</div>
 				</div>
 			</SelectionArea>
 			<div className="plans">
