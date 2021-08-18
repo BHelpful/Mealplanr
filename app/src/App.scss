@@ -32,6 +32,10 @@
 	--nav-max: 350px;
 }
 
+h1, h2, h3,
+p { user-select: all; }
+* { user-select: none; }
+
 /** 
  * @Desc: Window content area
  * @Occures: Once

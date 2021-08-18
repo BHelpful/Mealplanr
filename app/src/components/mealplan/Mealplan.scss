@@ -29,6 +29,39 @@
 			justify-items: center;
 			display: grid;
 			width: 380px;
+			margin-top: 20px;
+
+		}
+
+		> div:nth-of-type(3) {
+
+			height: 100px;
+
+			.big.button {
+
+				max-width: 350px;
+				width: 80%;
+				background-color: var(--joyfull);
+				filter: var(--shadow);
+				border-radius: var(--br);
+				color: var(--bright);
+				margin-block: 30px 10px;
+				margin-inline: auto;
+				padding: 15px;
+				height: 20px;
+				text-align: center;
+				font-size: large;
+				filter: var(--shadow);
+				transition: .5s filter, .4s margin;
+
+				&:hover {
+
+					margin-top: 35px;
+					filter: none;
+
+				}
+
+			}
 
 		}
 
