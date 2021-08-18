@@ -50,15 +50,16 @@ export default function Mealplan() {
 						<Tag type="fish" name="Salmon" /> */}
 					<Search taglist
 						type='search'
-						decription={'What foods do you have at home already'}
+						decription={'Stockpiled ingredients'}
 						datalist={foodSuggestions} />
 					<Search taglist
 						type='search'
-						decription={'What stores do you prefer?'}
+						decription={'Pefered stores'}
 						datalist={storesSuggestions} />
 					<Search taglist
 						type='search'
-						decription={'What categories do you wish to have recipes from?'}
+						decription={'Include/Exclude categories'}
+						toggable={true}
 						datalist={categorySuggestions} />
 				</div>
 			</SelectionArea>
