@@ -258,7 +258,7 @@
 			.day {
 
 				margin: 3px;
-				transition: transform .3s, filter .2s;
+				transition: .5s filter, .4s transform;
 				
 				&.unavailable {
 					
@@ -316,17 +316,17 @@
 
 					text-align: center;
 					color: var(--joyfull);
-					filter: var(--shadow);
-
+					
 					&.unavailable {
-
+						
 						color: var(--faded);
 						border: 0;
-
+						
 					}
-
+					
 					.dropdownbox {
-
+						
+						filter: var(--shadow);
 						border-radius: var(--br);
 						border: 0;
 						background-color: var(--joyfull);

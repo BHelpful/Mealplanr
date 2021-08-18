@@ -52,11 +52,11 @@
 				text-align: center;
 				font-size: large;
 				filter: var(--shadow);
-				transition: .2s filter, .3s margin;
+				transition: .5s filter, .4s margin;
 
 				&:hover {
 
-					margin-top: 33px;
+					margin-top: 35px;
 					filter: none;
 
 				}
