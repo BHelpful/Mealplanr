@@ -58,7 +58,7 @@ export default function Mealplan() {
 					<Search taglist
 						type='search'
 						decription={'Include/Exclude categories'}
-						toggable={true}
+						toggleable={true}
 						datalist={categorySuggestions} />
 				</div>
 				<div>
