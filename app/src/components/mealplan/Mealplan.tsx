@@ -8,18 +8,13 @@ import SelectionArea, {
 } from '../selectionArea/SelectionArea';
 import Recipes from '../recipes/Recipes';
 
-const foodSuggestions = [
-	'Carrot', 'Chicken', 'Milk', 'Gauda', 'Salmon', 'Egg', 'Pineapple', 'Bacon'
-]
+/* GET THIS DATA FROM API */
+const foodSuggestions = [ 'Carrot', 'Chicken', 'Milk', 'Gauda', 'Salmon', 'Egg', 'Pineapple', 'Bacon' ];
+const storesSuggestions = [ 'Rema1000', 'Fakta', 'Bilka', 'Meny', 'Netto', 'SuperBrugsen', 'Liva' ];
+const categorySuggestions = [ 'Spice', 'Asian', 'Indian', 'American', 'Traditional', 'Nordic' ];
+/* END OF GET DATA FROM API */
 
-const storesSuggestions = [
-	'Rema1000', 'Fakta', 'Bilka', 'Meny', 'Netto', 'SuperBrugsen', 'Liva'
-]
-
-const categorySuggestions = [
-	'Spice', 'Asian', 'Indian', 'American', 'Traditional', 'Nordic'
-]
-
+// Creates the container for viewing and planning the weekly mealplan
 export default function Mealplan() {
 	return (
 		<Container id="mealplan">
@@ -41,12 +36,6 @@ export default function Mealplan() {
 						/>
 				</div>
 				<div>
-					{/* <Tag type="salad" name="Gouda" />
-						<Tag type="meat" name="Chicken" />
-						<Tag type="diray" name="Milk" />
-						<Tag type="vegan" name="Carrots" />
-						<Tag type="exotic" name="Saffron " />
-					<Tag type="fish" name="Salmon" /> */}
 					<Search taglist
 						type='search'
 						decription={'Stockpiled ingredients'}

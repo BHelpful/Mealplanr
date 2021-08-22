@@ -5,8 +5,8 @@ interface PopupProps {
   type: string,
 }
 
+//Creates a popup container
  class Popup extends Component<PopupProps> {
-
   render() {
     const {type, children} = this.props;
     return (
@@ -15,7 +15,6 @@ interface PopupProps {
       </div>
     );
   }
-
 }
 
 export default Popup;

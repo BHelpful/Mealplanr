@@ -1,47 +1,30 @@
 import './Recipes.scss';
 
+/* GET DATA FROM API */
 const mealPlan = [
-	{
-		recipeId: -1,
-		time: '',
-	},
-	{
-		recipeId: 252816,
-		time: '18:00',
-	},
-	{
-		recipeId: 3500346,
-		time: '16:45',
-	},
-	{
-		recipeId: -1,
-		time: '',
-	},
-	{
-		recipeId: -1,
-		time: '',
-	},
-	{
-		recipeId: -1,
-		time: '',
-	},
-	{
-		recipeId: -1,
-		time: '',
-	},
+	{ recipeId: -			 1, time: ''	},
+	{ recipeId:   252816, time: '18:00' },
+	{ recipeId:  3500346, time: '16:45' },
+	{ recipeId: -			 1, time: '' },
+	{ recipeId: -			 1, time: '' },
+	{ recipeId: -			 1, time: '' },
+	{ recipeId: -			 1, time: '' },
 ];
 
 const recipes = [
-	{ recipeId: 2102013, },
-	{ recipeId: 2340076, },
-	{ recipeId: 2500023,	},
-	{ recipeId: 3500346, }
+	{ recipeId: 2102013 },
+	{ recipeId: 2340076 },
+	{ recipeId: 2500023 },
+	{ recipeId: 3500346 }
 ];
 
 const myRecipes = [
 	{ recipeId: 3500346, }
-]
+];
+/*END OF GET DATA FROM API*/
 
+/*FUNCTION SHOULD FETCH FROM DATABASE INSTEAD*/
+// Function to get the recipe information from the id
 const recipeInfo = (id: number) => {
 	switch (id) {
 		case 252816: return {

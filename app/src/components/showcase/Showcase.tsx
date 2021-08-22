@@ -2,6 +2,7 @@ import Container from "../container/Container";
 import SelectionArea, { Guide, Item, Listing, Quantaty, Step, Tag } from "../selectionArea/SelectionArea";
 import "./Showcase.scss";
 
+// Function that creates the recipe showcase
 export default function Showcase () {
   return (
     <Container id="showcase">
