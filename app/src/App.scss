@@ -59,6 +59,7 @@ p { user-select: all; }
 	font-weight: 400;
 	overflow-y: scroll;
 
+	/* Global classes for background coloring */
 	.meat 		{ background-color: var(--meat); 		}
 	.diray 	  { background-color: var(--diray);   }
 	.salad 		{ background-color: var(--salad); 	}
