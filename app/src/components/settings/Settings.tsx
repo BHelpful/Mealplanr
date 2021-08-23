@@ -21,7 +21,7 @@ const keypoints: kvsp = {
   360: 'red'
 }
 
-// Function that changes the color hue of the color 
+// Function that changes the color hue of the color
 const setcolor = (hue: number) => document.documentElement.style.setProperty('--c', String(hue));
 
 //             val, nearest, diff
@@ -43,7 +43,7 @@ const sliderSnap = (evt: any) => {
       nearest[2] = v;
       least = v;
     }
-  }  
+  }
 }
 
 // Function that creates the settings

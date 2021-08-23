@@ -387,7 +387,7 @@ export function WeekdaysButtons(props: WeekdaysProps) {
 	);
 }
 
-// Creates the weekday-dropdown 
+// Creates the weekday-dropdown
 export function WeekdaysDropdown(props: WeekdaysProps) {
 	const { decription, namelength, uppercase, offset } = {
 		namelength: 2,
