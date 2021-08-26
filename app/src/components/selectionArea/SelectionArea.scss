@@ -171,11 +171,12 @@
 			align-items: center;
 			background-color: var(--bgcolor);
 			filter: var(--shadow);
+			color: var(--gray);
 			
 			p {
 				
 				text-align: center;
-				color: var(--gray);
+				color: inherit;
 				margin: 0 5px 0 10px;
 				height: 1.2em;
 				cursor: copy;
@@ -189,21 +190,25 @@
 			}
 
 			span {
-
-				background-image: url("../../assets/Cross.svg");
-				width: 1.2em;
-				height: 1.2em;
-				display: block;
+				
 				margin-right: 5px;
-				transition: transform .5s, filter .5s;
 
-				&:hover {
+				&.removal {
 
-					transform: scale(1.5);
-					filter: invert(1) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
+					background-image: url("../../assets/Cross.svg");
+					width: 1.2em;
+					height: 1.2em;
+					display: block;
+					transition: transform .5s, filter .5s;
+
+					&:hover {
+
+						transform: scale(1.5);
+						filter: invert(1) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
+
+					}
 
 				}
-
 			}
 
 		}
