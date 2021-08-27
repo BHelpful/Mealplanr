@@ -22,8 +22,6 @@ body:
       label: Description
       description: The user story for the feature.
       placeholder: As a user, I would like to ... so I can ...
-    validations:
-      required: true
   - type: textarea
     id: ux
     attributes:
