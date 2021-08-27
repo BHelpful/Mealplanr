@@ -7,6 +7,15 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - MAJOR
+        - MINOR
+    validations:
+      required: true
   - type: textarea
     id: actual-behaviour
     attributes:
@@ -23,10 +32,18 @@ body:
       placeholder: When x the program should y
     validations:
       required: true
-  - type: dropdown
-    id: browsers
+  - type: textarea
+    id: reproduce
     attributes:
-      label: What browsers are you seeing the problem on?
+      label: Steps to reproduce
+      description: What steps do you take to reproduce the bug?
+      placeholder: Go to the website, click on the button, and then click on the button again...
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: What platform are you seeing the problem on?
       multiple: true
       options:
         - Firefox
@@ -34,6 +51,13 @@ body:
         - Safari
         - Microsoft Edge
         - Opera
+        - Internet Explorer
+        - Android
+        - iOS
+        - Linux
+        - macOS
+        - Windows
+        - Other
     validations:
       required: true
   - type: textarea
@@ -46,7 +70,7 @@ body:
     id: attatchments
     attributes:
       label: Attatchments
-      description: Please attatch images and videos/GIFs to paint a better picture of the bug.
+      description: Please attatch images and videos/GIFs or a link to paint a better picture of the bug.
   - type: checkboxes
     id: terms
     attributes:
