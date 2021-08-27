@@ -64,6 +64,16 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - uses: Naturalclar/issue-action@v1.0.0
         with:
+          keywords: '["MAJOR"]'
+          labels: '["MAJOR"]'
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: Naturalclar/issue-action@v1.0.0
+        with:
+          keywords: '["MINOR"]'
+          labels: '["MINOR"]'
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: Naturalclar/issue-action@v1.0.0
+        with:
           keywords: '["CSS", "css", "Css", "styling"]'
           labels: '["CSS"]'
           github-token: "${{ secrets.GITHUB_TOKEN }}"
