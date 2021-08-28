@@ -28,7 +28,7 @@ const colorTag = (tag: any) => {
 export default function Showcase () {
 
   const starstyle = {
-    width: (recipie.rating[0]/recipie.rating[1]) * 20 //40 px per star 
+    width: (recipie.rating[0]/recipie.rating[1]) * 20 //40 px per star
   }
 
   return (
