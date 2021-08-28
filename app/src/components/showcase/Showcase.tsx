@@ -13,7 +13,7 @@ const recipie = {
     {type: "cat", name: "Traditional"}
   ],
   decs: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora necessitatibus omnis delectus sequi optio tenetur eligendi non eos. Voluptatibus praesentium maiores nemo repudiandae ipsam provident ex repellendus officiis animi molestias.",
-  rating: [4000, 1000],
+  rating: [3862, 837],
 }
 /* END OF GET DATA FROM API */
 
@@ -26,6 +26,11 @@ const colorTag = (tag: any) => {
 }
 
 export default function Showcase () {
+
+  const starstyle = {
+    width: (recipie.rating[0]/recipie.rating[1]) * 20 //40 px per star 
+  }
+
   return (
     <Container id="showcase">
       <h1>Recipe showcase</h1>
@@ -40,7 +45,7 @@ export default function Showcase () {
             </div>
             </div>
           <p>{recipie.decs} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda odio blanditiis, fugit recusandae itaque quis aut iusto eos id optio eligendi quas ad, magni dolorem dolore numquam? Animi, dolore in?</p>
-          <div>Good-rating: {(recipie.rating[0]/recipie.rating[1])/5*100}%</div>
+          <div><div className={"rating icon"}><span style={starstyle}></span><span></span></div><span>based on {recipie.rating[1]} ratings</span></div>
         </div>
         <div>
           <div className={"image"}></div>

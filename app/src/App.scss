@@ -38,9 +38,14 @@
 	--nav-max: 350px;
 }
 
-h1, h2, h3,
-p { user-select: all; }
-* { user-select: none; }
+div:not(*),
+img,
+label,
+.item,
+.button,
+.amount,
+.day,
+.recipe :not(p) { user-select: none; }
 
 /** 
  * @Desc: Window content area

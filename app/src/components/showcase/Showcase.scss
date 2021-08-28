@@ -14,8 +14,47 @@
         width: 100%;
         min-width: 300px;
         flex: 1 1 40%;
+
+        span { display: block; }
         
         div { white-space: nowrap; }
+        
+        > :last-child {
+            
+          display: inline-grid;
+          grid-template-columns: 110px auto;
+
+          .rating.icon {
+
+            position: relative;
+
+            span {
+
+              margin-right: 5px;
+              position: absolute;
+              display: block;
+              height: 20px;
+              width: 100px;
+              mask-image: url("../../assets/Hearth.svg");
+              mask-size: 20px;
+              mask-repeat: repeat-x;
+              background: red;
+              background-size: 20px;
+              background-repeat: repeat-x;
+
+            }
+
+            span:last-of-type {
+
+              z-index: 0;
+              opacity: .3;
+
+            }
+
+          }
+
+        }
+        
         
       }
       
