@@ -1,5 +1,5 @@
-name: New Story
-description: Create a new story
+name: Minor
+description: Create a minor feature
 title: "[Minor]: "
 labels: [MINOR]
 body:
