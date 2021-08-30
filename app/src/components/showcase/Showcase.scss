@@ -15,7 +15,27 @@
         min-width: 300px;
         flex: 1 1 40%;
 
-        span { display: block; }
+        h2 { margin-bottom: 5px; }
+
+        .timeestimate {
+          
+          display: block;
+          margin-bottom: 10px;
+          position: relative;
+          
+          &::before {
+
+            content: "";
+            display: inline-block;
+            height: 1rem;
+            width: 1em;
+            background-image: url("../../assets/Clock.svg");
+            position: relative;
+            top: .25rem;
+
+          }
+        
+        }
         
         div { white-space: nowrap; }
         
@@ -54,7 +74,6 @@
           }
 
         }
-        
         
       }
       

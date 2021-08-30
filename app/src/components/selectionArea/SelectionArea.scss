@@ -156,6 +156,7 @@
 		flex-wrap: wrap;
 		transition: height 1s;
 		height: calc(100% - 70px);
+		gap: 5px;
 
 		.tag {
 
@@ -164,7 +165,6 @@
 			width: auto;
 			max-width: max-content;
 			height: 2em;
-			margin: 5px;
 			border-radius: var(--br);
 			justify-content: center;
 			align-items: center;

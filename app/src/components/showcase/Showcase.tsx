@@ -39,7 +39,7 @@ export default function Showcase () {
         <div>
           <h2>{recipie.title}</h2>
           <div>
-            <span>{recipie.time[0]+' '+recipie.time[1]}</span>
+            <span className={"timeestimate"}>{recipie.time[0]+' '+recipie.time[1]}</span>
             <div className={"list"}>
               {recipie.tags.map((v: any, i: number) => <Tag key={i} nonremovable type={colorTag(v)} name={v.name}/>)}
             </div>
