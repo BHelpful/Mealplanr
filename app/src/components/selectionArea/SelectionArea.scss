@@ -23,7 +23,6 @@
 	textarea {
 
 		min-height: 90px;
-		font-family: sans-serif;
 		font-size: 10pt;
 		resize: none;
 		color: var(--bright);
@@ -67,7 +66,7 @@
 			width: calc(100% - 40px);
 			display: inline-grid;
 			grid-template-columns: auto 80px;
-			margin-block: 15px 0px;
+			margin-block: 15px 0;
 			height: 60px;
 			
 			&.vertical {
@@ -157,6 +156,7 @@
 		flex-wrap: wrap;
 		transition: height 1s;
 		height: calc(100% - 70px);
+		gap: 5px;
 
 		.tag {
 
@@ -165,17 +165,17 @@
 			width: auto;
 			max-width: max-content;
 			height: 2em;
-			margin: 5px;
 			border-radius: var(--br);
 			justify-content: center;
 			align-items: center;
 			background-color: var(--bgcolor);
 			filter: var(--shadow);
+			color: var(--gray);
 			
 			p {
 				
 				text-align: center;
-				color: var(--gray);
+				color: inherit;
 				margin: 0 5px 0 10px;
 				height: 1.2em;
 				cursor: copy;
@@ -189,21 +189,25 @@
 			}
 
 			span {
-
-				background-image: url("../../assets/Cross.svg");
-				width: 1.2em;
-				height: 1.2em;
-				display: block;
+				
 				margin-right: 5px;
-				transition: transform .5s, filter .5s;
 
-				&:hover {
+				&.removal {
 
-					transform: scale(1.5);
-					filter: invert(1) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
+					background-image: url("../../assets/Cross.svg");
+					width: 1.2em;
+					height: 1.2em;
+					display: block;
+					transition: transform .5s, filter .5s;
+
+					&:hover {
+
+						transform: scale(1.5);
+						filter: invert(1) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
+
+					}
 
 				}
-
 			}
 
 		}
@@ -238,7 +242,6 @@
 
 	.weekdays.selection {
 
-		margin-bottom: 20px;
 		margin: auto;
 		
 		p { margin: 0; }
@@ -253,7 +256,7 @@
 			overflow-x: auto;
 			scrollbar-width: none;
 			padding-top: 20px;
-			margin-top: 0px;
+			margin-top: 0;
 			
 			.day {
 
@@ -410,7 +413,7 @@
 					
 				}
 				
-				&:first-child { top: -2px };
+				&:first-child { top: -2px; }
 				&:nth-child(2) { border-inline: 1px solid var(--accent); }
 				span { margin-right: 5px; }
 				

@@ -2,23 +2,50 @@ import Container from "../container/Container";
 import SelectionArea, { Guide, Item, Listing, Quantaty, Step, Tag } from "../selectionArea/SelectionArea";
 import "./Showcase.scss";
 
+/* GET DATA FROM API */
+const recipie = {
+  title: "Pyttipanna",
+  time: [20, "min"],
+  tags: [
+    {type: "type", name: "Main course"},
+    {type: "type", name: "Leftovers"},
+    {type: "cat", name: "Nordic"},
+    {type: "cat", name: "Traditional"}
+  ],
+  decs: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora necessitatibus omnis delectus sequi optio tenetur eligendi non eos. Voluptatibus praesentium maiores nemo repudiandae ipsam provident ex repellendus officiis animi molestias.",
+  rating: [3862, 837],
+}
+/* END OF GET DATA FROM API */
+
+const colorTag = (tag: any) => {
+  switch(tag.name) {
+    case "Leftovers":   return 'rainbow';
+    case "Main course": return 'gold';
+    default:            return "none";
+  }
+}
+
 export default function Showcase () {
+
+  const starstyle = {
+    width: (recipie.rating[0]/recipie.rating[1]) * 20 //40 px per star
+  }
+
   return (
     <Container id="showcase">
       <h1>Recipe showcase</h1>
       <div className="button">Edit</div>
       <SelectionArea columns={2} cln={"trailer"}>
         <div>
-          <h2>{"{{"}Title{"}}"}</h2>
+          <h2>{recipie.title}</h2>
           <div>
-            <span>{"{{"}Time{"}}"}</span>
+            <span className={"timeestimate"}>{recipie.time[0]+' '+recipie.time[1]}</span>
             <div className={"list"}>
-              <Tag type={"none"} name={"Main course"}/>
-              <Tag type={"none"} name={"{{Tag}}"}/>
+              {recipie.tags.map((v: any, i: number) => <Tag key={i} nonremovable type={colorTag(v)} name={v.name}/>)}
             </div>
             </div>
-          <p>{"{{"}Decription{"}}"} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda odio blanditiis, fugit recusandae itaque quis aut iusto eos id optio eligendi quas ad, magni dolorem dolore numquam? Animi, dolore in?</p>
-          <div>{"{{"}Rating{"}}"}</div>
+          <p>{recipie.decs} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda odio blanditiis, fugit recusandae itaque quis aut iusto eos id optio eligendi quas ad, magni dolorem dolore numquam? Animi, dolore in?</p>
+          <div><div className={"rating icon"}><span style={starstyle}></span><span></span></div><span>based on {recipie.rating[1]} ratings</span></div>
         </div>
         <div>
           <div className={"image"}></div>

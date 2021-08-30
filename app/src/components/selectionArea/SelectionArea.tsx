@@ -127,13 +127,14 @@ interface TagProps {
 	type: string,
 	name: string,
 	toggleable?: boolean,
+	nonremovable?: boolean
 }
 
 export function Tag(props: TagProps) {
-	const { type, name, toggleable } = props;
+	const { type, name, toggleable, nonremovable } = props;
 	return <div className={'tag ' + type}>
 					<p onClick={toggleable?toggleTag:()=>{}}>{name}</p>
-					<span onClick={handleTagRemove}></span>
+					<span className={nonremovable?'':'removal'} onClick={nonremovable?()=>{}:handleTagRemove}></span>
 				</div>;
 }
 
