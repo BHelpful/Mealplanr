@@ -75,11 +75,8 @@ p { user-select: all; }
 
 		grid-template-columns: auto;
 		
-		> div:last-child {
+		> div:last-child { margin-left: calc(var(--nav-min) + 80px); }
 		
-			margin-left: calc(var(--nav-min) + 80px);
-
-		}
 	}
 	
 }

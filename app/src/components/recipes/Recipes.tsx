@@ -75,19 +75,19 @@ const recipeInfo = (id: number) => {
 	}
 };
 
+// Handle to set placholder image when src is unavailable
 function handleAltImg(e: any) {
 	e.target.src='/alt.png';
-	e.target.parentNode.classList.remove("shadow");
+	e.target.parentNode.classList.remove("shadow"); // Shadow is applied to the path of svg - we do not want that
 }
 
+// Cycle images
 function handleNextImage(e: any) {
-	if(!e.target.parentElement.classList.contains("shadow")) return;
-	const max = e.target.dataset.images;
-	const [id, current] = e.target.src.replace(/http:\/\/localhost:3000\/temp\/recipe_(\d+)_(\d+).jpg/,"$1,$2").split(",")
-	const next = (Number(current) + 1) % max;
-	setTimeout(() => {
-		e.target.src = "/temp/recipe_"+id+"_"+next+".jpg"
-	},5000)
+	if(!e.target.parentElement.classList.contains("shadow")) return; // If no shadow, placeholder is used - no images at all
+	const max = e.target.dataset.images; // Data-tag containing amount of images assoatiated
+	const [id, current] = e.target.src.replace(/http:\/\/localhost:3000\/temp\/recipe_(\d+)_(\d+).jpg/,"$1,$2").split(","); // get current values
+	const next = (Number(current) + 1) % max; // Add one and loop in case of overflow
+	setTimeout(() => {e.target.src = "/temp/recipe_"+id+"_"+next+".jpg"}, 5000); // Wait 5s. Changing src will call onload causing chain reaction to trigger function again
 };
 
 interface RecipeProps {
@@ -102,11 +102,11 @@ export function Recipe(props: RecipeProps) {
 	const {Images, Title, Decs, Time, Rating, Ratings, category} = recipeInfo(Id);
 
 	return (
-		<div className={type + ' recipe ' + (Id !== -1 ? category : 'empty')} onClick={() => console.log('Clicked recipe')}>
+		<div className={type + ' recipe ' + (Id !== -1 ? category : 'empty')} id={Id+''} onClick={() => console.log('Clicked recipe')}>
 			{ Id !== -1 ? <>
 				<div className="rimage shadow">
 					{	personal ? <span className={"options"}></span> : <></> }
-					<img src={"/temp/recipe_"+Id+"_1.jpg"} data-images={Images} onError={handleAltImg} alt="" onLoad={handleNextImage}></img>
+					<img src={"/temp/recipe_"+Id+"_0.jpg"} data-images={Images} onError={handleAltImg} alt="" onLoad={handleNextImage}></img>
 				</div>
 				<h3>{Title}</h3>
 				<p>{Decs}</p>
@@ -148,7 +148,7 @@ export default function Recipes(props: RecipesProps) {
 		return (
 			<>
 				{data.map((data: any, index: number) => (
-					<Recipe key={index} type='tall' Id={data.recipeId} At={data.time} personal={true} />
+					<Recipe key={index} type={'tall'} Id={data.recipeId} At={data.time} personal={true} />
 				))}
 			</>
 		);
@@ -163,7 +163,7 @@ export default function Recipes(props: RecipesProps) {
 					</div>
 				) : ''}
 				{data.map((data: any, index: number) => (
-					<Recipe key={index} type='wide' Id={data.recipeId} personal={mealFrom==='personal'} />
+					<Recipe key={index} type={'wide'} Id={data.recipeId} personal={mealFrom==='personal'} />
 				))}
 			</>
 		);

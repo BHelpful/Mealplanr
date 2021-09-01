@@ -20,23 +20,21 @@ const user = {
 };
 
 function App() {
+	// Get relavant values in store
 	const navIndex = useSelector((state: RootState) => state.navState.index);
 	const userPopup = useSelector((state: RootState) => state.navState.userpopup);
 	const isLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
 	const dispatch = useDispatch();
 
+	/* Arrow function to set the hue/color-theme */
 	((hue: number) =>
 		document.documentElement.style.setProperty('--c', String(hue)))(
 		user.color
 	);
 
-	const updateDataEmail = (e: any) => {
-		user.email = e.target.value
-	};
-
-	const updateDataPass = (e: any) => {
-		user.pass = e.target.value
-	};
+	// Event handlers to change the global object, then use that value in store on a submit
+	const updateDataEmail = (e: any) => { user.email = e.target.value };
+	const updateDataPass = (e: any) => { user.pass = e.target.value };
 
 	return (
 		<div id="app">
@@ -50,12 +48,12 @@ function App() {
 					</> : userPopup === 2 ? <>
 						<h1>Login</h1>
 						<p>Mail known, enter password</p>
-						<input type={"password"} placeholder={"123456"} onChange={updateDataPass}/>
+						<input type={"password"} placeholder={"123456"} onChange={updateDataPass} value={""} />
 						<div onClick={() => dispatch(userLogin(user.email, user.pass))}>Login</div>
 					</> : userPopup === 3 ? <>
 						<h1>Signup</h1>
 						<p>Email not known, enter verification code from mail</p>
-						<input type={"text"} placeholder="222444"/>
+						<input type={"text"} placeholder="222444" value={""} />
 						<div onClick={() => {dispatch(createUser(user.email, user.pass, user.pass))}}>Login</div>
 					</> : <></> }
 				</Popup>
