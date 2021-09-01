@@ -1,5 +1,5 @@
 import Container from "../container/Container";
-import SelectionArea, { ButtonField, MultipleChoice, Search, Tag, TextField } from "../selectionArea/SelectionArea";
+import SelectionArea, { ButtonField, MultipleChoice, Search, TextField } from "../selectionArea/SelectionArea";
 import "./Settings.scss";
 
 interface kvsp {
@@ -94,16 +94,11 @@ export default function Settings() {
       <SelectionArea columns={3}>
         <div>
           <Search decription="Contry" type="" />
-          <Search taglist decription="What stores do you prefer?">
-            <Tag type="none" name="Netto" />
-          </Search>
+          <Search taglist decription="What stores do you prefer?" />
         </div>
         <div>
           <Search decription="Diet" type="dropdown" />
-          <Search taglist decription="Allergies / intolerences">
-            <Tag type="exotic" name="Hazelnut" />
-            <Tag type="dariy" name="Lactose" />
-          </Search>
+          <Search taglist decription="Allergies / intolerences" />
           <MultipleChoice decription="Hide recipes containing these"  name="itolalgi"/>
         </div>
         <div>

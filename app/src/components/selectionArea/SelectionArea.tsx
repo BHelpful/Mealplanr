@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import { capitalize } from 'lodash';
+import React, { Component, useState } from 'react';
 import './SelectionArea.scss';
 
 interface QuantityPorps {
@@ -81,11 +82,15 @@ class Listing extends Component<ListingProps> {
 
 interface ItemProps {
 	name: string;
+	amount?: number;
+	unit?: "kg"|"g"|"mg"|"L"|"dL"|"cL"|"mL"|"tbsp"|"tsp"|"dsp"|"pcs"|"tin"|"bag"|"sm"|"med"|"lrg"|""|"°C";
 	drag?: boolean;
 }
 
 export function Item(props: ItemProps) {
-	const {name, drag} = props;
+	const {name, amount, unit, drag} = {amount: "", unit: "", ...props};
+	console.log(amount);
+	
 	if (drag) return (
 		<div className={"item drag"} draggable={true}
 			onDragEnter={handleDragEnter}
@@ -95,48 +100,145 @@ export function Item(props: ItemProps) {
 			onDrop=			{handleDragDrop}
 			onDragEnd=	{handleDragEnd}>
 			<div className={"drag icon"}></div>
-			<p>{name}</p>
+			<p><span>{name}</span>{amount?<span>Note: {amount}</span>:<span></span>}<span>{unit}</span></p>
 			<div className={"cross icon"}></div>
 		</div>
 	);
 	else return (
-		<div className={"item"}>
+		<label className={"item cc"}>
 			<input type="checkbox" />
+			<span className="mark"></span>
 			<p>{name}</p>
-			<p><span>5</span><span>stk</span></p>
-		</div>
+			<p><span>{amount}</span><span>{unit}</span></p>
+		</label>
 	);
+}
+
+const handleTagRemove = (evt: any) => evt.target.parentElement.remove();
+const toggleTag = (evt: any) => {
+	const elem = evt.target;
+	const old = elem.classList[0] || "include";
+	elem.classList.remove(old);
+	elem.classList.add(old==="include" ? "exclude" : "include");
+	elem.title = `${capitalize(old)} item by clicking`;
 }
 
 interface TagProps {
 	type: string,
 	name: string,
+	toggleable?: boolean,
+	nonremovable?: boolean
 }
 
 export function Tag(props: TagProps) {
-	const { type, name } = props;
-	return <div className={'tag ' + type}>{name}</div>;
+	const { type, name, toggleable, nonremovable } = props;
+	return <div className={'tag ' + type}>
+					<p onClick={toggleable?toggleTag:()=>{}}>{name}</p>
+					<span className={nonremovable?'':'removal'} onClick={nonremovable?()=>{}:handleTagRemove}></span>
+				</div>;
+}
+
+const toggleDropdown = (toggle = true) => (evt: any) => {
+	evt.preventDefault();
+	if(!toggle || evt.target.classList.contains('open')) {
+		evt.target.classList.remove('open');
+	} else {
+		evt.target.classList.add('open');
+	}
+}
+
+const toFirstUpperCase = (v: string) => v.replace(/(\w)(.*)/, (...args: any[]) => args[1].toUpperCase()+args[2]);
+
+const lookupType = (name: string) => {
+	switch(name.toLowerCase()) {
+		case 'chicken': return 'meat';
+		default: return 'unkown';
+	}
+}
+
+interface KeyboardEventWithData extends KeyboardEvent {
+	data?: HTMLElement;
+}
+
+const varToString = (varObj: any) => (Object.keys(varObj)[0]).toString();
+const handleSubmit = (evt: any) => 0;
+const handleKeyDown = (createTag: any, tags: any) => (evt: any) => {
+	if(evt.key === 'Enter' || evt.key === ",") {
+		const target: any = evt.target||evt.data;
+		evt.preventDefault();
+		const elem = target.parentElement.nextElementSibling;
+		const newTaglist = tags;
+		if(elem.classList.contains('tags')) {
+			const v = target.value;
+			if(v.match(/(\w{2,} ?)+/)) newTaglist.push({"name": toFirstUpperCase(v), "type": lookupType(v)});
+			target.value.split(',').forEach((v: string) => {});
+			target.value = '';
+			createTag(newTaglist.filter((v:any,i:number,a:any)=>a.findIndex((t:any)=>(t.name === v.name))===i));
+		}
+	}
+};
+
+function* HTMLIDgenerator(): Generator<string> {
+	var n = Math.floor(Math.random() * 63);
+	while (++n) yield (String.fromCharCode((n % 26) + 64) + String.fromCharCode(Math.floor(n / 26) + 64));
+}
+
+const htmlID = HTMLIDgenerator();
+const getHTMLID: Array<string> = [];
+const generateHTMLID = (): string => {
+	getHTMLID.push(htmlID.next().value);
+	return getHTMLID.slice(-1)[0];
+}
+
+const handleMouseDown = (dropdown: boolean, createTag?:any, tags?:any) => (evt: any) => {
+	const parent = evt.target.parentElement;
+	parent.classList.remove("open");
+	const elem: any = document.getElementById(parent.dataset.for);
+	elem.value = evt.target.innerHTML;
+	elem.classList.remove("open");
+	if(!dropdown && createTag && tags) {
+		var ke: KeyboardEventWithData = new KeyboardEvent('keydown', {key: ','});
+		ke.data = elem;
+		handleKeyDown(createTag, tags)(ke);
+	}
 }
 
 interface SearchProps {
-	taglist?: boolean,
-	decription: string,
-	type?: string,
+	taglist?: boolean;
+	decription: string;
+	type?: string;
+	datalist?: Array<string>;
+	toggleable?: boolean;
 }
 
-class Search extends Component<SearchProps> {
-	render() {
-		const { taglist, decription, type, children } = this.props;
-		return (
-			<div className="search tags">
-				<p>{decription}</p>
-				<div className={"bar "+type||''}>
-					<span></span>
-				</div>
-				{taglist ? <div className="tags list">{children}</div> : ''}
+function Search(props: SearchProps) {
+	const { taglist, decription, type, datalist, toggleable } = props;
+	const dropdown = type==="dropdown";
+	const [tags, createTag] = useState([{name:'',type:''}]);
+	if(tags[0] && tags[0].name === '') tags.pop();
+	return (
+		<div className={"search "+(taglist ? "tags":"")}>
+			<div className={"bar "+type||''}>
+				<input
+					id={generateHTMLID()}
+					onClick={toggleDropdown()}
+					onBlur={toggleDropdown(false)}
+					onChange={(evt:any)=>evt.preventDefault()}
+					onKeyDown={taglist ? handleKeyDown(createTag, tags):()=>{}}
+					placeholder={decription}
+					list={datalist?varToString(datalist):''}/>
+				{datalist ?
+					<div className="dropdown list" data-for={getHTMLID.slice(-1)[0]}>
+						{datalist.map((v: string, i: number) => (<div key={i} onMouseDown={handleMouseDown(dropdown, createTag, tags)}>{v}</div>))}
+					</div>
+				: ''}
+				<label htmlFor={getHTMLID.slice(-1)[0]} onClick={type!=="dropdown"?handleSubmit:()=>{}}></label>
 			</div>
-		);
-	}
+			{taglist ? <div className="tags list">
+				{tags.length > 0 ? tags.map((v, i) => (<Tag key={i} name={v.name} type={v.type} toggleable={toggleable} />)) : ''}
+			</div>: ''}
+		</div>
+	);
 }
 
 interface MultipleChoiceProps {
@@ -213,6 +315,26 @@ interface WeekdaysProps {
 	uppercase?: boolean;
 }
 
+const handleWeekSelection = (evt: any) => {
+	const elem = evt.target;
+	if(!elem.classList.contains("unavailable")) {
+		const old = elem.classList.contains("available") ? "available" : "selected"
+		elem.classList.remove(old);
+		elem.classList.add(old==="available" ? "selected" : "available");
+		const distantSibling: any  = document.getElementsByClassName(elem.id)[0];
+		if(distantSibling) {
+			if(old==="available") {
+				distantSibling.classList.remove("unavailable");
+				distantSibling.children[1].disabled = false;
+			}
+			else {
+				distantSibling.classList.add("unavailable");
+				distantSibling.children[1].disabled = true;
+			}
+		}
+	}
+}
+
 export function WeekdaysButtons(props: WeekdaysProps) {
 	const { decription, namelength, uppercase, offset } = {
 		namelength: 2,
@@ -246,7 +368,7 @@ export function WeekdaysButtons(props: WeekdaysProps) {
 			<p>{decription}</p>
 			<div className="week">
 				{days.map((v: string, index: number) => (
-					<div key={index} className={'day ' + selected[index]}>
+					<div key={index} id={generateHTMLID()} className={'day ' + selected[index]} onClick={handleWeekSelection}>
 						{v}
 					</div>
 				))}
@@ -275,7 +397,7 @@ export function WeekdaysDropdown(props: WeekdaysProps) {
 				{days.map((v: string, index: number) => (
 					<div
 						key={index}
-						className={'day ' + (selected[index] ?? 'unavailable')}
+						className={'day ' + (getHTMLID.slice(index-7)[0]) + " " + (selected[index] ?? 'unavailable')}
 					>
 						<p>{v}</p>
 						<select
@@ -348,10 +470,11 @@ interface StepProps {
 export function Step(props: StepProps) {
 	const {decs} = props;
 	return (
-		<div className={"step"}>
+		<label className={"step cc"}>
 			<input type="checkbox" />
+			<span className="mark"></span>
 			<p>{decs}</p>
-		</div>
+		</label>
 	);
 }
 

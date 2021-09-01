@@ -8,12 +8,60 @@
 
 	.selectionarea {
 
-		grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+
+		> div:nth-of-type(1) {
+
+			width: 100%;
+			min-width: 300px;
+			max-width: 600px;
+			margin: auto;
+			overflow: hidden;
+
+			> div p { width: max-content; }
+
+		}
 
 		> div:nth-of-type(2) {
 
 			justify-items: center;
 			display: grid;
+			width: 380px;
+			margin-top: 20px;
+
+		}
+
+		> div:nth-of-type(3) {
+
+			height: 100px;
+
+			.big.button {
+
+				max-width: 350px;
+				width: 80%;
+				background-color: var(--joyfull);
+				filter: var(--shadow);
+				border-radius: var(--br);
+				color: var(--bright);
+				margin-block: 30px 10px;
+				margin-inline: auto;
+				padding: 15px;
+				height: 20px;
+				text-align: center;
+				font-size: large;
+				filter: var(--shadow);
+				transition: .5s filter, .4s margin;
+
+				&:hover {
+
+					margin-top: 35px;
+					filter: none;
+
+				}
+
+			}
 
 		}
 
@@ -23,7 +71,7 @@
 
 		grid-column: span 2;
 		display: grid;
-		grid-template-columns: 0px repeat(7, 150px) 30px;
+		grid-template-columns: 0 repeat(7, 150px) 30px;
 		grid-gap: 20px;
 		padding: 20px 40px;
 		overflow-x: scroll;

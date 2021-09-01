@@ -6,7 +6,7 @@
     background-color: var(--joyfull);
     border-radius: var(--br);
     z-index: 100;
-    box-shadow: 0px 0px 100px 50vw #000b;
+    box-shadow: 0 0 100px 50vw #000b;
     padding: 20px;
     height: 270px;
     width: 500px;
@@ -15,7 +15,7 @@
     input {
 
       border-radius: var(--br);
-      border: 0px solid;
+      border: 0 solid;
       height: 20px;
       width: 250px;
       display: block;

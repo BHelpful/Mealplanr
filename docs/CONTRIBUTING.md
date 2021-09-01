@@ -1,5 +1,5 @@
-# Contributing to Online-Help-List
-I love your input! I want to make contributing to this project as easy and transparent as possible, whether it's:
+# Contributing to MealPlanr
+We love your input! we want to make contributing to this project as easy and transparent as possible, whether it's:
 
 - Reporting a bug
 - Discussing the current state of the code
@@ -7,11 +7,11 @@ I love your input! I want to make contributing to this project as easy and trans
 - Proposing new features
 - Becoming a maintainer
 
-## I Develop with Github
-I use github to host code, to track issues and feature requests, as well as accept pull requests.
+## We Develop with Github
+We use github to host code, to track issues and feature requests, as well as accept pull requests.
 
-## I Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
-Pull requests are the best way to propose changes to the codebase (I use [Github Flow](https://guides.github.com/introduction/flow/index.html)). I actively welcome your pull requests:
+## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
+Pull requests are the best way to propose changes to the codebase (We use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
 
 1. Create an issue, if you'd like a new feature or find a bug.
 2. Create branch from `master` by assigning yourself to an issue.
@@ -22,10 +22,10 @@ Pull requests are the best way to propose changes to the codebase (I use [Github
 7. Remember to link issues to pull requests, if one is relevant.
 
 ## Report bugs using Github's [issues](https://github.com/BHelpful/Mealplanr/issues)
-I use GitHub issues to track public bugs. Report a bug by [opening a new issue](); it's that easy!
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](); it's that easy!
 
 ## Write bug reports with detail, background, and sample code
-[This is an example](http://stackoverflow.com/q/12488905/180626) of a bug report, and I think it's not a bad model. Here's [another example from Craig Hockenberry](http://www.openradar.me/11905408).
+[This is an example](http://stackoverflow.com/q/12488905/180626) of a bug report, and we think it's not a bad model. Here's [another example from Craig Hockenberry](http://www.openradar.me/11905408).
 
 **Great Bug Reports** tend to have:
 
@@ -37,12 +37,11 @@ I use GitHub issues to track public bugs. Report a bug by [opening a new issue](
 - What actually happens
 - Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
 
-People *love* thorough bug reports. I'm not even kidding.
+People *love* thorough bug reports. We're not even kidding.
 
 ## Use a Consistent Coding Style
 
-* I should have some points here
-* Yes I should...
+* Use prettier to format your code before committing.
 
 ## License
 By contributing, you agree that your contributions will be licensed under its GNU Affero General Public License v3.0.
