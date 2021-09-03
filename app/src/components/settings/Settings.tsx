@@ -2,6 +2,20 @@ import Container from "../container/Container";
 import SelectionArea, { ButtonField, MultipleChoice, Search, TextField } from "../selectionArea/SelectionArea";
 import "./Settings.scss";
 import './DesignPreview.tsx'
+import DesignPreview from "./DesignPreview";
+
+const handleOpenTheme = () => {
+  const elem = document.getElementById("designPreview");
+  if(elem)
+    if(elem.classList.contains("hidden"))
+      elem.classList.remove("hidden");
+    else elem.classList.add("hidden");
+}
+
+const handleChangeShade = () => {
+
+}
+
 
 interface kvsp {
   [index: number]: string;
@@ -107,15 +121,12 @@ export default function Settings() {
           <MultipleChoice decription="Email" name="email"/>
           <MultipleChoice decription="Web" name="web"/>
           <MultipleChoice decription="Mobile" name="mobile"/>
-          <label htmlFor="colorHueSelect">Theme</label>
-          <label htmlFor="colorHueSelect" id={"colorHueText"}>Blue</label>
-          <input id={"colorHueSelect"} list={"data-list-colors"} type="range" min={0} max={360} step={1} onChange={sliderSnap} defaultValue={210}></input>
-          <datalist id={"data-list-colors"}>
-            {Object.keys(keypoints).map((s: string, i: number) => {
-              const style = {left: .1+Number(s)/3.9+"%"}
-              return ( <option key={i} value={Number(s)} label={capitalize(keypoints[Number(s)])} style={style}></option> );
-            })}
-          </datalist>
+          <p>Theme</p>
+          <div>
+            <div className={"themeselect button"} onClick={handleOpenTheme}>Change Theme</div>
+            <div className={"Shadeselect button"} onClick={handleChangeShade}></div>
+            <DesignPreview />
+          </div>
         </div>
       </SelectionArea>
     </Container>

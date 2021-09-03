@@ -5,7 +5,7 @@
 	Standard colors                         Inverted colors */
 	--c: 			 210;													--i: calc((var(--c) + 180) % 360);
 	//Exposure (lightness/darkness)
-	--e:			85%;
+	--e:			0%;
 
 	--joyfull:  hsl(var(--c),  80%,  65%);	--i-joyfull:	hsl(var(--i),  80%,  35%);
 	--accent:   hsl(var(--c),  60%,  70%);	--i-accent: 	hsl(var(--i),  60%,  30%);
