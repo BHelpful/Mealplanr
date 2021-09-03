@@ -1,6 +1,7 @@
 import Container from "../container/Container";
 import SelectionArea, { ButtonField, MultipleChoice, Search, TextField } from "../selectionArea/SelectionArea";
 import "./Settings.scss";
+import './DesignPreview.tsx'
 
 interface kvsp {
   [index: number]: string;
