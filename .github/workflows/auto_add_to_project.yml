@@ -1,9 +1,9 @@
 name: Add PR to project
 on:
   issues:
-    types: [opened, reopened]
+    types: [opened]
   pull_request:
-    types: [opened, reopened]
+    types: [opened]
 
 jobs:
   track_pr:
