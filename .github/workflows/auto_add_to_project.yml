@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Get project data
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.MY_GITHUB_TOKEN}}
           ORGANIZATION: BHelpful
           PROJECT_NUMBER: 4
         run: |
