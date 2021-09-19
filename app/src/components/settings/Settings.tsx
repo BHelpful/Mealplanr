@@ -6,6 +6,7 @@ interface kvsp {
   [index: number]: string
 }
 
+// Values to snap to
 const keypoints: kvsp = {
    30: 'orange',
    60: 'yellow',
@@ -20,11 +21,13 @@ const keypoints: kvsp = {
   360: 'red'
 }
 
+// Function that changes the color hue of the color
 const setcolor = (hue: number) => document.documentElement.style.setProperty('--c', String(hue));
 
 //             val, nearest, diff
 var nearest = [0,   0,       Infinity];
 
+// Function to change the value of the slider
 const sliderSnap = (evt: any) => {
 
   const { valueAsNumber } = evt.target;
@@ -34,20 +37,17 @@ const sliderSnap = (evt: any) => {
   
   let least = Infinity;
   for(const i of Object.keys(keypoints)) {
-    let v = Math.abs(nearest[0] - Number(i));
-    if(least > v) {
+    let v = Math.abs(nearest[0] - Number(i)); // Get the difference
+    if(least > v) { // If it is the lowest difference
       nearest[1] = Number(i);
       nearest[2] = v;
       least = v;
     }
   }
-
-  console.log(`Nearest color: ${keypoints[nearest[1]]}`);
-  
 }
 
+// Function that creates the settings
 export default function Settings() {
-
   return (
     <Container id={"settings"}>
       <h1>Personal information</h1>
