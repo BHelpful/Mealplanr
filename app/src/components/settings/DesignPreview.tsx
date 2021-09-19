@@ -73,7 +73,7 @@ export default function DesignPreview (props: DesignPreviewProps) {
             </div>
           </div>
         </div>
-        {themes.map((v: themetype, i: number) => 
+        {themes.map((v: themetype, i: number) =>
           <div className={"themecolor"} key={i} data-base={v.base} data-shade={v.shade} onMouseOver={handleThemeHover} onMouseOut={handleThemeHoverOut} onClick={handleThemeClick} style={{background: `linear-gradient(135deg, hsl(${v.base}, 80%, 65%) 50%, hsl(0, 0%, ${90 - Math.abs(v.shade)}%) 50%)`}}></div>
         )}
       </div>
