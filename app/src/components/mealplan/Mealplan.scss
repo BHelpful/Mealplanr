@@ -71,7 +71,7 @@
 
 		grid-column: span 2;
 		display: grid;
-		grid-template-columns: 0px repeat(7, 150px) 30px;
+		grid-template-columns: 0 repeat(7, 150px) 30px;
 		grid-gap: 20px;
 		padding: 20px 40px;
 		overflow-x: scroll;
