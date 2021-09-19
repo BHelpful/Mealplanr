@@ -25,10 +25,10 @@ function App() {
 	const isLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
 	const dispatch = useDispatch();
 
-	((hue: number) =>
+/* 	((hue: number) =>
 		document.documentElement.style.setProperty('--c', String(hue)))(
 		user.color
-	);
+	); */
 
 	const updateDataEmail = (e: any) => {
 		user.email = e.target.value

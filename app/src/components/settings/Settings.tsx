@@ -4,6 +4,17 @@ import "./Settings.scss";
 import './DesignPreview.tsx'
 import DesignPreview from "./DesignPreview";
 
+const prevcolor = {
+  base: Number(document.documentElement.style.getPropertyValue('--c')),
+  shade: Number(document.documentElement.style.getPropertyValue('--e').replace(/%/, ""))
+};
+
+const setcolor = (obj: any) => {
+  const {base, shade} = obj;
+  document.documentElement.style.setProperty('--c', base.toString());
+  document.documentElement.style.setProperty('--e', shade+"%");
+};
+
 const handleOpenTheme = () => {
   const elem = document.getElementById("designPreview");
   if(elem)
@@ -13,55 +24,9 @@ const handleOpenTheme = () => {
 }
 
 const handleChangeShade = () => {
-
-}
-
-
-interface kvsp {
-  [index: number]: string;
-}
-
-const keypoints: kvsp = {
-   30: 'orange',
-   50: 'yellow',
-  120: 'green',
-  160: 'mint',
-  180: 'turquise',
-  210: 'blue',
-  240: 'blacklight',
-  270: 'purple',
-  290: 'pink',
-  330: 'rose',
-  360: 'red',
-}
-
-const capitalize = (s: string) => s.split('').map((e,i) => !i?e.toUpperCase():e).join('');
-const setcolor = (hue: number) => document.documentElement.style.setProperty('--c', String(hue));
-
-//             val, nearest, diff
-var nearest = [0,   0,       Infinity];
-
-const sliderSnap = (evt: any) => {
-
-  const { valueAsNumber } = evt.target;
-
-  nearest[0] = valueAsNumber;
-  setcolor(nearest[1]);
-  
-  let least = Infinity;
-  for(const i of Object.keys(keypoints)) {
-    let v = Math.abs(nearest[0] - Number(i));
-    if(least > v) {
-      nearest[1] = Number(i);
-      nearest[2] = v;
-      least = v;
-    }
-  }
-  
-  evt.target.value = nearest[1];
-  let e = document.getElementById("colorHueText");
-  if(e) e.innerHTML = capitalize(keypoints[nearest[1]]);
-
+  const thd = 75;
+  prevcolor.shade = prevcolor.shade>=thd?prevcolor.shade-thd:prevcolor.shade+thd;
+  setcolor(prevcolor);
 }
 
 export default function Settings() {

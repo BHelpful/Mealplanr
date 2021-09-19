@@ -188,12 +188,13 @@
       background-color: var(--bgcolor);
       margin: 0px!important;
 
-      &.dpwshade, div { 
+      &.dpwshade, div, input { 
 
         margin: 15px;
         height: auto;
         border-radius: var(--br);
         display: grid;
+        align-content: center;
 
         div { filter: var(--shadow); }
 
@@ -217,15 +218,21 @@
             padding: 10px;
             word-break: normal;
             font-size: 10px;
-            color: var(--gray)
-
+            color: var(--gray);
+            
           }
-
+          
           .dpwfield { 
             
             background-color: var(--accent);
-            margin-bottom: 5px;
+            align-self: end;
             margin-left: 0;
+            border: 0px;
+            font-size: 8px;
+            padding: 5px 10px;
+            height: 10px;
+            width: calc(100% - 35px);
+            color: var(--bright);
 
           }
 
@@ -236,7 +243,6 @@
             margin-left: 0;
             color: var(--bright);
             font-size: 8px;
-            padding-top: .5em;
             text-align: center;
 
           }
@@ -255,8 +261,9 @@
       justify-self: center;
       align-self: center;
       border-radius: 5px 10px;
-      background-color: #0f0;
-
+      border-width: 2px;
+      border-style: solid;
+      border-color: white;
     }
 
 
