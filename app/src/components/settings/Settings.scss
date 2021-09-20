@@ -186,7 +186,7 @@
 
       grid-column: span 8;
       background-color: var(--bgcolor);
-      margin: 0px!important;
+      margin: 0!important;
 
       &.dpwshade, div, input { 
 
@@ -227,7 +227,7 @@
             background-color: var(--accent);
             align-self: end;
             margin-left: 0;
-            border: 0px;
+            border: 0;
             font-size: 8px;
             padding: 5px 10px;
             height: 10px;
