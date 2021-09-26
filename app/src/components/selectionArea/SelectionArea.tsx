@@ -272,7 +272,7 @@ interface MultipleChoiceProps {
 export function MultipleChoice(props: MultipleChoiceProps) {
 	const {decription, name} = props;
 	return (
-		<div><input type="checkbox" id={name} /><label htmlFor={name}>{decription}</label></div>
+		<><input type="checkbox" id={name} /><label htmlFor={name}>{decription}</label></>
 	);
 }
 
