@@ -1,4 +1,3 @@
-import { capitalize } from 'lodash';
 import React, { Component, useState } from 'react';
 import './SelectionArea.scss';
 
@@ -7,6 +6,7 @@ interface QuantityPorps {
 	ingredients?: boolean;
 }
 
+// Creates a element for user to enter quantities
 export function Quantaty(props: QuantityPorps) {
 	const {time, ingredients} = props;
 	if(time) return (
@@ -25,8 +25,8 @@ export function Quantaty(props: QuantityPorps) {
 	);
 }
 
+/* DRAG AND DROP HANDLES FOR Item */
 var dragSrcEl: any;
-
 const handleDragStart = (evt: any) => {
   evt.target.style.opacity = '0.4';
   dragSrcEl = evt.target;
@@ -55,11 +55,14 @@ const handleDragEnd = (evt: any) => {
   [].forEach.call(listItens, (item: any) => item.classList.remove('over'));
   evt.target.style.opacity = '1';
 }
+/* END OF DRAG AND DROP HANDLES FOR Item */
 
 interface ListingProps {
 	name: string;
 	drag?: boolean;
 }
+
+// Creates a list wrapper for Item
 class Listing extends Component<ListingProps> {
 	render () {
 		const {name, drag, children} = this.props;
@@ -87,6 +90,7 @@ interface ItemProps {
 	drag?: boolean;
 }
 
+// Creates an list element with checkbox or draggable
 export function Item(props: ItemProps) {
 	const {name, amount, unit, drag} = {amount: "", unit: "", ...props};
 	console.log(amount);
@@ -114,13 +118,15 @@ export function Item(props: ItemProps) {
 	);
 }
 
+// Function to handle click on remove icon on tag
 const handleTagRemove = (evt: any) => evt.target.parentElement.remove();
+// Function to handle click on tag text
 const toggleTag = (evt: any) => {
 	const elem = evt.target;
 	const old = elem.classList[0] || "include";
 	elem.classList.remove(old);
 	elem.classList.add(old==="include" ? "exclude" : "include");
-	elem.title = `${capitalize(old)} item by clicking`;
+	elem.title = `${toFirstUpperCase(old)} item by clicking`;
 }
 
 interface TagProps {
@@ -130,6 +136,7 @@ interface TagProps {
 	nonremovable?: boolean
 }
 
+// Function to create a tag
 export function Tag(props: TagProps) {
 	const { type, name, toggleable, nonremovable } = props;
 	return <div className={'tag ' + type}>
@@ -138,6 +145,7 @@ export function Tag(props: TagProps) {
 				</div>;
 }
 
+// Handle to toggle dropdown state
 const toggleDropdown = (toggle = true) => (evt: any) => {
 	evt.preventDefault();
 	if(!toggle || evt.target.classList.contains('open')) {
@@ -147,22 +155,31 @@ const toggleDropdown = (toggle = true) => (evt: any) => {
 	}
 }
 
+// Manipulate ONLY the first letter to be uppercase
 const toFirstUpperCase = (v: string) => v.replace(/(\w)(.*)/, (...args: any[]) => args[1].toUpperCase()+args[2]);
 
+/* GET DATA FROM API */
 const lookupType = (name: string) => {
 	switch(name.toLowerCase()) {
 		case 'chicken': return 'meat';
 		default: return 'unkown';
 	}
 }
+/* ENDOF GET DATA FROM API */
 
 interface KeyboardEventWithData extends KeyboardEvent {
 	data?: HTMLElement;
 }
 
+// Get the name of a variable name as a string
 const varToString = (varObj: any) => (Object.keys(varObj)[0]).toString();
+
+// Unused <- undefined
 const handleSubmit = (evt: any) => 0;
+
+// Handle to execute on keypress on a searchbar
 const handleKeyDown = (createTag: any, tags: any) => (evt: any) => {
+	// Checks for enter or a comma
 	if(evt.key === 'Enter' || evt.key === ",") {
 		const target: any = evt.target||evt.data;
 		evt.preventDefault();
@@ -170,26 +187,30 @@ const handleKeyDown = (createTag: any, tags: any) => (evt: any) => {
 		const newTaglist = tags;
 		if(elem.classList.contains('tags')) {
 			const v = target.value;
+			// Add new tag if matches requirements
 			if(v.match(/(\w{2,} ?)+/)) newTaglist.push({"name": toFirstUpperCase(v), "type": lookupType(v)});
-			target.value.split(',').forEach((v: string) => {});
+			// Empty tag list
 			target.value = '';
+			// Fill populate list with updatede values
 			createTag(newTaglist.filter((v:any,i:number,a:any)=>a.findIndex((t:any)=>(t.name === v.name))===i));
 		}
 	}
 };
 
+// Yeild function to generate id's with format: AA, BA, CA, ...
 function* HTMLIDgenerator(): Generator<string> {
-	var n = Math.floor(Math.random() * 63);
+	var n = Math.ceil(Math.random() * 63);
 	while (++n) yield (String.fromCharCode((n % 26) + 64) + String.fromCharCode(Math.floor(n / 26) + 64));
 }
 
-const htmlID = HTMLIDgenerator();
-const getHTMLID: Array<string> = [];
+const htmlID = HTMLIDgenerator(); // Create generator from yield function
+const getHTMLID: Array<string> = [];  // List of previus generated ids
 const generateHTMLID = (): string => {
-	getHTMLID.push(htmlID.next().value);
+	getHTMLID.push(htmlID.next().value); // Get next id
 	return getHTMLID.slice(-1)[0];
 }
 
+// Handle for clicking on search bar with dropdown menu
 const handleMouseDown = (dropdown: boolean, createTag?:any, tags?:any) => (evt: any) => {
 	const parent = evt.target.parentElement;
 	parent.classList.remove("open");
@@ -211,6 +232,7 @@ interface SearchProps {
 	toggleable?: boolean;
 }
 
+// Creates a search-bar, either with or without tags
 function Search(props: SearchProps) {
 	const { taglist, decription, type, datalist, toggleable } = props;
 	const dropdown = type==="dropdown";
@@ -246,6 +268,7 @@ interface MultipleChoiceProps {
 	name: string,
 }
 
+// Creates a checkbox
 export function MultipleChoice(props: MultipleChoiceProps) {
 	const {decription, name} = props;
 	return (
@@ -253,6 +276,7 @@ export function MultipleChoice(props: MultipleChoiceProps) {
 	);
 }
 
+// Create a list with weekdays name - formatted as length, case, and index-day
 const weekdaysNamesArr = (len = 2, uppercase = true, offset = 1) => {
 	const days = [
 		'monday',
@@ -274,37 +298,29 @@ const weekdaysNamesArr = (len = 2, uppercase = true, offset = 1) => {
 	return parsed;
 };
 
+// Rotate-right a list
 const weekdaysAvailArr = (arr: any, offset: number) => {
 	arr.forEach((v: number, i: number) => {
 		arr[((i + offset) % 7) + 7] = arr[i];
-
 		if (i === 6) {
 			for (let i = 0; i < 7; i++) arr[i] = arr[i + 7];
 			arr = arr.slice(7);
 		}
 	});
-
 	return arr;
 };
 
+// Convert short meal-format to long
 const fullMeal = (short: string | null) => {
 	switch (short) {
-		case 'A':
-			return 'Appetiser';
-		case 'M':
-			return 'Main';
-		case 'D':
-			return 'Desert';
-		case 'AM':
-			return 'Appetiser + Main';
-		case 'AD':
-			return 'Appetiser + Desert';
-		case 'MD':
-			return 'Main + Desert';
-		case 'AMD':
-			return 'Appetiser + Main + Desert';
-		default:
-			return 'Chose';
+		case 'A':   return 'Appetiser';
+		case 'M':   return 'Main';
+		case 'D':   return 'Desert';
+		case 'AM':  return 'Appetiser + Main';
+		case 'AD':  return 'Appetiser + Desert';
+		case 'MD':  return 'Main + Desert';
+		case 'AMD': return 'Appetiser + Main + Desert';
+		default:    return 'Choose';
 	}
 };
 
@@ -315,6 +331,7 @@ interface WeekdaysProps {
 	uppercase?: boolean;
 }
 
+// Handle to toggle weekday selection
 const handleWeekSelection = (evt: any) => {
 	const elem = evt.target;
 	if(!elem.classList.contains("unavailable")) {
@@ -326,8 +343,7 @@ const handleWeekSelection = (evt: any) => {
 			if(old==="available") {
 				distantSibling.classList.remove("unavailable");
 				distantSibling.children[1].disabled = false;
-			}
-			else {
+			} else {
 				distantSibling.classList.add("unavailable");
 				distantSibling.children[1].disabled = true;
 			}
@@ -335,6 +351,7 @@ const handleWeekSelection = (evt: any) => {
 	}
 }
 
+// Creates the weekday button selection
 export function WeekdaysButtons(props: WeekdaysProps) {
 	const { decription, namelength, uppercase, offset } = {
 		namelength: 2,
@@ -347,19 +364,13 @@ export function WeekdaysButtons(props: WeekdaysProps) {
 		[-1, 1, 1, 0, 0, 1, 1],
 		offset
 	); /* Fetch from database */
+
 	selected.forEach((v: number, i: number) => {
 		switch (v) {
-			case -1:
-				selected[i] = 'unavailable';
-				break;
-			case 0:
-				selected[i] = 'available';
-				break;
-			case 1:
-				selected[i] = 'selected';
-				break;
-			default:
-				selected[i] = '';
+			case -1: selected[i] = 'unavailable'; break;
+			case 0: selected[i] = 'available'; break;
+			case 1: selected[i] = 'selected'; break;
+			default: selected[i] = '';
 		}
 	});
 
@@ -377,6 +388,7 @@ export function WeekdaysButtons(props: WeekdaysProps) {
 	);
 }
 
+// Creates the weekday-dropdown
 export function WeekdaysDropdown(props: WeekdaysProps) {
 	const { decription, namelength, uppercase, offset } = {
 		namelength: 2,
@@ -427,6 +439,7 @@ interface TextFieldProps {
 	submitBtnText?: string,
 }
 
+// Creates a textbox, that can be used as search or input
 export function TextField(props: TextFieldProps) {
 	const {large, decription, placeholder, submitBtnText} = props;
 	if(large) return (
@@ -450,6 +463,7 @@ interface ButtonFieldProps {
 	danger?: boolean
 }
 
+// Creates a area for buttons, to arrange them
 class ButtonField extends Component<ButtonFieldProps> {
 	render() {
 		const {decription, vertical, danger, children} = this.props;
@@ -467,6 +481,7 @@ interface StepProps {
 	decs: string;
 }
 
+// Creates a list element for Guide
 export function Step(props: StepProps) {
 	const {decs} = props;
 	return (
@@ -481,6 +496,8 @@ export function Step(props: StepProps) {
 interface GuideProps {
 	title: string;
 }
+
+// Creates a list to hold Steps
 class Guide extends Component<GuideProps> {
 	render() {
 		const {title, children} = this.props;
@@ -499,6 +516,7 @@ interface SelectionAreaProps {
 	columns: number;
 }
 
+// Creates the box around buttons/search/other selections
 class SelectionArea extends Component<SelectionAreaProps> {
 	render() {
 		const { cln, columns, children } = { cln: null, ...this.props };

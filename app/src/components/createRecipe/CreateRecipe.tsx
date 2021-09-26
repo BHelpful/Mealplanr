@@ -2,6 +2,7 @@ import Container from "../container/Container";
 import SelectionArea, { Item, Listing, Quantaty, Search, TextField } from "../selectionArea/SelectionArea";
 import "./CreateRecipe.scss";
 
+// Creates the container for creating a new recipe
 export default function CreateRecipe() {
   return (
     <Container id="createrecipe">

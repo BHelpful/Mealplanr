@@ -25,6 +25,7 @@ const colorTag = (tag: any) => {
   }
 }
 
+// Function that creates the recipe showcase
 export default function Showcase () {
 
   const starstyle = {
