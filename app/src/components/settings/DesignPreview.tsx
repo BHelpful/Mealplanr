@@ -31,10 +31,6 @@ const setcolor = (base: number, shade: number) => {
   document.documentElement.style.setProperty('--e', shade+"%");
 };
 
-/* const iterateHTMLCollection = (a: HTMLCollection, fnc: any) => {
-  for (let i = 0; i < a.length; i++) fnc(a.item(i));
-} */
-
 const DOMStringMapToObj = (dsm: DOMStringMap) => {
   const obj: any = {};
   Object.keys(dsm).forEach((k: string) => obj[k] = dsm[k]);
