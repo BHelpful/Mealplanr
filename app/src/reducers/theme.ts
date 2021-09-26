@@ -22,7 +22,7 @@ type ActionType = ReturnType<
 	| typeof theme
 >;
 
-interface sessionType {
+interface themeType {
 	hue: any;
 	shade: any;
 }
@@ -30,7 +30,7 @@ interface sessionType {
 // Defining the reducer, which contains the functionality for each of the functions defined above
 // using action.type to identify the function.
 const themeReducer = (
-	state: sessionType = {
+	state: themeType = {
 		hue: 0,
 		shade: 0
 	},
