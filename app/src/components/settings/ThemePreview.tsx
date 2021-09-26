@@ -60,10 +60,10 @@ const handleThemeClick = (dispatch: any) => (e: any) => {
   dispatch(setTheme(password, sc.base, sc.shade));
 }
 
-export default function DesignPreview () {
+export default function ThemePreview () {
   const dispatch = useDispatch();
   return (
-    <div id="designPreview">
+    <div id="ThemePreview">
       <div>
         <div className={"dpwshade"}>
           <div className={"dpwbackground"}>

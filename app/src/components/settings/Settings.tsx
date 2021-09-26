@@ -1,8 +1,7 @@
 import Container from "../container/Container";
 import SelectionArea, { ButtonField, MultipleChoice, Search, TextField } from "../selectionArea/SelectionArea";
 import "./Settings.scss";
-import './DesignPreview.tsx'
-import DesignPreview from "./DesignPreview";
+import ThemePreview from "./ThemePreview";
 
 const prevcolor = {
   base: Number(document.documentElement.style.getPropertyValue('--c')),
@@ -16,7 +15,7 @@ const setcolor = (obj: any) => {
 };
 
 const handleOpenTheme = () => {
-  const elem = document.getElementById("designPreview");
+  const elem = document.getElementById("ThemePreview");
   if(elem)
     if(elem.classList.contains("hidden"))
       elem.classList.remove("hidden");
@@ -90,7 +89,7 @@ export default function Settings() {
           <div>
             <div className={"themeselect button"} onClick={handleOpenTheme}>Change Theme</div>
             <div className={"Shadeselect button"} onClick={handleChangeShade}></div>
-            <DesignPreview />
+            <ThemePreview />
           </div>
         </div>
       </SelectionArea>

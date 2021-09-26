@@ -11,7 +11,6 @@ import Settings from './components/settings/Settings';
 import Popup from './components/popup/Popup';
 import Showcase from './components/showcase/Showcase';
 import CreateRecipe from './components/createRecipe/CreateRecipe';
-import { setTheme } from './reducers/theme';
 
 const user = {
 	id: 9272,
