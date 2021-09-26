@@ -60,11 +60,7 @@ const handleThemeClick = (dispatch: any) => (e: any) => {
   dispatch(setTheme(password, sc.base, sc.shade));
 }
 
-interface DesignPreviewProps {
-
-}
-
-export default function DesignPreview (props: DesignPreviewProps) {
+export default function DesignPreview () {
   const dispatch = useDispatch();
   return (
     <div id="designPreview">
