@@ -29,8 +29,8 @@ const handleChangeShade = () => {
   setcolor(prevcolor);
 }
 
+// Function that creates the settings
 export default function Settings() {
-
   return (
     <Container id={"settings"}>
       <h1>Personal information</h1>

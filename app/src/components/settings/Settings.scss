@@ -1,4 +1,10 @@
-#settings {
+  /** 
+ * @Desc: Loats of input and buttons in two parts ({selectionarea})
+ * @Occures: Once at {Settings}
+ * @Behavior: Static layout with flex-warp for small content area, constrained to its current content area.
+ * @Media: (vw <= 930px): Put all cells in one column
+ */
+  #settings {
   
   .selectionarea:nth-child(3) {
     
