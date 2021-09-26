@@ -37,7 +37,7 @@ body:
     attributes:
       label: Comments / questions
       description: Any comments or questions relating the story.
-      placeholder: Should we devide this into sub-tasks?
+      placeholder: We should devide this into sub-tasks...
   - type: textarea
     id: dor-dod
     attributes:
@@ -52,7 +52,7 @@ body:
             ```
             - Acceptance criteria written and reviewed by QA, PM and SE
             - Behaviour scenarios written
-            - Signed off UX design
+            - Signed off UX
             - Estimated and appropriately scoped
             ```
 
