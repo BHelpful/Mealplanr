@@ -11,6 +11,7 @@ import Settings from './components/settings/Settings';
 import Popup from './components/popup/Popup';
 import Showcase from './components/showcase/Showcase';
 import CreateRecipe from './components/createRecipe/CreateRecipe';
+import { setTheme } from './reducers/theme';
 
 const user = {
 	id: 9272,
@@ -23,12 +24,12 @@ function App() {
 	const navIndex = useSelector((state: RootState) => state.navState.index);
 	const userPopup = useSelector((state: RootState) => state.navState.userpopup);
 	const isLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
+	const theme = useSelector((state: RootState) => state.theme);
 	const dispatch = useDispatch();
 
-/* 	((hue: number) =>
-		document.documentElement.style.setProperty('--c', String(hue)))(
-		user.color
-	); */
+	((hue: number) => document.documentElement.style.setProperty('--c', String(hue)))(theme.hue);
+
+	dispatch(setTheme("",0,0));
 
 	const updateDataEmail = (e: any) => {
 		user.email = e.target.value

@@ -1,6 +1,5 @@
 import config from '../config.json';
 import { get } from 'lodash';
-import { setUserPopup } from './navState';
 
 const THEME = 'THEME';
 
@@ -30,7 +29,7 @@ interface sessionType {
 
 // Defining the reducer, which contains the functionality for each of the functions defined above
 // using action.type to identify the function.
-const colorReducer = (
+const themeReducer = (
 	state: sessionType = {
 		hue: 0,
 		shade: 0
@@ -50,16 +49,23 @@ const colorReducer = (
 
 export const getTheme = () => {
 	return async function (dispatch: Function, getState: Function) {
+		const email = getState().session.user.email;
+		const {refresh, authorization} = getState().session;
 		const themeResponse = await fetch(
-			`${config.apiUrl}/users/settings/?theme`, {
-				headers: { 'Content-Type': 'application/json' },
+			`${config.apiUrl}/users/?userMail=${email}`, {
+				headers: {
+					'Content-Type': 'application/json',
+					'x-refresh': refresh,
+					authorization: authorization,
+				},
 				method: 'GET',
 			}
 		);
 
 		if (themeResponse.status === 200) {
 			const themedata = await themeResponse.json();
-			dispatch(theme(themedata.hue, themedata.shade));
+			var [hue, shade] = themedata.options.theme.split(", ");
+			dispatch(theme(hue, shade));
 		} else {
 			// Error handling
 		}
@@ -67,24 +73,34 @@ export const getTheme = () => {
 };
 
 export const setTheme = (
-	hue: number,
-	shade: number
+	password: string,
+	thue: number,
+	tshade: number
 ) => {
 	return async function (dispatch: Function, getState: Function) {
-		const themeResponse = await fetch(
-			`${config.apiUrl}/users/settings/?theme`, {
+		const email = getState().session.user.email;
+		const {refresh, authorization} = getState().session;
+		const themeResponse: any = await fetch(
+			`${config.apiUrl}/users/?userMail=${email}`, {
 				body: JSON.stringify({
-					hue: hue,
-					shade: shade,
+					password: password,
+					options: {
+						theme: `${thue}, ${tshade}`,
+					}
 				}),
-				headers: { 'Content-Type': 'application/json' },
+				headers: {
+					'Content-Type': 'application/json',
+					'x-refresh': refresh,
+					authorization: authorization,
+				},
 				method: 'PUT',
 			}
 		);
 
 		if (themeResponse.status === 200) {
 			const themedata = await themeResponse.json();
-			dispatch(theme(themedata.hue, themedata.shade));
+			var [hue, shade] = themedata.options.theme.split(", ");
+			dispatch(theme(hue, shade));
 		} else {
 			// Error handling
 		}
@@ -92,4 +108,4 @@ export const setTheme = (
 };
 
 
-export default colorReducer;
+export default themeReducer;

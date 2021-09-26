@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setTheme } from '../../reducers/theme';
 
 interface themetype {
   base: number;
@@ -48,12 +50,18 @@ const handleThemeHoverOut = (e: any) => {
   setcolor(prevcolor.base, prevcolor.shade);
 }
 
-const handleThemeClick = (e: any) => {
+const handleThemeClick = (dispatch: any) => (e: any) => {
   const sc = DOMStringMapToObj(e.target.dataset);
   prevcolor.base = sc.base;
   prevcolor.shade = sc.shade;
   setcolor(sc.base, sc.shade);
+  const allPallets = document.getElementsByClassName("themecolor");
+  for(let i = 0; i < allPallets.length; i++) allPallets[i].classList.remove("selected");
+
+  const password = "123456";
+
   e.target.classList.add("selected");
+  dispatch(setTheme(password, sc.base, sc.shade));
 }
 
 interface DesignPreviewProps {
@@ -61,6 +69,7 @@ interface DesignPreviewProps {
 }
 
 export default function DesignPreview (props: DesignPreviewProps) {
+  const dispatch = useDispatch();
   return (
     <div id="designPreview">
       <div>
@@ -74,7 +83,12 @@ export default function DesignPreview (props: DesignPreviewProps) {
           </div>
         </div>
         {themes.map((v: themetype, i: number) =>
-          <div className={"themecolor"} key={i} data-base={v.base} data-shade={v.shade} onMouseOver={handleThemeHover} onMouseOut={handleThemeHoverOut} onClick={handleThemeClick} style={{background: `linear-gradient(135deg, hsl(${v.base}, 80%, 65%) 50%, hsl(0, 0%, ${90 - Math.abs(v.shade)}%) 50%)`}}></div>
+          <div className={"themecolor"} key={i} data-base={v.base} data-shade={v.shade}
+          onMouseOver={handleThemeHover}
+          onMouseOut={handleThemeHoverOut}
+          onClick={handleThemeClick(dispatch)}
+          style={{background: `linear-gradient(135deg, hsl(${v.base}, 80%, 65%) 50%, hsl(0, 0%, ${90 - Math.abs(v.shade)}%) 50%)`}}
+          ></div>
         )}
       </div>
     </div>
