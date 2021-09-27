@@ -14,7 +14,7 @@ import CreateRecipe from './components/createRecipe/CreateRecipe';
 
 const user = {
 	id: 9272,
-	color: 30,
+	color: 0,
 	email: "test@test.test",
 	pass: "123456",
 };
@@ -24,13 +24,10 @@ function App() {
 	const navIndex = useSelector((state: RootState) => state.navState.index);
 	const userPopup = useSelector((state: RootState) => state.navState.userpopup);
 	const isLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
+	const theme = useSelector((state: RootState) => state.theme);
 	const dispatch = useDispatch();
 
-	/* Arrow function to set the hue/color-theme */
-	((hue: number) =>
-		document.documentElement.style.setProperty('--c', String(hue)))(
-		user.color
-	);
+	((hue: number) => document.documentElement.style.setProperty('--c', String(hue)))(theme.hue);
 
 	// Event handlers to change the global object, then use that value in store on a submit
 	const updateDataEmail = (e: any) => { user.email = e.target.value };

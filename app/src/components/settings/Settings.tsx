@@ -1,49 +1,31 @@
 import Container from "../container/Container";
 import SelectionArea, { ButtonField, MultipleChoice, Search, TextField } from "../selectionArea/SelectionArea";
 import "./Settings.scss";
+import ThemePreview from "./ThemePreview";
 
-interface kvsp {
-  [index: number]: string
+const prevcolor = {
+  base: Number(document.documentElement.style.getPropertyValue('--c')),
+  shade: Number(document.documentElement.style.getPropertyValue('--e').replace(/%/, ""))
+};
+
+const setcolor = (obj: any) => {
+  const {base, shade} = obj;
+  document.documentElement.style.setProperty('--c', base.toString());
+  document.documentElement.style.setProperty('--e', shade+"%");
+};
+
+const handleOpenTheme = () => {
+  const elem = document.getElementById("ThemePreview");
+  if(elem)
+    if(elem.classList.contains("hidden"))
+      elem.classList.remove("hidden");
+    else elem.classList.add("hidden");
 }
 
-// Values to snap to
-const keypoints: kvsp = {
-   30: 'orange',
-   60: 'yellow',
-  120: 'green',
-  160: 'mint',
-  180: 'turquise',
-  210: 'blue',
-  240: 'blacklight',
-  270: 'purple',
-  290: 'pink',
-  330: 'rose',
-  360: 'red'
-}
-
-// Function that changes the color hue of the color
-const setcolor = (hue: number) => document.documentElement.style.setProperty('--c', String(hue));
-
-//             val, nearest, diff
-var nearest = [0,   0,       Infinity];
-
-// Function to change the value of the slider
-const sliderSnap = (evt: any) => {
-
-  const { valueAsNumber } = evt.target;
-
-  nearest[0] = valueAsNumber;
-  setcolor(nearest[0]);
-  
-  let least = Infinity;
-  for(const i of Object.keys(keypoints)) {
-    let v = Math.abs(nearest[0] - Number(i)); // Get the difference
-    if(least > v) { // If it is the lowest difference
-      nearest[1] = Number(i);
-      nearest[2] = v;
-      least = v;
-    }
-  }
+const handleChangeShade = () => {
+  const thd = 75;
+  prevcolor.shade = prevcolor.shade>=thd?prevcolor.shade-thd:prevcolor.shade+thd;
+  setcolor(prevcolor);
 }
 
 // Function that creates the settings
@@ -104,7 +86,11 @@ export default function Settings() {
           <MultipleChoice decription="Web" name="web"/>
           <MultipleChoice decription="Mobile" name="mobile"/>
           <p>Theme</p>
-          <input id={"colorHueSelect"} type="range" min={0} max={360} step={1} onInput={sliderSnap} defaultValue={230}></input>
+          <div>
+            <div className={"themeselect button"} onClick={handleOpenTheme}>Change Theme</div>
+            <div className={"Shadeselect button"} onClick={handleChangeShade}></div>
+            <ThemePreview />
+          </div>
         </div>
       </SelectionArea>
     </Container>
