@@ -12,15 +12,17 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		overflow-y: hidden;
-		transition: max-height .5s, padding .2s;
-		max-height: 800px;
 		height: max-content;
-
-		&.hidden {
-
-			max-height: 0;
-			padding-block: 0;
-			transition: max-height .5s, padding .2s .3s;
+		
+		padding-block: 0;
+		max-height: 0;
+		transition: max-height .5s, padding .2s .3s;
+		
+		&.open {
+			
+			padding: 20px;
+			max-height: 800px;
+			transition: max-height .5s, padding .2s;
 
 		}
 

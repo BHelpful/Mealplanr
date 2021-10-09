@@ -20,10 +20,10 @@ const toggleCreateMenu = (evt: any) => {
 	menustate %= 2;
 	if(menustate) {
 		evt.target.innerHTML = "Cancel";
-		evt.target.nextSibling.classList.remove("hidden");
+		evt.target.nextSibling.classList.add("open");
 	} else {
 		evt.target.innerHTML = "Create";
-		evt.target.nextSibling.classList.add("hidden");
+		evt.target.nextSibling.classList.remove("open");
 	}
 }
 
