@@ -1,20 +1,17 @@
 // Function definitions - Defining what parameters and the object structure
 export const setNavCollapsed = () => {
-	console.log("test");
 	return {
 		type: 'TOGGLE',
 		payload: 0,
 	};
 };
 export const setNavIndex = (index: number = 0) => {
-	console.log(index);
 	return {
 		type: 'PAGE',
 		payload: index,
 	};
 };
 export const setUserPopup = (index: number = 0) => {
-	console.log(index);
 	return {
 		type: 'POPUP',
 		payload: index,
@@ -37,7 +34,6 @@ const navStateReduser = (
 	action: ActionType
 ) => {
 	let newstate: any = {};
-	console.log(action, state);
 	switch (action.type) {
 		case 'TOGGLE':
 			newstate.collapsed = !state.collapsed;

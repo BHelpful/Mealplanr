@@ -24,7 +24,6 @@ const persistedState = localState ? JSON.parse(localState) : {reducers: rootRedu
 const store = configureStore(persistedState);
 
 store.subscribe(() => {
-	console.log(store.getState());
   localStorage.setItem('reduxState', JSON.stringify(store.getState()));
 });
 
