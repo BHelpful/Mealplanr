@@ -15,8 +15,7 @@ function configureStore(preloadedState: any) {
   const enhancers = [middlewareEnhancer];
 	const composedEnhancers = composeWithDevTools(...enhancers); // removed: { trace: true, traceLimit: 25 }
 	// Combine all parts
-  const store = createStore(rootReducer, preloadedState, composedEnhancers);
-  return store;
+  return createStore(rootReducer, preloadedState, composedEnhancers);
 }
 
 // Load or set default state based on localstoarge
@@ -25,6 +24,7 @@ const persistedState = localState ? JSON.parse(localState) : {reducers: rootRedu
 const store = configureStore(persistedState);
 
 store.subscribe(() => {
+	console.log(store.getState());
   localStorage.setItem('reduxState', JSON.stringify(store.getState()));
 });
 
