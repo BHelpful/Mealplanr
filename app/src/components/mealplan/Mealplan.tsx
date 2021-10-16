@@ -14,13 +14,26 @@ const storesSuggestions = [ 'Rema1000', 'Fakta', 'Bilka', 'Meny', 'Netto', 'Supe
 const categorySuggestions = [ 'Spice', 'Asian', 'Indian', 'American', 'Traditional', 'Nordic' ];
 /* END OF GET DATA FROM API */
 
+var menustate = 0
+const toggleCreateMenu = (evt: any) => {
+	menustate++;
+	menustate %= 2;
+	if(menustate) {
+		evt.target.innerHTML = "Cancel";
+		evt.target.nextSibling.classList.add("open");
+	} else {
+		evt.target.innerHTML = "Create";
+		evt.target.nextSibling.classList.remove("open");
+	}
+}
+
 // Creates the container for viewing and planning the weekly mealplan
 export default function Mealplan() {
 	return (
 		<Container id="mealplan">
 			<h1>My meal plan</h1>
-			<div className="button">Cancel</div>
-			<SelectionArea columns={2}>
+			<div className="button" onClick={toggleCreateMenu}>Create</div>
+			<SelectionArea columns={2} cln={"hidden"}>
 				<div>
 					<WeekdaysButtons
 						decription={'Select which days to plan meals for'}
