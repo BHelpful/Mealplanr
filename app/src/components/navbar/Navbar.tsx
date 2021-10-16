@@ -71,6 +71,7 @@ export default function Navbar() {
 				</div>
 			) : (
 				<div className="bottom loggedout">
+					<div className="profile image"></div>
 					<p>Log in / Sign up</p>
 					<div
 						className="login icon"
