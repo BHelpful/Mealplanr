@@ -93,7 +93,6 @@ interface ItemProps {
 // Creates an list element with checkbox or draggable
 export function Item(props: ItemProps) {
 	const {name, amount, unit, drag} = {amount: "", unit: "", ...props};
-	console.log(amount);
 	
 	if (drag) return (
 		<div className={"item drag"} draggable={true}

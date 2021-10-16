@@ -175,7 +175,6 @@
 		
 		&.loggedout {
 
-			grid-template-columns: minmax(0, min-content) 45px;
 			width: calc(100% - 32px);
 			margin: 0;
 			align-items: center;
