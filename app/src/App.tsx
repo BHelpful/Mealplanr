@@ -21,9 +21,9 @@ const user = {
 
 function App() {
 	// Get relavant values in store
-	const navIndex = useSelector((state: RootState) => state.navState.index);
+	const navIndex: number = useSelector((state: RootState) => state.navState.index);
 	const userPopup = useSelector((state: RootState) => state.navState.userpopup);
-	const isLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
+	const isLoggedIn: boolean = useSelector((state: RootState) => state.session.isLoggedIn);
 	const theme = useSelector((state: RootState) => state.theme);
 	const dispatch = useDispatch();
 
