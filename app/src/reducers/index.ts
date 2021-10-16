@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import counterReducer from './counter';
-import navStateReducer from './navState';
 import sessionReducer from './session';
+import navStateReducer from './navState';
 import themeReducer from './theme';
 
 export const rootReducer = combineReducers({
@@ -12,5 +12,4 @@ export const rootReducer = combineReducers({
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
-
 export default rootReducer;
