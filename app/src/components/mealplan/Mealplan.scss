@@ -11,6 +11,20 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
+		overflow-y: hidden;
+		height: max-content;
+		
+		padding-block: 0;
+		max-height: 0;
+		transition: max-height .5s, padding .2s;
+		
+		&.open {
+			
+			padding: 20px;
+			max-height: 800px;
+			transition: max-height .5s, padding .2s;
+
+		}
 
 		> div:nth-of-type(1) {
 

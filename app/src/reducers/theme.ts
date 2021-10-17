@@ -36,14 +36,15 @@ const themeReducer = (
 	},
 	action: ActionType
 ) => {
+	let newstate: any = {}
 	switch (action.type) {
 		case THEME:
-			state.hue = get(action.payload, 'hue');
-			state.shade = get(action.payload, 'shade');
-			return state;
+			newstate.hue = get(action.payload, 'hue');
+			newstate.shade = get(action.payload, 'shade');
+			return Object.assign({...state, ...newstate});
 
 		default:
-			return state;
+			return Object.assign({...state, ...newstate});
 	}
 };
 
@@ -106,6 +107,5 @@ export const setTheme = (
 		}
 	};
 };
-
 
 export default themeReducer;
