@@ -24,7 +24,7 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - uses: Naturalclar/issue-action@v1.0.0
         with:
-          keywords: '["doc", "documentation","Doc", "Documentation", "docs", "Docs", "doc-string","docstring","Doc-string","DocString","doc string","Doc string"]'
+          keywords: '["docs", "Docs", "doc-string","docstring","Doc-string","DocString","doc string","Doc string"]'
           labels: '["documentation"]'
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - uses: Naturalclar/issue-action@v1.0.0
@@ -94,7 +94,7 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - uses: Naturalclar/issue-action@v1.0.0
         with:
-          keywords: '["e2e","E2E","Cypress", "cypress", "test", "Test", "Testing"]'
+          keywords: '["e2e","E2E","Cypress", "cypress"]'
           labels: '["Cypress"]'
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - uses: Naturalclar/issue-action@v1.0.0
