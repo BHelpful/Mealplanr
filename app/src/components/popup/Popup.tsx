@@ -5,7 +5,7 @@ import './Popup.scss';
 interface PopupProps {
   type: string,
   dispatch: Function,
-  navCollapsed: Boolean,
+  navCollapsed: boolean,
 }
 
 //Creates a popup container
