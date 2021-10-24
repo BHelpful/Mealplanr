@@ -2,6 +2,10 @@ import Container from "../container/Container";
 import SelectionArea, { Item, Listing, Quantaty, Search, TextField } from "../selectionArea/SelectionArea";
 import "./CreateRecipe.scss";
 
+const mealtypes = [
+  "Main course"
+]
+
 // Creates the container for creating a new recipe
 export default function CreateRecipe() {
   return (
@@ -12,7 +16,7 @@ export default function CreateRecipe() {
         <div>
           <TextField decription={"Title of recipe"} placeholder={"Pyttipanna"} />
           <TextField large decription={"Short decription of the recie"} placeholder={"This recipe is great."} />
-          <Search decription={"Type of meal"} type={"select"}/>
+          <Search decription={"Type of meal"} type={"dropdown"} datalist={mealtypes} />
           <div className={"quantities"}>
             <Quantaty time />
             <Quantaty />
