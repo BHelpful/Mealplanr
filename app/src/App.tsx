@@ -23,6 +23,7 @@ function App() {
 	// Get relavant values in store
 	const navIndex: number = useSelector((state: RootState) => state.navState.index);
 	const userPopup = useSelector((state: RootState) => state.navState.userpopup);
+	const navCollapsed = useSelector((state: RootState) => state.navState.collapsed);
 	const isLoggedIn: boolean = useSelector((state: RootState) => state.session.isLoggedIn);
 	const theme = useSelector((state: RootState) => state.theme);
 	const dispatch = useDispatch();
@@ -36,7 +37,7 @@ function App() {
 	return (
 		<div id="app">
 			{ userPopup !== 0 ?
-				<Popup type={"userpopup"}>
+				<Popup type={"userpopup"} navCollapsed={navCollapsed} dispatch={dispatch}>
 					{ userPopup === 1 ? <>
 						<h1>Login/Signup</h1>
 						<p>Enter email, if its is not in our system, you will be redirected to signup.</p>
