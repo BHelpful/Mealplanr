@@ -524,9 +524,8 @@
 				
 			}
 			
-			.cross.icon {
+			.icon {
 				
-				background-image: url("../../assets/Cross.svg");
 				background-position: center;
 				background-position-x: right;
 				margin-right: 5px;
@@ -534,7 +533,9 @@
 				height: 100%;
 				display: block;
 				filter: var(--shadow) invert(1);
-
+				
+				&.cross { background-image: url("../../assets/Cross.svg"); }
+				&.drag { background-image: url("../../assets/Dragdots.svg"); }
 			
 			}
       

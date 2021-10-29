@@ -6,17 +6,42 @@
  */
 .popup {
 
-  &#userpopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000b;
+  z-index: 110;
+  color: var(--bright);
+  
+  #userpopup {
     
     position: fixed;
     background-color: var(--joyfull);
     border-radius: var(--br);
-    z-index: 100;
-    box-shadow: 0 0 100px 50vw #000b;
     padding: 20px;
     height: 270px;
     width: 500px;
-    color: var(--bright);
+    filter: var(--shadow);
+    bottom: 20px;
+
+    &.close { left: 120px; }
+    &.far { left: 390px; }
+
+    &::after {
+
+      content: "";
+      background-color: inherit;
+      display: block;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      transform: rotate(45deg);
+      bottom: 33px;
+      left: -20px;
+
+    }
 
     input {
 
