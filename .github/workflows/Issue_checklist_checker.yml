@@ -5,7 +5,7 @@ on: issues
 jobs:
   checkIssue:
     name: Check Issue for Incomplete Checklist
-    runs-on: Deploy-server
+    runs-on: self-hosted
     steps:
       - uses: adamzolyak/checklist-checker-action@master
         env:

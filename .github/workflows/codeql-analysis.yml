@@ -23,7 +23,7 @@ on:
 jobs:
   analyze:
     name: Analyze
-    runs-on: Deploy-server
+    runs-on: self-hosted
     permissions:
       actions: read
       contents: read

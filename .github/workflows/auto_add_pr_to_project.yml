@@ -5,7 +5,7 @@ on:
 
 jobs:
   add_item_to_project:
-    runs-on: Deploy-server
+    runs-on: self-hosted
     steps:
       - name: Get project data
         env:

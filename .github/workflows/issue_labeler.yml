@@ -5,7 +5,7 @@ on:
 
 jobs:
   test:
-    runs-on: Deploy-server
+    runs-on: self-hosted
     steps:
       - uses: Naturalclar/issue-action@v1.0.0
         with:

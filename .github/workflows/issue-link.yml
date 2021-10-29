@@ -5,7 +5,7 @@ on:
 
 jobs:
   issue-links:
-    runs-on: Deploy-server
+    runs-on: self-hosted
     steps:
       - uses: tkt-actions/add-issue-links@v1.4.0
         with:

@@ -7,7 +7,7 @@ on:
 jobs:
   stale:
 
-    runs-on: Deploy-server
+    runs-on: self-hosted
     permissions:
       issues: write
       pull-requests: write
