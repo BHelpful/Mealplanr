@@ -103,7 +103,8 @@ export function Item(props: ItemProps) {
 			onDrop=			{handleDragDrop}
 			onDragEnd=	{handleDragEnd}>
 			<div className={"drag icon"}></div>
-			<p><span>{name}</span>{amount?<span>Note: {amount}</span>:<span></span>}<span>{unit}</span></p>
+			<p><span>{name}</span></p>
+			<p>{amount?<span>{amount}</span>:<span></span>}<span> {unit}</span></p>
 			<div className={"cross icon"}></div>
 		</div>
 	);

@@ -436,8 +436,6 @@
 		
 			p {
 
-				display: inline-grid;
-				grid-template-columns: 1fr max-content max-content;
 				grid-gap: 10px;
 
 			}
@@ -455,6 +453,21 @@
       grid-template-columns: 30px auto minmax(35px, min-content);
       align-items: center;
       margin: 4px auto;
+
+			&.drag {
+
+				grid-template-columns: 30px auto 100px 35px;
+				
+				p:nth-child(3) {
+
+					width: 70px;
+					text-align: center;
+					border-inline: 2px solid var(--bright);
+					padding-inline: 10px;
+
+				}
+
+			}
       
 			> :not(.cross):last-child {
 
