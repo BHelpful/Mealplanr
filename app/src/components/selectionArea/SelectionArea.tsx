@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './SelectionArea.scss';
 
 interface QuantityPorps {
@@ -6,6 +6,7 @@ interface QuantityPorps {
 	ingredients?: boolean;
 }
 
+// Creates a element for user to enter quantities
 export function Quantaty(props: QuantityPorps) {
 	const {time, ingredients} = props;
 	if(time) return (
@@ -24,8 +25,8 @@ export function Quantaty(props: QuantityPorps) {
 	);
 }
 
+/* DRAG AND DROP HANDLES FOR Item */
 var dragSrcEl: any;
-
 const handleDragStart = (evt: any) => {
   evt.target.style.opacity = '0.4';
   dragSrcEl = evt.target;
@@ -54,11 +55,14 @@ const handleDragEnd = (evt: any) => {
   [].forEach.call(listItens, (item: any) => item.classList.remove('over'));
   evt.target.style.opacity = '1';
 }
+/* END OF DRAG AND DROP HANDLES FOR Item */
 
 interface ListingProps {
 	name: string;
 	drag?: boolean;
 }
+
+// Creates a list wrapper for Item
 class Listing extends Component<ListingProps> {
 	render () {
 		const {name, drag, children} = this.props;
@@ -81,11 +85,15 @@ class Listing extends Component<ListingProps> {
 
 interface ItemProps {
 	name: string;
+	amount?: number;
+	unit?: "kg"|"g"|"mg"|"L"|"dL"|"cL"|"mL"|"tbsp"|"tsp"|"dsp"|"pcs"|"tin"|"bag"|"sm"|"med"|"lrg"|""|"°C";
 	drag?: boolean;
 }
 
+// Creates an list element with checkbox or draggable
 export function Item(props: ItemProps) {
-	const {name, drag} = props;
+	const {name, amount, unit, drag} = {amount: "", unit: "", ...props};
+	
 	if (drag) return (
 		<div className={"item drag"} draggable={true}
 			onDragEnter={handleDragEnter}
@@ -95,48 +103,163 @@ export function Item(props: ItemProps) {
 			onDrop=			{handleDragDrop}
 			onDragEnd=	{handleDragEnd}>
 			<div className={"drag icon"}></div>
-			<p>{name}</p>
+			<p><span>{name}</span>{amount?<span>Note: {amount}</span>:<span></span>}<span>{unit}</span></p>
 			<div className={"cross icon"}></div>
 		</div>
 	);
 	else return (
-		<div className={"item"}>
+		<label className={"item cc"}>
 			<input type="checkbox" />
+			<span className="mark"></span>
 			<p>{name}</p>
-			<p><span>5</span><span>stk</span></p>
-		</div>
+			<p><span>{amount}</span><span>{unit}</span></p>
+		</label>
 	);
+}
+
+// Function to handle click on remove icon on tag
+const handleTagRemove = (evt: any) => evt.target.parentElement.remove();
+// Function to handle click on tag text
+const toggleTag = (evt: any) => {
+	const elem = evt.target;
+	const old = elem.classList[0] || "include";
+	elem.classList.remove(old);
+	elem.classList.add(old==="include" ? "exclude" : "include");
+	elem.title = `${toFirstUpperCase(old)} item by clicking`;
 }
 
 interface TagProps {
 	type: string,
 	name: string,
+	toggleable?: boolean,
+	nonremovable?: boolean
 }
 
+// Function to create a tag
 export function Tag(props: TagProps) {
-	const { type, name } = props;
-	return <div className={'tag ' + type}>{name}</div>;
+	const { type, name, toggleable, nonremovable } = props;
+	return <div className={'tag ' + type}>
+					<p onClick={toggleable?toggleTag:()=>{}}>{name}</p>
+					<span className={nonremovable?'':'removal'} onClick={nonremovable?()=>{}:handleTagRemove}></span>
+				</div>;
+}
+
+// Handle to toggle dropdown state
+const toggleDropdown = (toggle = true) => (evt: any) => {
+	evt.preventDefault();
+	if(!toggle || evt.target.classList.contains('open')) {
+		evt.target.classList.remove('open');
+	} else {
+		evt.target.classList.add('open');
+	}
+}
+
+// Manipulate ONLY the first letter to be uppercase
+const toFirstUpperCase = (v: string) => v.replace(/(\w)(.*)/, (...args: any[]) => args[1].toUpperCase()+args[2]);
+
+/* GET DATA FROM API */
+const lookupType = (name: string) => {
+	switch(name.toLowerCase()) {
+		case 'chicken': return 'meat';
+		default: return 'unkown';
+	}
+}
+/* ENDOF GET DATA FROM API */
+
+interface KeyboardEventWithData extends KeyboardEvent {
+	data?: HTMLElement;
+}
+
+// Get the name of a variable name as a string
+const varToString = (varObj: any) => (Object.keys(varObj)[0]).toString();
+
+// Unused <- undefined
+const handleSubmit = (evt: any) => 0;
+
+// Handle to execute on keypress on a searchbar
+const handleKeyDown = (createTag: any, tags: any) => (evt: any) => {
+	// Checks for enter or a comma
+	if(evt.key === 'Enter' || evt.key === ",") {
+		const target: any = evt.target||evt.data;
+		evt.preventDefault();
+		const elem = target.parentElement.nextElementSibling;
+		const newTaglist = tags;
+		if(elem.classList.contains('tags')) {
+			const v = target.value;
+			// Add new tag if matches requirements
+			if(v.match(/(\w{2,} ?)+/)) newTaglist.push({"name": toFirstUpperCase(v), "type": lookupType(v)});
+			// Empty tag list
+			target.value = '';
+			// Fill populate list with updatede values
+			createTag(newTaglist.filter((v:any,i:number,a:any)=>a.findIndex((t:any)=>(t.name === v.name))===i));
+		}
+	}
+};
+
+// Yeild function to generate id's with format: AA, BA, CA, ...
+function* HTMLIDgenerator(): Generator<string> {
+	var n = Math.ceil(Math.random() * 63);
+	while (++n) yield (String.fromCharCode((n % 26) + 64) + String.fromCharCode(Math.floor(n / 26) + 64));
+}
+
+const htmlID = HTMLIDgenerator(); // Create generator from yield function
+const getHTMLID: Array<string> = [];  // List of previus generated ids
+const generateHTMLID = (): string => {
+	getHTMLID.push(htmlID.next().value); // Get next id
+	return getHTMLID.slice(-1)[0];
+}
+
+// Handle for clicking on search bar with dropdown menu
+const handleMouseDown = (dropdown: boolean, createTag?:any, tags?:any) => (evt: any) => {
+	const parent = evt.target.parentElement;
+	parent.classList.remove("open");
+	const elem: any = document.getElementById(parent.dataset.for);
+	elem.value = evt.target.innerHTML;
+	elem.classList.remove("open");
+	if(!dropdown && createTag && tags) {
+		var ke: KeyboardEventWithData = new KeyboardEvent('keydown', {key: ','});
+		ke.data = elem;
+		handleKeyDown(createTag, tags)(ke);
+	}
 }
 
 interface SearchProps {
-	taglist?: boolean,
-	decription: string,
-	type?: string,
+	taglist?: boolean;
+	decription: string;
+	type?: string;
+	datalist?: Array<string>;
+	toggleable?: boolean;
 }
 
-class Search extends Component<SearchProps> {
-	render() {
-		const { taglist, decription, type, children } = this.props;
-		return (
-			<div className="search tags">
-				<p>{decription}</p>
-				<div className={"bar "+type||''}>
-					<span></span>
-				</div>
-				{taglist ? <div className="tags list">{children}</div> : ''}
+// Creates a search-bar, either with or without tags
+function Search(props: SearchProps) {
+	const { taglist, decription, type, datalist, toggleable } = props;
+	const dropdown = type==="dropdown";
+	const [tags, createTag] = useState([{name:'',type:''}]);
+	if(tags[0] && tags[0].name === '') tags.pop();
+	return (
+		<div className={"search "+(taglist ? "tags":"")}>
+			<div className={"bar "+type||''}>
+				<input
+					id={generateHTMLID()}
+					onClick={toggleDropdown()}
+					onBlur={toggleDropdown(false)}
+					onChange={(evt:any)=>evt.preventDefault()}
+					onKeyDown={taglist ? handleKeyDown(createTag, tags):()=>{}}
+					placeholder={decription}
+					list={datalist?varToString(datalist):''}/>
+				{datalist ?
+					<div className="dropdown list" data-for={getHTMLID.slice(-1)[0]}>
+						{datalist.map((v: string, i: number) => (<div key={i} onMouseDown={handleMouseDown(dropdown, createTag, tags)}>{v}</div>))}
+					</div>
+				: ''}
+				<label htmlFor={getHTMLID.slice(-1)[0]} onClick={type!=="dropdown"?handleSubmit:()=>{}}></label>
 			</div>
-		);
-	}
+			{taglist ? <div className="tags list">
+				{tags.length > 0 ? tags.map((v, i) => (<Tag key={i} name={v.name} type={v.type} toggleable={toggleable} />)) : ''}
+			</div>: ''}
+		</div>
+	);
 }
 
 interface MultipleChoiceProps {
@@ -144,13 +267,15 @@ interface MultipleChoiceProps {
 	name: string,
 }
 
+// Creates a checkbox
 export function MultipleChoice(props: MultipleChoiceProps) {
 	const {decription, name} = props;
 	return (
-		<div><input type="checkbox" id={name} /><label htmlFor={name}>{decription}</label></div>
+		<><input type="checkbox" id={name} /><label htmlFor={name}>{decription}</label></>
 	);
 }
 
+// Create a list with weekdays name - formatted as length, case, and index-day
 const weekdaysNamesArr = (len = 2, uppercase = true, offset = 1) => {
 	const days = [
 		'monday',
@@ -172,37 +297,29 @@ const weekdaysNamesArr = (len = 2, uppercase = true, offset = 1) => {
 	return parsed;
 };
 
+// Rotate-right a list
 const weekdaysAvailArr = (arr: any, offset: number) => {
 	arr.forEach((v: number, i: number) => {
 		arr[((i + offset) % 7) + 7] = arr[i];
-
 		if (i === 6) {
 			for (let i = 0; i < 7; i++) arr[i] = arr[i + 7];
 			arr = arr.slice(7);
 		}
 	});
-
 	return arr;
 };
 
+// Convert short meal-format to long
 const fullMeal = (short: string | null) => {
 	switch (short) {
-		case 'A':
-			return 'Appetiser';
-		case 'M':
-			return 'Main';
-		case 'D':
-			return 'Desert';
-		case 'AM':
-			return 'Appetiser + Main';
-		case 'AD':
-			return 'Appetiser + Desert';
-		case 'MD':
-			return 'Main + Desert';
-		case 'AMD':
-			return 'Appetiser + Main + Desert';
-		default:
-			return 'Chose';
+		case 'A':   return 'Appetiser';
+		case 'M':   return 'Main';
+		case 'D':   return 'Desert';
+		case 'AM':  return 'Appetiser + Main';
+		case 'AD':  return 'Appetiser + Desert';
+		case 'MD':  return 'Main + Desert';
+		case 'AMD': return 'Appetiser + Main + Desert';
+		default:    return 'Choose';
 	}
 };
 
@@ -213,6 +330,27 @@ interface WeekdaysProps {
 	uppercase?: boolean;
 }
 
+// Handle to toggle weekday selection
+const handleWeekSelection = (evt: any) => {
+	const elem = evt.target;
+	if(!elem.classList.contains("unavailable")) {
+		const old = elem.classList.contains("available") ? "available" : "selected"
+		elem.classList.remove(old);
+		elem.classList.add(old==="available" ? "selected" : "available");
+		const distantSibling: any  = document.getElementsByClassName(elem.id)[0];
+		if(distantSibling) {
+			if(old==="available") {
+				distantSibling.classList.remove("unavailable");
+				distantSibling.children[1].disabled = false;
+			} else {
+				distantSibling.classList.add("unavailable");
+				distantSibling.children[1].disabled = true;
+			}
+		}
+	}
+}
+
+// Creates the weekday button selection
 export function WeekdaysButtons(props: WeekdaysProps) {
 	const { decription, namelength, uppercase, offset } = {
 		namelength: 2,
@@ -225,19 +363,13 @@ export function WeekdaysButtons(props: WeekdaysProps) {
 		[-1, 1, 1, 0, 0, 1, 1],
 		offset
 	); /* Fetch from database */
+
 	selected.forEach((v: number, i: number) => {
 		switch (v) {
-			case -1:
-				selected[i] = 'unavailable';
-				break;
-			case 0:
-				selected[i] = 'available';
-				break;
-			case 1:
-				selected[i] = 'selected';
-				break;
-			default:
-				selected[i] = '';
+			case -1: selected[i] = 'unavailable'; break;
+			case 0: selected[i] = 'available'; break;
+			case 1: selected[i] = 'selected'; break;
+			default: selected[i] = '';
 		}
 	});
 
@@ -246,7 +378,7 @@ export function WeekdaysButtons(props: WeekdaysProps) {
 			<p>{decription}</p>
 			<div className="week">
 				{days.map((v: string, index: number) => (
-					<div key={index} className={'day ' + selected[index]}>
+					<div key={index} id={generateHTMLID()} className={'day ' + selected[index]} onClick={handleWeekSelection}>
 						{v}
 					</div>
 				))}
@@ -255,6 +387,7 @@ export function WeekdaysButtons(props: WeekdaysProps) {
 	);
 }
 
+// Creates the weekday-dropdown
 export function WeekdaysDropdown(props: WeekdaysProps) {
 	const { decription, namelength, uppercase, offset } = {
 		namelength: 2,
@@ -275,7 +408,7 @@ export function WeekdaysDropdown(props: WeekdaysProps) {
 				{days.map((v: string, index: number) => (
 					<div
 						key={index}
-						className={'day ' + (selected[index] ?? 'unavailable')}
+						className={'day ' + (getHTMLID.slice(index-7)[0]) + " " + (selected[index] ?? 'unavailable')}
 					>
 						<p>{v}</p>
 						<select
@@ -305,6 +438,7 @@ interface TextFieldProps {
 	submitBtnText?: string,
 }
 
+// Creates a textbox, that can be used as search or input
 export function TextField(props: TextFieldProps) {
 	const {large, decription, placeholder, submitBtnText} = props;
 	if(large) return (
@@ -328,6 +462,7 @@ interface ButtonFieldProps {
 	danger?: boolean
 }
 
+// Creates a area for buttons, to arrange them
 class ButtonField extends Component<ButtonFieldProps> {
 	render() {
 		const {decription, vertical, danger, children} = this.props;
@@ -345,19 +480,23 @@ interface StepProps {
 	decs: string;
 }
 
+// Creates a list element for Guide
 export function Step(props: StepProps) {
 	const {decs} = props;
 	return (
-		<div className={"step"}>
+		<label className={"step cc"}>
 			<input type="checkbox" />
+			<span className="mark"></span>
 			<p>{decs}</p>
-		</div>
+		</label>
 	);
 }
 
 interface GuideProps {
 	title: string;
 }
+
+// Creates a list to hold Steps
 class Guide extends Component<GuideProps> {
 	render() {
 		const {title, children} = this.props;
@@ -376,6 +515,7 @@ interface SelectionAreaProps {
 	columns: number;
 }
 
+// Creates the box around buttons/search/other selections
 class SelectionArea extends Component<SelectionAreaProps> {
 	render() {
 		const { cln, columns, children } = { cln: null, ...this.props };

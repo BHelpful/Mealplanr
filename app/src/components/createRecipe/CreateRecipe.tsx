@@ -2,6 +2,11 @@ import Container from "../container/Container";
 import SelectionArea, { Item, Listing, Quantaty, Search, TextField } from "../selectionArea/SelectionArea";
 import "./CreateRecipe.scss";
 
+const mealtypes = [
+  "Main course"
+]
+
+// Creates the container for creating a new recipe
 export default function CreateRecipe() {
   return (
     <Container id="createrecipe">
@@ -11,7 +16,7 @@ export default function CreateRecipe() {
         <div>
           <TextField decription={"Title of recipe"} placeholder={"Pyttipanna"} />
           <TextField large decription={"Short decription of the recie"} placeholder={"This recipe is great."} />
-          <Search decription={"Type of meal"} type={"select"}/>
+          <Search decription={"Type of meal"} type={"dropdown"} datalist={mealtypes} />
           <div className={"quantities"}>
             <Quantaty time />
             <Quantaty />
@@ -19,7 +24,7 @@ export default function CreateRecipe() {
         </div>
         <div>
           <Listing drag name={"Prerequisites"}>
-            <Item drag name={"Turn on the oven"}></Item>
+            <Item drag name={"Turn on the oven"} amount={200} unit={"°C"}></Item>
             <Item drag name={"Clean the beans"}></Item>
           </Listing>
         </div>
@@ -35,12 +40,12 @@ export default function CreateRecipe() {
           <p>Ingredients</p>
           <Quantaty />
           <Listing drag={false} name={"Main course"}>
-            <Item name={"Carrot"} />
-            <Item name={"Carrot"} />
+            <Item name={"Carrot"} amount={5} unit={"pcs"}/>
+            <Item name={"Carrot"} amount={10} unit={"bag"}/>
           </Listing>
           <Listing drag={false} name={"Dessert"}>
-            <Item name={"Carrot"} />
-            <Item name={"Carrot"} />
+            <Item name={"Carrot"} amount={5} unit={"pcs"}/>
+            <Item name={"Carrot"} amount={5} unit={"pcs"}/>
           </Listing>
         </div>
         <div>

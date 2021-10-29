@@ -93,42 +93,40 @@ const sessionReducer = (
 	},
 	action: ActionType
 ) => {
+	let newstate: any = {}
 	switch (action.type) {
 		case USER_EXISTS:
-			state.created = true;
-			return state;
+			newstate.created = true;
+			return Object.assign({...state, ...newstate});
 
 		case CREATED_USER:
-			state.user = get(action.payload, 'user');
-			state.created = true;
-			state.isLoggedIn = true;
-			state.refresh = get(action.payload, 'refresh');
-			state.authorization = get(action.payload, 'authorization');
-			if (get(action.payload, 'informationFillded')) {
-				state.informationFillded = true;
-			}
-			return state;
+			newstate.user = get(action.payload, 'user');
+			newstate.created = true;
+			newstate.isLoggedIn = true;
+			newstate.refresh = get(action.payload, 'refresh');
+			newstate.authorization = get(action.payload, 'authorization');
+			if (get(action.payload, 'informationFillded')) newstate.informationFillded = true;
+			return Object.assign({...state, ...newstate});
 
 		case LOGIN:
-			state.user = get(action.payload, 'user');
-			state.created = true;
-			state.isLoggedIn = true;
-			state.refresh = get(action.payload, 'refresh');
-			state.authorization = get(action.payload, 'authorization');
-			if (get(action.payload, 'informationFillded')) {
-				state.informationFillded = true;
-			}
-			return state;
+			newstate.user = get(action.payload, 'user');
+			newstate.created = true;
+			newstate.isLoggedIn = true;
+			newstate.refresh = get(action.payload, 'refresh');
+			newstate.authorization = get(action.payload, 'authorization');
+			if (get(action.payload, 'informationFillded')) newstate.informationFillded = true;
+			return Object.assign({...state, ...newstate });
 
 		case LOGOUT:
-			state.isLoggedIn = false;
-			return state;
+			newstate.isLoggedIn = false;
+			return Object.assign({...state, ...newstate});
 
 		case ERROR:
-			state.errorMessage = String(action.payload);
-			return state;
+			newstate.errorMessage = String(action.payload)
+			return Object.assign({...state, ...newstate});
+
 		default:
-			return state;
+			return Object.assign({...state, ...newstate});
 	}
 };
 

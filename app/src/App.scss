@@ -3,25 +3,34 @@
 
 	/*
 	Standard colors                         Inverted colors */
-	--c: 				230;												--i: calc((var(--c) + 180) % 360);
+	--c: 			 210;													--i: calc((var(--c) + 180) % 360);
+	//Exposure (lightness/darkness)
+	--e:			0%;
 
-	--joyfull:  hsl(var(--c),  80%,  70%);	--i-joyfull:	hsl(var(--i),  80%,  30%);
-	--accent:   hsl(var(--c),  50%,  75%);	--i-accent: 	hsl(var(--i),  50%,  25%);
+	--joyfull:  hsl(var(--c),  80%,  65%);	--i-joyfull:	hsl(var(--i),  80%,  35%);
+	--accent:   hsl(var(--c),  60%,  70%);	--i-accent: 	hsl(var(--i),  60%,  30%);
 	--faded:    hsl(var(--c),  40%,  85%);	--i-faded: 		hsl(var(--i),  40%,  15%);
-	--light:    hsl(var(--c),  30%,  95%);	--i-light: 		hsl(var(--i),  30%,   5%);
+	--light:    hsl(var(--c),  20%,  max( 90% - var(--e), -1*( 90% - var(--e))));
+	--i-light: 	hsl(var(--i),  20%,  max( 10% - var(--e), -1*( 10% - var(--e))));
 
-	--bgcolor:  hsl(  0,   0%,  90%);			--i-bgcolor:	hsl(180,   0%,  10%);
+												//abs(x) = max(x, -1 * x)
+	--bgcolor:  hsl(0, 0%, max( 90% - var(--e), -1*( 90% - var(--e))));
+	--bright:   hsl(0, 0%, max(100% - var(--e), -1*(100% - var(--e))));
+	--gray:     hsl(0, 0%, max( 33% - var(--e), -1*( 33% - var(--e))));
+	--dark:     hsl(0, 0%, max(  0% - var(--e), -1*(  0% - var(--e))));
 
-	--bright:   hsl(  0,   0%, 100%);			--i-bright:   hsl(180,   0%,   0%);
-	--gray:     hsl(  0,   0%,  33%);			--i-gray:     hsl(180,   0%,  77%);
-	--dark:     hsl(  0,   0%,   0%);			--i-dark:     hsl(180,   0%, 100%);
+	--meat:     hsl(  0,  53%,  70%);
+	--diray:		hsl( 50,  53%,  70%);
+	--salad:    hsl(100,  53%,  70%);
+	--vegan:    hsl(150,  53%,  70%);
+	--fish:     hsl(200,  53%,  70%);
+	--exotic:   hsl(250,  53%,  70%);
 
-	--meat:     hsl(  0,  53%,  70%);			--i-meat:     hsl(180,  53%,  30%);
-	--diray:		hsl( 50,  53%,  70%);			--i-diray:    hsl(230,  53%,  30%);
-	--salad:    hsl(100,  53%,  70%);			--i-salad:    hsl(280,  53%,  30%);
-	--vegan:    hsl(150,  53%,  70%);			--i-vegan:    hsl(330,  53%,  30%);
-	--fish:     hsl(200,  53%,  70%);			--i-fish:     hsl( 20,  53%,  30%);
-	--exotic:   hsl(250,  53%,  70%);			--i-exotic:   hsl( 70,  53%,  30%);
+	//Special / gradient colors
+	--rainbow: linear-gradient( 40deg, rgba(255,0,0,1) 			5%, rgba(255,128,0,1)		19%, rgba(255,255,0,1)	50%, rgba(0,255,0,1) 60%, rgba(0,255,255,1) 70%, rgba(115,0,255,1) 80%, rgba(255,0,255,1) 90%);
+	--gold: 	 linear-gradient(130deg, rgba(255,184,0,1) 	 35%, rgba(250,213,75,1) 	55%, rgba(255,66,37,1) 100%);
+	--silver:  linear-gradient(250deg, rgba(200,200,200,1) 35%, rgba(240,240,240,1) 55%, rgba(60,60,60,1)  100%);
+	--bronze:  linear-gradient(150deg, rgba(166,89,0,1)		 33%, rgba(255,166,0,1) 	72%, rgba(223,96,0,1)  100%);
 
 	--br: 15px;
 	--shadow: drop-shadow(4px 4px 4px hsla(0, 0%, 0%, 0.25));
@@ -31,6 +40,15 @@
 	--nav-min: 80px;
 	--nav-max: 350px;
 }
+
+div:not(*),
+img,
+label,
+.item,
+.button,
+.amount,
+.day,
+.recipe :not(p) { user-select: none; }
 
 /** 
  * @Desc: Window content area
@@ -55,12 +73,16 @@
 	font-weight: 400;
 	overflow-y: scroll;
 
+	/* Global classes for background coloring */
 	.meat 		{ background-color: var(--meat); 		}
 	.diray 	  { background-color: var(--diray);   }
 	.salad 		{ background-color: var(--salad); 	}
 	.vegan 		{ background-color: var(--vegan); 	}
 	.fish 		{ background-color: var(--fish); 		}
 	.exotic 	{ background-color: var(--exotic); 	}
+
+	.rainbow 	{ font-weight: 600; background: var(--rainbow);	}
+	.gold 		{ font-weight: 600; background: var(--gold);		}
 
 }
 
@@ -70,11 +92,8 @@
 
 		grid-template-columns: auto;
 		
-		> div:last-child {
+		> div:last-child { margin-left: calc(var(--nav-min) + 80px); }
 		
-			margin-left: calc(var(--nav-min) + 80px);
-
-		}
 	}
 	
 }

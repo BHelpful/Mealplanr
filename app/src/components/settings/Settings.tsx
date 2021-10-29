@@ -1,53 +1,35 @@
 import Container from "../container/Container";
-import SelectionArea, { ButtonField, MultipleChoice, Search, Tag, TextField } from "../selectionArea/SelectionArea";
+import SelectionArea, { ButtonField, MultipleChoice, Search, TextField } from "../selectionArea/SelectionArea";
 import "./Settings.scss";
+import ThemePreview from "./ThemePreview";
 
-interface kvsp {
-  [index: number]: string
+const prevcolor = {
+  base: Number(document.documentElement.style.getPropertyValue('--c')),
+  shade: Number(document.documentElement.style.getPropertyValue('--e').replace(/%/, ""))
+};
+
+const setcolor = (obj: any) => {
+  const {base, shade} = obj;
+  document.documentElement.style.setProperty('--c', base.toString());
+  document.documentElement.style.setProperty('--e', shade+"%");
+};
+
+const handleOpenTheme = () => {
+  const elem = document.getElementById("ThemePreview");
+  if(elem)
+    if(elem.classList.contains("hidden"))
+      elem.classList.remove("hidden");
+    else elem.classList.add("hidden");
 }
 
-const keypoints: kvsp = {
-   30: 'orange',
-   60: 'yellow',
-  120: 'green',
-  160: 'mint',
-  180: 'turquise',
-  210: 'blue',
-  240: 'blacklight',
-  270: 'purple',
-  290: 'pink',
-  330: 'rose',
-  360: 'red'
+const handleChangeShade = () => {
+  const thd = 75;
+  prevcolor.shade = prevcolor.shade>=thd?prevcolor.shade-thd:prevcolor.shade+thd;
+  setcolor(prevcolor);
 }
 
-const setcolor = (hue: number) => document.documentElement.style.setProperty('--c', String(hue));
-
-//             val, nearest, diff
-var nearest = [0,   0,       Infinity];
-
-const sliderSnap = (evt: any) => {
-
-  const { valueAsNumber } = evt.target;
-
-  nearest[0] = valueAsNumber;
-  setcolor(nearest[0]);
-  
-  let least = Infinity;
-  for(const i of Object.keys(keypoints)) {
-    let v = Math.abs(nearest[0] - Number(i));
-    if(least > v) {
-      nearest[1] = Number(i);
-      nearest[2] = v;
-      least = v;
-    }
-  }
-
-  console.log(`Nearest color: ${keypoints[nearest[1]]}`);
-  
-}
-
+// Function that creates the settings
 export default function Settings() {
-
   return (
     <Container id={"settings"}>
       <h1>Personal information</h1>
@@ -91,16 +73,11 @@ export default function Settings() {
       <SelectionArea columns={3}>
         <div>
           <Search decription="Contry" type="" />
-          <Search taglist decription="What stores do you prefer?">
-            <Tag type="none" name="Netto" />
-          </Search>
+          <Search taglist decription="What stores do you prefer?" />
         </div>
         <div>
           <Search decription="Diet" type="dropdown" />
-          <Search taglist decription="Allergies / intolerences">
-            <Tag type="exotic" name="Hazelnut" />
-            <Tag type="dariy" name="Lactose" />
-          </Search>
+          <Search taglist decription="Allergies / intolerences" />
           <MultipleChoice decription="Hide recipes containing these"  name="itolalgi"/>
         </div>
         <div>
@@ -109,7 +86,11 @@ export default function Settings() {
           <MultipleChoice decription="Web" name="web"/>
           <MultipleChoice decription="Mobile" name="mobile"/>
           <p>Theme</p>
-          <input id={"colorHueSelect"} type="range" min={0} max={360} step={1} onInput={sliderSnap} defaultValue={230}></input>
+          <div>
+            <div className={"themeselect button"} onClick={handleOpenTheme}>Change Theme</div>
+            <div className={"Shadeselect button"} onClick={handleChangeShade}></div>
+            <ThemePreview />
+          </div>
         </div>
       </SelectionArea>
     </Container>
