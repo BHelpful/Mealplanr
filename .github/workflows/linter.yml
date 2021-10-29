@@ -30,7 +30,7 @@ jobs:
     # Name the Job
     name: Lint Code Base
     # Set the agent to run on
-    runs-on: self-hosted
+    runs-on: Deploy-server
 
     ##################
     # Load all steps #
@@ -55,3 +55,8 @@ jobs:
           VALIDATE_TSX: true
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Self hosted deploy server cleanup, should ALWAYS run independent to result
+      - name: Cleanup
+        if: ${{ always() }}
+        run: docker ps -q | xargs -n 1 -P 8 -I {} docker stop {}
