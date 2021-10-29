@@ -5,7 +5,7 @@ on:
 
 jobs:
   add_item_to_project:
-    runs-on: self-hosted
+    runs-on: vds2019x11
     steps:
       - name: Get project data
         env:

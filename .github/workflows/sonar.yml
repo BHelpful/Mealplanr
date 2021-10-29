@@ -9,7 +9,7 @@ on:
 name: Code Quality Analysis
 jobs:
   sonarcloud:
-    runs-on: self-hosted
+    runs-on: vds2019x11
     steps:
     - uses: actions/checkout@v2
       with:

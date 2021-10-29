@@ -30,7 +30,7 @@ jobs:
     # Name the Job
     name: Lint Code Base
     # Set the agent to run on
-    runs-on: self-hosted
+    runs-on: vds2019x11
 
     ##################
     # Load all steps #

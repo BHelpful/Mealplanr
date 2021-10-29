@@ -5,7 +5,7 @@ on:
 
 jobs:
   issue-links:
-    runs-on: self-hosted
+    runs-on: vds2019x11
     steps:
       - uses: tkt-actions/add-issue-links@v1.4.0
         with:

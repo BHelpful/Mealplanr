@@ -7,7 +7,7 @@ on:
 
 jobs:
   assign-author:
-    runs-on: self-hosted
+    runs-on: vds2019x11
     steps:
       - uses: toshimaru/auto-author-assign@v1.2.0
         with:
