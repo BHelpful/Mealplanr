@@ -40,7 +40,7 @@ jobs:
     steps:
     - name: elevate #https://github.com/actions/checkout/issues/211
         run: |
-          sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+          echo ${{secrets.DEPLOY_PASSWORD}} | sudo -S chown -R $USER:$USER $GITHUB_WORKSPACE
     - name: Checkout repository
       uses: actions/checkout@v2
 

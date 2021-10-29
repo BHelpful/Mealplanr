@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: elevate #https://github.com/actions/checkout/issues/211
         run: |
-          sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+          echo ${{secrets.DEPLOY_PASSWORD}} | sudo -S chown -R $USER:$USER $GITHUB_WORKSPACE
     - uses: actions/checkout@v2
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
