@@ -113,7 +113,7 @@ jobs:
           labels: '["Settings"]'
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       
-      # Self hosted deploy server cleanup, should ALWAYS run independent to result
+      # Self hosted deploy server cleanup, should ALWAYS run independent to result 
       - name: Cleanup
         if: ${{ always() }}
         run: docker ps -q | xargs -n 1 -P 8 -I {} docker stop {}
