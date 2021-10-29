@@ -11,6 +11,9 @@ jobs:
   sonarcloud:
     runs-on: vds2019x11
     steps:
+    - name: elevate #https://github.com/actions/checkout/issues/211
+        run: |
+          sudo chown -R $USER:$USER $GITHUB_WORKSPACE
     - uses: actions/checkout@v2
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting

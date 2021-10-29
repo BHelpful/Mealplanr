@@ -36,6 +36,9 @@ jobs:
     # Load all steps #
     ##################
     steps:
+      - name: elevate #https://github.com/actions/checkout/issues/211
+        run: |
+          sudo chown -R $USER:$USER $GITHUB_WORKSPACE
       ##########################
       # Checkout the code base #
       ##########################

@@ -5,6 +5,9 @@ jobs:
       - image: circleci/node:16
     working_directory: ~/Mealplanr/api
     steps:
+      - name: elevate #https://github.com/actions/checkout/issues/211
+        run: |
+          sudo chown -R $USER:$USER $GITHUB_WORKSPACE
       - checkout:
           path: ~/Mealplanr
       - run:
