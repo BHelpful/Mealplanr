@@ -3,19 +3,29 @@ import './SelectionArea.scss';
 
 interface QuantityPorps {
 	time?: boolean;
-	ingredients?: boolean;
+	ingredient?: boolean;
 }
 
 // Creates a element for user to enter quantities
 export function Quantaty(props: QuantityPorps) {
-	const {time, ingredients} = props;
+	const {time, ingredient} = props;
 	if(time) return (
 		<div className={"quantity time"}>
 			<p><span>60</span></p>
 			<p><span>min</span></p>
 	</div>
-	); else if (ingredients) return (
-		<></>
+	); else if (ingredient) return (
+		<>
+			<div className={"quantity ingredient"}>
+				<input type="text" placeholder={"Carrot"}/>
+				<input type="number" value={10}/>
+				<select>
+					<option value="g">Grams</option>
+					<option value="L">Liters</option>
+				</select>
+			</div>
+			<div className={"button"}>Add</div>
+		</>
 	); else return (
 		<div className={"quantity amount"}>
 			<p>-</p>

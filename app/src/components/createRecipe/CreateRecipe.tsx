@@ -34,7 +34,7 @@ export default function CreateRecipe() {
       <SelectionArea columns={2} cln={"guide"}>
         <div>
           <p>Ingredients</p>
-          <Quantaty />
+          <Quantaty ingredient/>
           <Listing drag={false} name={"Main course"}>
             <Item drag name={"Carrot"} amount={5} unit={"pcs"}/>
             <Item drag name={"Carrot"} amount={10} unit={"bag"}/>
