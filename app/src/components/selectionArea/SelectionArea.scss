@@ -420,6 +420,43 @@
 			}
 			
 		}
+
+		&.ingredient {
+
+			width: calc(100% - 90px);
+			height: 30px;
+			grid-template-columns: auto 80px 100px;
+			display: inline-grid;
+			margin-inline: 0 10px;
+
+			input, select {
+
+				display: inline;
+				height: 18px;
+				padding: 0;
+				background-color: transparent;
+				border: 0;
+				color: var(--joyfull);
+				font-weight: 800;
+				border-radius: 0;
+				text-align: center;
+				
+				&:nth-child(1) {
+				
+					width: calc(100% - 10px);
+					margin-left: 10px;
+
+				}
+				
+				&:nth-child(2) { border-inline: 2px solid var(--bright); }
+
+				// Remove spinner
+				&::-webkit-outer-spin-button, &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; } /* Chrome, Safari, Edge, Opera */
+				&[type=number] { -moz-appearance: textfield;} /* Firefox */
+
+			}
+
+		}
 		
 	}
   
@@ -436,8 +473,6 @@
 		
 			p {
 
-				display: inline-grid;
-				grid-template-columns: 1fr max-content max-content;
 				grid-gap: 10px;
 
 			}
@@ -455,6 +490,21 @@
       grid-template-columns: 30px auto minmax(35px, min-content);
       align-items: center;
       margin: 4px auto;
+
+			&.drag {
+
+				grid-template-columns: 30px auto 100px 35px;
+				
+				p:nth-child(3) {
+
+					width: 70px;
+					text-align: center;
+					border-inline: 2px solid var(--bright);
+					padding-inline: 10px;
+
+				}
+
+			}
       
 			> :not(.cross):last-child {
 
