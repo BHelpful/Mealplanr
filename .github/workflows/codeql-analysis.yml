@@ -18,7 +18,7 @@ on:
     # The branches below must be a subset of the branches above
     branches: [ master ]
   schedule:
-    - cron: '43 6 * * 3'
+    - cron: '22 17 * * 4'
 
 jobs:
   analyze:
@@ -38,9 +38,6 @@ jobs:
         # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
 
     steps:
-    - name: elevate #https://github.com/actions/checkout/issues/211
-        run: |
-          echo ${{secrets.DEPLOY_PASSWORD}} | sudo -S chown -R $USER:$USER $GITHUB_WORKSPACE
     - name: Checkout repository
       uses: actions/checkout@v2
 
@@ -72,9 +69,8 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
-
-      
-    # Self hosted deploy server cleanup, should ALWAYS run independent to result 
+    
+    # Self hosted deploy server cleanup, should ALWAYS run independent to result
     - name: Cleanup
       if: ${{ always() }}
       run: docker ps -q | xargs -n 1 -P 8 -I {} docker stop {}
