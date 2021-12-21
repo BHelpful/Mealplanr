@@ -1,3 +1,5 @@
+# The development of this repo has been moved to the monorepo: https://github.com/BHelpful/BHelpful
+
 # Mealplanr
 A web application that allows you to write in your recipes for different foods. The app should then allow you to put in the basic ingredients you have at home and then choose for you the most appropriate meals for the week based on your current selection of ingredients and on when you last made the last meals, so that you don't get the same meals over and over.
 
